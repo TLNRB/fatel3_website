@@ -1,0 +1,55 @@
+@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*-- Colors --*/
+:root {
+  --ltPrimary: #6270EF;
+  --ltPrimaryBG: #6270ef29;
+  --dtPrimary: #6f7af9;
+  --BGLight: #ffffff;
+  --BGSemiLight: #F4F4F7;
+  --BGSemiNormal: #F0F0F2;
+  --BGSemiDark: #272733;
+  --BGDark: #1f1f2a;
+  --TextLight: #ffffff;
+  --TextNormal: #807D8D;
+  --TextSemiDark: #3e3d45;
+  --TextDark: #26262f;
+  --ltBorder: #DBDBDB;
+  --ltBorderNormal: #cfced3;
+  --ltRange: #b0b0b0;
+  --ltBoxShadow: #00000029;
+  --ltScrollbarBG: #dfdfdf;
+  --ltScrollbarThumb: #b6b6b6;
+  --ltBGPositive: #E2FCDC;
+  --ltBGNegative: #FDD6DB;
+  --ltTextPositive: #4DAA57;
+  --ltTextNegative: #FC536B;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: 'Neue-regrade-bold';
+  src: url('../assets//fonts/NeueRegrade/neue_regrade_bold-webfont.woff2') format('woff2'),
+       url('../assets//fonts/NeueRegrade/neue_regrade_bold-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Geologica', sans-serif;
+  font-size: 1rem;
+  overflow-x: hidden;
+  background-color: var(--BGLight);
+  color: var(--TextSemiDark);
+}
