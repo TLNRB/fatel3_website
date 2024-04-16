@@ -2,6 +2,7 @@
 /*-- Import Data --*/
 import featuresData from "@/data/featuresData.ts";
 import useCasesData from "@/data/useCasesData.ts";
+import resourcesData from "@/data/resourcesData.ts";
 
 // Navbar items
 const navItems = [
@@ -45,14 +46,9 @@ const navItems = [
 </script>
 
 <template>
-  <div>
-    <div v-for="navItem in navItems">
-      <div v-for="item in navItem.subItems">
-        {{ item.title }}
-        <i :class="item.icon"></i>
-      </div>
-    </div>
-  </div>
+  <header>
+    <nav></nav>
+  </header>
 </template>
 
 <style scoped></style>
