@@ -1,4 +1,6 @@
 import './assets/main.css'
+// Import Icons
+import 'remixicon/fonts/remixicon.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
