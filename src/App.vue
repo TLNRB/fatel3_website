@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView } from "vue-router";
 /*-- Import Components --*/
-import Navbar from '@/components/Misc/Navbar.vue'
+import Navbar from "@/components/Nav/Navbar.vue";
 </script>
 
 <template>
@@ -9,5 +9,4 @@ import Navbar from '@/components/Misc/Navbar.vue'
   <RouterView />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
