@@ -2,5 +2,7 @@
 </script>
 
 <template>
-  <div class="text-TextDark">arany</div>
+  <div class="text-TextSemiDark">
+    fatel3
+  </div>
 </template>
