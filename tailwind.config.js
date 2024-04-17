@@ -18,6 +18,7 @@ export default {
       },
       colors: {
         ltPrimary: '#6270EF',
+        ltPrimaryDark: '#525fdb',
         ltPrimaryBG: '#6270ef29',
         dtPrimary: '#6f7af9',
         BGLight: '#ffffff',
@@ -30,7 +31,7 @@ export default {
         TextSemiDark: '#3e3d45',
         TextDark: '#26262f',
         ltBorder: '#DBDBDB',
-        ltBorderNormal: '#cfced3',
+        ltBorderNormal: '#C1BFC6',
         ltRange: '#b0b0b0',
         ltBoxShadow: '#00000029',
         ltScrollbarBG: '#dfdfdf',
@@ -39,6 +40,7 @@ export default {
         ltBGNegative: '#FDD6DB',
         ltTextPositive: '#4DAA57',
         ltTextNegative: '#FC536B',
+        ltHoverPrimary: '#E9ECFF',
       }
     },
   },
