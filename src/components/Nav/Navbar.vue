@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 /*-- Import Data --*/
 import featuresData from "@/data/featuresData.ts";
 import useCasesData from "@/data/useCasesData.ts";
@@ -8,6 +8,7 @@ import resourcesData from "@/data/resourcesData.ts";
 import { RiArrowDownSLine } from "@remixicon/vue";
 import logoPrimary from "@/assets/images/logo_primary.svg";
 
+/*-- Navbar --*/
 // Navbar items
 const navItems = [
   { id: "home", title: "Home", route: "/", subItems: null, active: "true" },
@@ -58,12 +59,41 @@ const newNavItem = (isShowcase: boolean) => {
 };
 
 //Nav and dropdown click event
-const isMenuOpen = ref(false);
+const isMenuOpen = ref<boolean>(false);
 
 //Toggle menu dropdown
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+// Navbar Open&Collapse
+const screenWidth = ref<number>(window.innerWidth); // Get initial screen width
+const screenHeight = ref<number>(window.innerHeight); // Get initial screen height
+
+function handleResize() {
+  screenWidth.value = window.innerWidth; // Update screen width on resize
+  screenHeight.value = window.innerHeight; // Update screen height on resize
+}
+
+const navbarWidthComputed = computed(() => {
+  // Check if screen width is less than 1060 then return the screen height minus navbar height
+  if (screenWidth.value < 1060) {
+    return {
+      minHeight: screenHeight.value - 66 + "px",
+    };
+  } else {
+    return { height: "100%" }; // Return the full height when screen width is greater than 1060
+  }
+});
+
+// Add resize event listener when component is mounted
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+});
+// Remove resize event listener when component is mounted
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
+});
 </script>
 
 <template>
@@ -80,13 +110,16 @@ const toggleMenu = () => {
         <span class="hamburger-icon-line hamburger-icon-line-middle"></span>
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
-      <div class="absolute top-[82px] left-[1rem]">
+      <div
+        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] overflow-y-auto flex flex-col gap-[5rem] justify-between"
+        :style="navbarWidthComputed"
+      >
         <!-- Navbar Items -->
         <div class="flex flex-col gap-[1rem]">
           <div
             v-for="navItem in navItems"
             :key="navItem.id"
-            class="w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer"
+            class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out"
             :class="[
               navItemClasses(navItem.subItems),
               newNavItem(navItem.id === 'showcase'),
@@ -104,15 +137,22 @@ const toggleMenu = () => {
             <RiArrowDownSLine
               v-if="navItem.subItems"
               size="22px"
-              class="text-TextSemiDark translate-y-[1px]"
+              class="nav-item-arrow"
             />
           </div>
         </div>
-        <div>
-          <!-- Login BTN -->
-          <!-- <button>Login</button> -->
-          <!-- Get Started BTN -->
-          <!-- <button>Get Started</button> -->
+        <!-- Login & Get Started BTN-->
+        <div class="flex justify-center items-center gap-[1rem] ml-[-1rem]">
+          <button
+            class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight"
+          >
+            Login
+          </button>
+          <button
+            class="nav-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight"
+          >
+            Get Started
+          </button>
         </div>
       </div>
     </nav>
@@ -193,6 +233,55 @@ const toggleMenu = () => {
     transform: translateY(0);
     -webkit-transform: translate(4.5px, -1.5px) rotate(45deg);
     transform: translate(4.5px, -1.5px) rotate(45deg);
+  }
+}
+
+/*-- Nav Items --*/
+/* Nav Item Arrow */
+.nav-item-arrow {
+  transform: translateY(1px) rotate(0deg);
+  color: var(--TextSemiDark);
+  transition: color 0.15s ease-in-out;
+  transition: transform 0.4s ease-in-out;
+}
+
+/*-- Nav BTNs --*/
+.nav-btn-outline {
+  color: var(--TextSemiDark);
+  border-color: var(--ltBorderNormal);
+  transition: all 0.15s ease-in-out;
+}
+
+.nav-btn-solid {
+  background-color: var(--ltPrimary);
+  border-color: var(--ltPrimary);
+  transition: all 0.15s ease-in-out;
+}
+
+/*-- Hover isn't visible on touchscreen devices --*/
+@media (hover: hover) {
+  .nav-item:hover {
+    background-color: var(--ltHoverPrimary);
+    color: var(--ltPrimary);
+  }
+
+  .nav-item:hover .nav-item-arrow {
+    color: var(--ltPrimary);
+    transform: translateY(1px) rotate(180deg);
+    transition: color 0.15s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .nav-btn-outline:hover {
+    border-color: var(--ltPrimary);
+    color: var(--ltPrimary);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .nav-btn-solid:hover {
+    background-color: var(--ltPrimaryDark);
+    border-color: var(--ltPrimaryDark);
+    transition: all 0.15s ease-in-out;
   }
 }
 </style>
