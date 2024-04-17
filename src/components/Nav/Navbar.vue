@@ -48,6 +48,15 @@ const navItems = [
   },
 ];
 
+// Navbar items conditional classes
+const navItemClasses = (isSubItems: {} | null) => {
+  return isSubItems ? "pl-[.875rem] pr-[7px]" : "px-[.875rem]";
+};
+
+const newNavItem = (isShowcase: boolean) => {
+  return isShowcase ? "bg-BGSemiNormal" : "bg-transparent";
+};
+
 //Nav and dropdown click event
 const isMenuOpen = ref(false);
 
@@ -71,18 +80,27 @@ const toggleMenu = () => {
         <span class="hamburger-icon-line hamburger-icon-line-middle"></span>
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
-      <div class="absolute top-0">
+      <div class="absolute top-[82px] left-[1rem]">
         <!-- Navbar Items -->
-        <div class="flex flex-col gap-[.5rem]">
+        <div class="flex flex-col gap-[1rem]">
           <div
             v-for="navItem in navItems"
             :key="navItem.id"
-            class="w-fit flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer bg-ltPrimary"
-            :class="navItem.subItems ? 'pl-[.875rem] pr-[7px]' : 'px-[.875rem]'"
+            class="w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer"
+            :class="[
+              navItemClasses(navItem.subItems),
+              newNavItem(navItem.id === 'showcase'),
+            ]"
           >
             <div class="text-[1.25rem] leading-[1.3]">
               {{ navItem.title }}
             </div>
+            <!-- New Badge for Showcase -->
+            <span
+              v-if="navItem.id === 'showcase'"
+              class="absolute top-0 right-0 translate-y-[-4px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px]"
+              >New</span
+            >
             <RiArrowDownSLine
               v-if="navItem.subItems"
               size="22px"
