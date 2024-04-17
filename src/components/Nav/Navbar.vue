@@ -71,19 +71,22 @@ const toggleMenu = () => {
         <span class="hamburger-icon-line hamburger-icon-line-middle"></span>
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
-      <div class="absolute top-0 bg-red-500">
+      <div class="absolute top-0">
         <!-- Navbar Items -->
-        <div>
+        <div class="flex flex-col gap-[.5rem]">
           <div
             v-for="navItem in navItems"
             :key="navItem.id"
-            class="flex items-center gap-[.5rem]"
+            class="w-fit flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer bg-ltPrimary"
+            :class="navItem.subItems ? 'pl-[.875rem] pr-[7px]' : 'px-[.875rem]'"
           >
-            <div>{{ navItem.title }}</div>
+            <div class="text-[1.25rem] leading-[1.3]">
+              {{ navItem.title }}
+            </div>
             <RiArrowDownSLine
               v-if="navItem.subItems"
-              size="18px"
-              class="text-TextSemiDark"
+              size="22px"
+              class="text-TextSemiDark translate-y-[1px]"
             />
           </div>
         </div>
