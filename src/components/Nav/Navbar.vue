@@ -5,6 +5,7 @@ import featuresData from "@/data/featuresData.ts";
 import useCasesData from "@/data/useCasesData.ts";
 import resourcesData from "@/data/resourcesData.ts";
 /*-- Import Assets --*/
+import { RiArrowDownSLine } from "@remixicon/vue";
 import logoPrimary from "@/assets/images/logo_primary.svg";
 
 // Navbar items
@@ -59,23 +60,40 @@ const toggleMenu = () => {
 <template>
   <header>
     <nav
-      class="flex justify-between px-[1rem]"
+      class="fixed top-0 left-0 right-0 flex justify-between p-[1rem] border-b-[1px] border-ltBorder"
       :class="{ 'menu-active': isMenuOpen }"
     >
       <!-- Logo -->
       <img :src="logoPrimary" alt="fatel3 logo" class="h-[34px] lg:h-[40px]" />
       <!-- Hamburger -->
-      <div @click="toggleMenu" class="hamburger-icon">
+      <div @click="toggleMenu" class="hamburger-icon lg:hidden">
         <span class="hamburger-icon-line hamburger-icon-line-top"></span>
         <span class="hamburger-icon-line hamburger-icon-line-middle"></span>
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
-      <!-- Navbar Items -->
-      <!-- <div>Nav items</div> -->
-      <!-- Login BTN -->
-      <!-- <button>Login</button> -->
-      <!-- Get Started BTN -->
-      <!-- <button>Get Started</button> -->
+      <div class="absolute top-0 bg-red-500">
+        <!-- Navbar Items -->
+        <div>
+          <div
+            v-for="navItem in navItems"
+            :key="navItem.id"
+            class="flex items-center gap-[.5rem]"
+          >
+            <div>{{ navItem.title }}</div>
+            <RiArrowDownSLine
+              v-if="navItem.subItems"
+              size="18px"
+              class="text-TextSemiDark"
+            />
+          </div>
+        </div>
+        <div>
+          <!-- Login BTN -->
+          <!-- <button>Login</button> -->
+          <!-- Get Started BTN -->
+          <!-- <button>Get Started</button> -->
+        </div>
+      </div>
     </nav>
   </header>
 </template>
