@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed, render } from "vue";
 /*-- Import Data --*/
 import featuresData from "@/data/featuresData.ts";
 import useCasesData from "@/data/useCasesData.ts";
 import resourcesData from "@/data/resourcesData.ts";
 /*-- Import Assets --*/
-import { RiArrowDownSLine } from "@remixicon/vue";
 import logoPrimary from "@/assets/images/logo_primary.svg";
 
 /*-- Navbar --*/
@@ -108,24 +107,6 @@ const setActiveIndex = (index: string) => {
     activeIndex.value = index;
   }
 };
-
-// Method to clear active index when hovering over another item
-const clearActiveIndex = (index: string) => {
-  if (activeIndex.value !== index) {
-    activeIndex.value = "none";
-  }
-};
-
-// Method to toggle active state of nav item
-/* const toggleNavSubMenu = (navItemID: string) => {
-  navItems.map((item) => {
-    if (item.subItems && item.id === navItemID) {
-      item.subMenuOpen = true; // Set open state based on clicked nav item
-    } else {
-      item.subMenuOpen = false;
-    }
-  });
-}; */
 </script>
 
 <template>
@@ -146,49 +127,91 @@ const clearActiveIndex = (index: string) => {
         class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] overflow-y-auto flex flex-col gap-[5rem] justify-between"
         :style="navbarWidthComputed"
       >
-        <!-- Navbar Items -->
+        <!-- Navbar Items Conatainer -->
         <div class="flex flex-col gap-[1rem]">
+          <!-- Navbar Items -->
           <div
             v-for="navItem in navItems"
             :key="navItem.id"
-            class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out"
-            :class="[
-              { 'pl-[.875rem] pr-[7px]': navItem.subItems },
-              { 'px-[.875rem]': !navItem.subItems },
-              { 'bg-BGSemiNormal': navItem.id === 'showcase' },
-              { 'bg-transparent': navItem.id !== 'showcase' },
-              {
-                'text-ltPrimary':
-                  navItem.activePage &&
-                  (navItem.id === 'home' || navItem.id === 'pricing'),
-              },
-              {
-                'bg-ltHoverPrimary text-ltPrimary':
-                  navItem.id === activeIndex && navItem.subItems,
-              },
-            ]"
-            @click="setActiveIndex(navItem.id)"
-            @mouseenter="clearActiveIndex(navItem.id)"
+            class="duration-[1s] ease-in-out"
           >
-            <div class="text-[1.25rem] leading-[1.3]">
-              {{ navItem.title }}
-            </div>
-            <!-- New Badge for Showcase -->
-            <span
-              v-if="navItem.id === 'showcase'"
-              class="absolute top-0 right-0 translate-y-[-4px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px]"
-              >New</span
+            <!-- Navbar Item -->
+            <div
+              class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out"
+              :class="[
+                { 'pl-[.875rem] pr-[7px]': navItem.subItems },
+                { 'px-[.875rem]': !navItem.subItems },
+                { 'bg-BGSemiNormal': navItem.id === 'showcase' },
+                { 'bg-transparent': navItem.id !== 'showcase' },
+                {
+                  'text-ltPrimary':
+                    navItem.activePage &&
+                    (navItem.id === 'home' || navItem.id === 'pricing'),
+                },
+                {
+                  'bg-ltHoverPrimary text-ltPrimary':
+                    navItem.id === activeIndex && navItem.subItems,
+                },
+              ]"
+              @click="setActiveIndex(navItem.id)"
             >
-            <RiArrowDownSLine
+              <div class="text-[1.25rem] leading-[1.3]">
+                {{ navItem.title }}
+              </div>
+              <!-- New Badge for Showcase -->
+              <span
+                v-if="navItem.id === 'showcase'"
+                class="absolute top-0 right-0 translate-y-[-4px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px]"
+                >New</span
+              >
+              <i
+                class="ri-arrow-down-s-line"
+                :class="
+                  navItem.id === activeIndex && navItem.subItems
+                    ? 'nav-item-arrow-open'
+                    : 'nav-item-arrow-close'
+                "
+              ></i>
+              <RiArrowDownSLine
+                v-if="navItem.subItems"
+                size="22px"
+                class=""
+                :class="
+                  navItem.id === activeIndex && navItem.subItems
+                    ? 'nav-item-arrow-open'
+                    : 'nav-item-arrow-close'
+                "
+              />
+            </div>
+            <!-- Navbar Item Sub Menu -->
+            <div
               v-if="navItem.subItems"
-              size="22px"
-              class="nav-item-arrow"
+              class="flex flex-col gap-[.5rem] overflow-hidden duration-[1s] ease-in-out"
               :class="
-                navItem.id === activeIndex && navItem.subItems
-                  ? 'nav-item-arrow-open'
-                  : ''
+                activeIndex === navItem.id
+                  ? 'h-[100%] overflow-auto'
+                  : 'h-[0px]'
               "
-            />
+            >
+              <div
+                v-if="navItem.id === 'features' || navItem.id === 'useCases'"
+                v-for="(subItem, index) in navItem.subItems"
+                :key="index"
+                class="w-fit flex gap-[.625rem] first:mt-[.75rem] last:mb-[2.5rem] py-[.75rem] px-[.875rem] bg-ltHoverPrimary rounded-[11px]"
+              >
+                <i class="" :class="subItem.icon"></i>
+                <div class="flex flex-col gap-[.25rem]">
+                  <div class="leading-tight">
+                    {{ subItem.title }}
+                  </div>
+                  <div
+                    class="text-[.875rem] font-light text-TextNormal leading-tight"
+                  >
+                    {{ subItem.shortDesc }}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Login & Get Started BTN-->
@@ -288,16 +311,18 @@ const clearActiveIndex = (index: string) => {
 
 /*-- Nav Items --*/
 /* Nav Item Arrow */
-.nav-item-arrow {
-  transform: translateY(1px) rotate(0deg);
-  color: var(--TextSemiDark);
+.nav-item-arrow-open {
+  transform: translateY(1px) rotate(180deg);
+  color: var(--ltPrimary);
   transition: color 0.15s ease-in-out;
   transition: transform 0.25s ease-in-out;
 }
 
-.nav-item-arrow-open {
-  transform: translateY(1px) rotate(180deg);
-  color: var(--ltPrimary);
+.nav-item-arrow-close {
+  transform: translateY(1px) rotate(0deg);
+  color: var(--TextSemiDark);
+  transition: color 0.15s ease-in-out;
+  transition: transform 0.25s ease-in-out;
 }
 
 /*-- Nav BTNs --*/
@@ -317,14 +342,11 @@ const clearActiveIndex = (index: string) => {
 @media (hover: hover) {
   .nav-item:hover {
     background-color: var(--ltHoverPrimary);
-    color: var(--ltPrimary);
   }
 
-  .nav-item:hover .nav-item-arrow {
+  /* Hover haven't effected the arrow icon */
+  .nav-item:hover * {
     color: var(--ltPrimary);
-    transform: translateY(1px) rotate(180deg);
-    transition: color 0.15s ease-in-out;
-    transition: transform 0.25s ease-in-out;
   }
 
   .nav-btn-outline:hover {
