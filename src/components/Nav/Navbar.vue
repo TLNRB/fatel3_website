@@ -109,6 +109,13 @@ const setActiveIndex = (index: string) => {
   }
 };
 
+// Method to clear active index when hovering over another item
+const clearActiveIndex = (index: string) => {
+  if (activeIndex.value !== index) {
+    activeIndex.value = "none";
+  }
+};
+
 // Method to toggle active state of nav item
 /* const toggleNavSubMenu = (navItemID: string) => {
   navItems.map((item) => {
@@ -161,6 +168,7 @@ const setActiveIndex = (index: string) => {
               },
             ]"
             @click="setActiveIndex(navItem.id)"
+            @mouseenter="clearActiveIndex(navItem.id)"
           >
             <div class="text-[1.25rem] leading-[1.3]">
               {{ navItem.title }}
