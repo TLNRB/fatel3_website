@@ -17,6 +17,7 @@ const navItems = [
     subItems: null,
     activePage: true,
     subMenuOpen: false,
+    subMenuHeight: 0,
   },
   {
     id: "pricing",
@@ -25,6 +26,7 @@ const navItems = [
     subItems: null,
     activePage: false,
     subMenuOpen: false,
+    subMenuHeight: 0,
   },
   {
     id: "features",
@@ -33,6 +35,7 @@ const navItems = [
     subItems: featuresData,
     activePage: false,
     subMenuOpen: false,
+    subMenuHeight: 409,
   },
   {
     id: "useCases",
@@ -41,6 +44,7 @@ const navItems = [
     subItems: useCasesData,
     activePage: false,
     subMenuOpen: false,
+    subMenuHeight: 226,
   },
   {
     id: "resources",
@@ -49,6 +53,7 @@ const navItems = [
     subItems: resourcesData,
     activePage: false,
     subMenuOpen: false,
+    subMenuHeight: 607,
   },
   {
     id: "showcase",
@@ -57,6 +62,7 @@ const navItems = [
     subItems: null,
     activePage: false,
     subMenuOpen: false,
+    subMenuHeight: 0,
   },
 ];
 
@@ -130,11 +136,7 @@ const setActiveIndex = (index: string) => {
         <!-- Navbar Items Conatainer -->
         <div class="flex flex-col gap-[1rem]">
           <!-- Navbar Items -->
-          <div
-            v-for="navItem in navItems"
-            :key="navItem.id"
-            class="duration-[1s] ease-in-out"
-          >
+          <div v-for="navItem in navItems" :key="navItem.id">
             <!-- Navbar Item -->
             <div
               class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out"
@@ -177,11 +179,11 @@ const setActiveIndex = (index: string) => {
             <!-- Navbar Item Sub Menu -->
             <div
               v-if="navItem.subItems"
-              class="flex flex-col gap-[.5rem] overflow-hidden duration-[1s] ease-in-out"
-              :class="
+              class="flex flex-col gap-[.5rem] overflow-hidden duration-[.375s] ease-in-out"
+              :style="
                 activeIndex === navItem.id
-                  ? 'h-[100%] overflow-auto'
-                  : 'h-[0px]'
+                  ? { height: navItem.subMenuHeight + 'px' }
+                  : { height: '0' }
               "
             >
               <!-- Sub menu for features and use cases -->
@@ -189,15 +191,22 @@ const setActiveIndex = (index: string) => {
                 v-if="navItem.id === 'features' || navItem.id === 'useCases'"
                 v-for="(subItem, index) in navItem.subItems"
                 :key="index"
-                class="w-[248px] flex gap-[.625rem] first:mt-[.75rem] last:mb-[2.5rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer"
+                class="sub-menu-item w-[248px] flex gap-[.625rem] first:mt-[.75rem] last:mb-[2.5rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out"
               >
                 <i
                   class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
                   :class="subItem.icon"
                 ></i>
                 <div class="flex flex-col gap-[.25rem]">
-                  <div class="leading-tight">
-                    {{ subItem.title }}
+                  <div class="flex items-center gap-[.625rem]">
+                    <div class="leading-tight">
+                      {{ subItem.title }}
+                    </div>
+                    <span
+                      v-if="subItem.commingSoon"
+                      class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGSemiNormal text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
+                      >Comming soon
+                    </span>
                   </div>
                   <div
                     class="text-[.875rem] font-light text-TextNormal leading-tight"
@@ -220,7 +229,7 @@ const setActiveIndex = (index: string) => {
                 <div
                   v-for="(subItem, index) in item.subItems"
                   :key="index"
-                  class="w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer"
+                  class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out"
                 >
                   <i
                     class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
@@ -233,9 +242,9 @@ const setActiveIndex = (index: string) => {
                       </div>
                       <span
                         v-if="subItem.commingSoon"
-                        class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGSemiNormal text-ltPrimary leading-tight rounded-[4px]"
-                        >Comming soon</span
-                      >
+                        class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGSemiNormal text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
+                        >Comming soon
+                      </span>
                     </div>
                     <div
                       class="text-[.875rem] font-light text-TextNormal leading-tight"
@@ -392,6 +401,17 @@ const setActiveIndex = (index: string) => {
   .nav-btn-solid:hover {
     background-color: var(--ltPrimaryDark);
     border-color: var(--ltPrimaryDark);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .sub-menu-item:hover {
+    background-color: var(--ltHoverPrimary);
+    transition: all 0.15s ease-in-out;
+  }
+
+  /* comming soon badge */
+  .sub-menu-item:hover span {
+    background-color: var(--BGLight);
     transition: all 0.15s ease-in-out;
   }
 }
