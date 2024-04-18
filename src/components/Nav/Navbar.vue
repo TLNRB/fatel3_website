@@ -11,57 +11,60 @@ import logoPrimary from "@/assets/images/logo_primary.svg";
 /*-- Navbar --*/
 // Navbar items
 const navItems = [
-  { id: "home", title: "Home", route: "/", subItems: null, active: "true" },
+  {
+    id: "home",
+    title: "Home",
+    route: "/",
+    subItems: null,
+    activePage: true,
+    subMenuOpen: false,
+  },
   {
     id: "pricing",
     title: "Pricing",
     route: "/pricing",
     subItems: null,
-    active: "false",
+    activePage: false,
+    subMenuOpen: false,
   },
   {
     id: "features",
     title: "Features",
     route: "/features",
     subItems: featuresData,
-    active: "false",
+    activePage: false,
+    subMenuOpen: false,
   },
   {
     id: "useCases",
     title: "Use Cases",
     route: "/use-cases",
     subItems: useCasesData,
-    active: "false",
+    activePage: false,
+    subMenuOpen: false,
   },
   {
     id: "resources",
     title: "Resources",
     route: "/resources",
     subItems: resourcesData,
-    active: "false",
+    activePage: false,
+    subMenuOpen: false,
   },
   {
     id: "showcase",
     title: "Showcase",
     route: "/showcase",
     subItems: null,
-    active: "false",
+    activePage: false,
+    subMenuOpen: false,
   },
 ];
 
-// Navbar items conditional classes
-const navItemClasses = (isSubItems: {} | null) => {
-  return isSubItems ? "pl-[.875rem] pr-[7px]" : "px-[.875rem]";
-};
-
-const newNavItem = (isShowcase: boolean) => {
-  return isShowcase ? "bg-BGSemiNormal" : "bg-transparent";
-};
-
-//Nav and dropdown click event
+// Menu dropdown click event
 const isMenuOpen = ref<boolean>(false);
 
-//Toggle menu dropdown
+// Toggle menu dropdown
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
@@ -94,6 +97,28 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", handleResize);
 });
+
+const activeIndex = ref<string>("none"); // Track active index
+
+// Method to set active index
+const setActiveIndex = (index: string) => {
+  if (activeIndex.value === index) {
+    activeIndex.value = "none";
+  } else {
+    activeIndex.value = index;
+  }
+};
+
+// Method to toggle active state of nav item
+/* const toggleNavSubMenu = (navItemID: string) => {
+  navItems.map((item) => {
+    if (item.subItems && item.id === navItemID) {
+      item.subMenuOpen = true; // Set open state based on clicked nav item
+    } else {
+      item.subMenuOpen = false;
+    }
+  });
+}; */
 </script>
 
 <template>
@@ -121,9 +146,21 @@ onUnmounted(() => {
             :key="navItem.id"
             class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out"
             :class="[
-              navItemClasses(navItem.subItems),
-              newNavItem(navItem.id === 'showcase'),
+              { 'pl-[.875rem] pr-[7px]': navItem.subItems },
+              { 'px-[.875rem]': !navItem.subItems },
+              { 'bg-BGSemiNormal': navItem.id === 'showcase' },
+              { 'bg-transparent': navItem.id !== 'showcase' },
+              {
+                'text-ltPrimary':
+                  navItem.activePage &&
+                  (navItem.id === 'home' || navItem.id === 'pricing'),
+              },
+              {
+                'bg-ltHoverPrimary text-ltPrimary':
+                  navItem.id === activeIndex && navItem.subItems,
+              },
             ]"
+            @click="setActiveIndex(navItem.id)"
           >
             <div class="text-[1.25rem] leading-[1.3]">
               {{ navItem.title }}
@@ -138,6 +175,11 @@ onUnmounted(() => {
               v-if="navItem.subItems"
               size="22px"
               class="nav-item-arrow"
+              :class="
+                navItem.id === activeIndex && navItem.subItems
+                  ? 'nav-item-arrow-open'
+                  : ''
+              "
             />
           </div>
         </div>
@@ -242,7 +284,12 @@ onUnmounted(() => {
   transform: translateY(1px) rotate(0deg);
   color: var(--TextSemiDark);
   transition: color 0.15s ease-in-out;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.25s ease-in-out;
+}
+
+.nav-item-arrow-open {
+  transform: translateY(1px) rotate(180deg);
+  color: var(--ltPrimary);
 }
 
 /*-- Nav BTNs --*/
@@ -269,7 +316,7 @@ onUnmounted(() => {
     color: var(--ltPrimary);
     transform: translateY(1px) rotate(180deg);
     transition: color 0.15s ease-in-out;
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.25s ease-in-out;
   }
 
   .nav-btn-outline:hover {
