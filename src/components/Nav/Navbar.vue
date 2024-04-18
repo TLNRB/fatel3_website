@@ -125,6 +125,7 @@ const setActiveIndex = (index: string) => {
 
 const getSubMenuHeight = (navItem: any) => {
   if (activeIndex.value === navItem.id) {
+    console.log(screenWidth.value);
     if (screenWidth.value < 560) {
       return {
         height: `${navItem.subMenuHeightXS}px`,
@@ -173,11 +174,12 @@ const getSubMenuHeight = (navItem: any) => {
                 { 'pl-[.875rem] pr-[7px]': navItem.subItems },
                 { 'px-[.875rem]': !navItem.subItems },
                 { 'bg-BGSemiNormal': navItem.id === 'showcase' },
-                { 'bg-transparent': navItem.id !== 'showcase' },
                 {
                   'text-ltPrimary':
                     navItem.activePage &&
-                    (navItem.id === 'home' || navItem.id === 'pricing'),
+                    (navItem.id === 'home' ||
+                      navItem.id === 'pricing' ||
+                      navItem.id === 'showcase'),
                 },
                 {
                   'bg-ltHoverPrimary text-ltPrimary':
