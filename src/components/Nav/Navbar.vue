@@ -35,7 +35,9 @@ const navItems = [
     subItems: featuresData,
     activePage: false,
     subMenuOpen: false,
-    subMenuHeight: 409,
+    subMenuHeightXS: 388,
+    subMenuHeightSM: 206,
+    subMenuHeightMD: 206,
   },
   {
     id: "useCases",
@@ -44,7 +46,9 @@ const navItems = [
     subItems: useCasesData,
     activePage: false,
     subMenuOpen: false,
-    subMenuHeight: 226,
+    subMenuHeightXS: 206,
+    subMenuHeightSM: 115,
+    subMenuHeightMD: 115,
   },
   {
     id: "resources",
@@ -53,7 +57,9 @@ const navItems = [
     subItems: resourcesData,
     activePage: false,
     subMenuOpen: false,
-    subMenuHeight: 607,
+    subMenuHeightXS: 587,
+    subMenuHeightSM: 349,
+    subMenuHeightMD: 332,
   },
   {
     id: "showcase",
@@ -83,14 +89,17 @@ function handleResize() {
   screenHeight.value = window.innerHeight; // Update screen height on resize
 }
 
-const navbarWidthComputed = computed(() => {
-  // Check if screen width is less than 1060 then return the screen height minus navbar height
-  if (screenWidth.value < 1060) {
+const navbarHeightComputed = computed(() => {
+  // Check if screen width is less than 1060 and the dropdown is open then return the screen height minus navbar height
+  if (screenWidth.value < 1060 && isMenuOpen.value) {
     return {
       minHeight: screenHeight.value - 66 + "px",
+      overflowY: "auto",
     };
+  } else if (screenWidth.value < 1060 && !isMenuOpen.value) {
+    return { height: "0", overflow: "hidden" }; // Return 0 when the dropdown is closed
   } else {
-    return { height: "100%" }; // Return the full height when screen width is greater than 1060
+    return { height: "auto" }; // Return auto when the screen width is greater than 1060
   }
 });
 
@@ -113,6 +122,26 @@ const setActiveIndex = (index: string) => {
     activeIndex.value = index;
   }
 };
+
+const getSubMenuHeight = (navItem: any) => {
+  if (activeIndex.value === navItem.id) {
+    if (screenWidth.value < 560) {
+      return {
+        height: `${navItem.subMenuHeightXS}px`,
+      }; // For extra small screens
+    } else if (screenWidth.value < 768) {
+      return {
+        height: `${navItem.subMenuHeightSM}px`,
+      }; // For small screens
+    } else if (screenWidth.value < 1060) {
+      return {
+        height: `${navItem.subMenuHeightMD}px`,
+      }; // For medium screens
+    }
+  } else {
+    return { height: 0 }; // Default height when conditions are not met
+  }
+};
 </script>
 
 <template>
@@ -130,13 +159,13 @@ const setActiveIndex = (index: string) => {
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
       <div
-        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] overflow-y-auto flex flex-col gap-[5rem] justify-between"
-        :style="navbarWidthComputed"
+        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between duration-[1s] ease-in-out"
+        :class="isMenuOpen ? 'menu-dropdown-open' : 'menu-dropdown-close'"
       >
         <!-- Navbar Items Conatainer -->
         <div class="flex flex-col gap-[1rem]">
           <!-- Navbar Items -->
-          <div v-for="navItem in navItems" :key="navItem.id">
+          <div v-for="(navItem, index) in navItems" :key="index">
             <!-- Navbar Item -->
             <div
               class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out"
@@ -180,19 +209,17 @@ const setActiveIndex = (index: string) => {
             <div
               v-if="navItem.subItems"
               class="overflow-hidden duration-[.375s] ease-in-out"
-              :style="
-                activeIndex === navItem.id ? { height: auto } : { height: '0' }
-              "
+              :style="getSubMenuHeight(navItem)"
             >
               <!-- Sub menu for features and use cases -->
               <div
                 v-if="navItem.id === 'features' || navItem.id === 'useCases'"
-                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem]"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px]"
               >
                 <div
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
-                  class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[300px]"
+                  class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[350px]"
                 >
                   <i
                     class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
@@ -220,7 +247,7 @@ const setActiveIndex = (index: string) => {
               <!-- Sub menu for resources -->
               <div
                 v-if="navItem.id === 'resources'"
-                class="flex flex-col gap-[.5rem] ml-[.875rem] mt-[1.5rem] mb-[.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem]"
+                class="flex flex-col gap-[.5rem] ml-[.875rem] mt-[1.5rem] mb-[.25rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px]"
               >
                 <div v-for="(item, index) in navItem.subItems" :key="index">
                   <div class="mb-[.5rem] text-ltPrimary font-light">
@@ -230,8 +257,8 @@ const setActiveIndex = (index: string) => {
                   <div class="flex flex-col gap-[.5rem] mb-[1.5rem]">
                     <div
                       v-for="(subItem, index) in item.subItems"
-                      :key="index"
-                      class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[300px]"
+                      :key="subItem.title"
+                      class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
                     >
                       <i
                         class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
@@ -281,6 +308,22 @@ const setActiveIndex = (index: string) => {
 
 <style scoped>
 /*-- Menu --*/
+.menu-dropdown-open {
+  min-height: calc(100vh - 66px);
+  opacity: 1;
+  visibility: visible;
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-dropdown-close {
+  min-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
 /* Menu Icon */
 .hamburger-icon {
   display: flex;
