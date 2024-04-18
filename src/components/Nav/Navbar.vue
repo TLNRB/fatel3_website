@@ -179,57 +179,20 @@ const setActiveIndex = (index: string) => {
             <!-- Navbar Item Sub Menu -->
             <div
               v-if="navItem.subItems"
-              class="flex flex-col gap-[.5rem] overflow-hidden duration-[.375s] ease-in-out"
+              class="overflow-hidden duration-[.375s] ease-in-out"
               :style="
-                activeIndex === navItem.id
-                  ? { height: navItem.subMenuHeight + 'px' }
-                  : { height: '0' }
+                activeIndex === navItem.id ? { height: auto } : { height: '0' }
               "
             >
               <!-- Sub menu for features and use cases -->
               <div
                 v-if="navItem.id === 'features' || navItem.id === 'useCases'"
-                v-for="(subItem, index) in navItem.subItems"
-                :key="index"
-                class="sub-menu-item w-[248px] flex gap-[.625rem] first:mt-[.75rem] last:mb-[2.5rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem]"
               >
-                <i
-                  class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
-                  :class="subItem.icon"
-                ></i>
-                <div class="flex flex-col gap-[.25rem]">
-                  <div class="flex items-center gap-[.625rem]">
-                    <div class="leading-tight">
-                      {{ subItem.title }}
-                    </div>
-                    <span
-                      v-if="subItem.commingSoon"
-                      class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGSemiNormal text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
-                      >Comming soon
-                    </span>
-                  </div>
-                  <div
-                    class="text-[.875rem] font-light text-TextNormal leading-tight"
-                  >
-                    {{ subItem.shortDesc }}
-                  </div>
-                </div>
-              </div>
-              <!-- Sub menu for resources -->
-              <div
-                v-if="navItem.id === 'resources'"
-                v-for="(item, index) in navItem.subItems"
-                :key="index"
-                class="flex flex-col gap-[.5rem] first:mt-[1.5rem] first:mb-[1.5rem] last:mb-[2.5rem] ml-[.875rem]"
-              >
-                <div class="mb-[.25rem] text-ltPrimary font-light">
-                  {{ item.title }}
-                </div>
-                <!-- Company and connect -->
                 <div
-                  v-for="(subItem, index) in item.subItems"
+                  v-for="(subItem, index) in navItem.subItems"
                   :key="index"
-                  class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out"
+                  class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[300px]"
                 >
                   <i
                     class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
@@ -250,6 +213,47 @@ const setActiveIndex = (index: string) => {
                       class="text-[.875rem] font-light text-TextNormal leading-tight"
                     >
                       {{ subItem.shortDesc }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Sub menu for resources -->
+              <div
+                v-if="navItem.id === 'resources'"
+                class="flex flex-col gap-[.5rem] ml-[.875rem] mt-[1.5rem] mb-[.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem]"
+              >
+                <div v-for="(item, index) in navItem.subItems" :key="index">
+                  <div class="mb-[.5rem] text-ltPrimary font-light">
+                    {{ item.title }}
+                  </div>
+                  <!-- Company and connect -->
+                  <div class="flex flex-col gap-[.5rem] mb-[1.5rem]">
+                    <div
+                      v-for="(subItem, index) in item.subItems"
+                      :key="index"
+                      class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[300px]"
+                    >
+                      <i
+                        class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
+                        :class="subItem.icon"
+                      ></i>
+                      <div class="flex flex-col gap-[.25rem]">
+                        <div class="flex items-center gap-[.625rem]">
+                          <div class="leading-tight">
+                            {{ subItem.title }}
+                          </div>
+                          <span
+                            v-if="subItem.commingSoon"
+                            class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGSemiNormal text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
+                            >Comming soon
+                          </span>
+                        </div>
+                        <div
+                          class="text-[.875rem] font-light text-TextNormal leading-tight"
+                        >
+                          {{ subItem.shortDesc }}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
