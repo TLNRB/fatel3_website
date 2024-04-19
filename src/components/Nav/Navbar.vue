@@ -1,83 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, render } from "vue";
-/*-- Import Data --*/
-import featuresData from "@/data/featuresData.ts";
-import useCasesData from "@/data/useCasesData.ts";
-import resourcesData from "@/data/resourcesData.ts";
 /*-- Import Assets --*/
 import logoPrimary from "@/assets/images/logo_primary.svg";
 
-/*-- Navbar --*/
-// Navbar items
-const navItems = [
-  {
-    id: "home",
-    title: "Home",
-    route: "/",
-    subItems: null,
-    activePage: true,
-    subMenuOpen: false,
-    subMenuHeight: 0,
-  },
-  {
-    id: "features",
-    title: "Features",
-    route: "/features",
-    subItems: featuresData,
-    activePage: false,
-    subMenuOpen: false,
-    subMenuHeightXS: 388,
-    subMenuHeightSM: 206,
-    subMenuHeightMD: 206,
-    subMenuHeightLG: 206,
-    subMenuHeightXL: 238,
-  },
-  {
-    id: "useCases",
-    title: "Use Cases",
-    route: "/use-cases",
-    subItems: useCasesData,
-    activePage: false,
-    subMenuOpen: false,
-    subMenuHeightXS: 206,
-    subMenuHeightSM: 115,
-    subMenuHeightMD: 115,
-    subMenuHeightLG: 115,
-    subMenuHeightXL: 147,
-  },
-  {
-    id: "resources",
-    title: "Resources",
-    route: "/resources",
-    subItems: resourcesData,
-    activePage: false,
-    subMenuOpen: false,
-    subMenuHeightXS: 579,
-    subMenuHeightSM: 341,
-    subMenuHeightMD: 324,
-    subMenuHeightLG: 324,
-    subMenuHeightXL: 364,
-  },
-  {
-    id: "pricing",
-    title: "Pricing",
-    route: "/pricing",
-    subItems: null,
-    activePage: false,
-    subMenuOpen: false,
-    subMenuHeight: 0,
-  },
-  {
-    id: "showcase",
-    title: "Showcase",
-    route: "/showcase",
-    subItems: null,
-    activePage: false,
-    subMenuOpen: false,
-    subMenuHeight: 0,
-  },
-];
+// Prop handling
+const { navItems } = defineProps(["navItems"]);
 
+/*-- Navbar --*/
 // Menu dropdown click event
 const isMenuOpen = ref<boolean>(false);
 
@@ -157,7 +86,11 @@ const getSubMenuHeight = (navItem: any) => {
       :class="{ 'menu-active': isMenuOpen }"
     >
       <!-- Logo -->
-      <img :src="logoPrimary" alt="fatel3 logo" class="h-[34px] lg:h-[40px]" />
+      <img
+        :src="logoPrimary"
+        alt="fatel3 logo"
+        class="h-[34px] cursor-pointer lg:h-[40px]"
+      />
       <!-- Hamburger -->
       <div @click="toggleMenu" class="hamburger-icon">
         <span class="hamburger-icon-line hamburger-icon-line-top"></span>
@@ -165,7 +98,7 @@ const getSubMenuHeight = (navItem: any) => {
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
       <div
-        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight duration-[1s] ease-in-out lg:top-[72px] xl:static xl:flex-row xl:items-center xl:gap-[2rem] xl:p-0 xl:border-t-0"
+        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight duration-[1s] ease-in-out lg:top-[72px] xl:static xl:flex-row xl:items-center xl:gap-[2rem] xl:p-0"
         :class="
           isMenuOpen || screenWidth >= 1200
             ? 'menu-dropdown-open'
@@ -208,7 +141,7 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- New Badge for Showcase -->
               <span
                 v-if="navItem.id === 'showcase'"
-                class="absolute top-0 right-0 translate-y-[-4px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px] xl:text-[.625rem] xl:rounded-[4px] xl:translate-y-[-3px] xl:translate-x-[12px]"
+                class="absolute top-0 right-0 translate-y-[-3px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px] xl:text-[.625rem] xl:rounded-[4px] xl:translate-x-[12px]"
                 >New</span
               >
               <i
@@ -224,7 +157,7 @@ const getSubMenuHeight = (navItem: any) => {
             <!-- Navbar Item Sub Menu -->
             <div
               v-if="navItem.subItems"
-              class="overflow-hidden duration-[.375s] ease-in-out xl:w-[100%] xl:absolute xl:top-[72px] xl:left-0 xl:bg-BGNavDropdown"
+              class="overflow-hidden duration-[.375s] ease-in-out xl:w-[100%] xl:absolute xl:top-[72px] xl:left-0 xl:bg-BGNavDropdown xl:border-b-[1px] xl:border-ltBorder"
               :style="getSubMenuHeight(navItem)"
             >
               <!-- Sub menu for features and use cases -->
