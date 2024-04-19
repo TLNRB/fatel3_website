@@ -28,16 +28,12 @@ const filteredNavItemsUseCases = computed(() => {
 const filteredNavItemsResources = computed(() =>
   navItems.find((item: any) => item.id === "resources")
 );
-
-onMounted(() => {
-  console.log(filteredNavItemsResources.value);
-});
 </script>
 
 <template>
   <footer class="border-t-[1px] border-ltBorder">
     <div
-      class="pt-[3rem] pb-[2rem] px-[1rem] bg-BGLight lg:px-[2rem] xxl:w-[1412px] xxl:mx-auto xxl:px-[1rem]"
+      class="flex flex-col gap-[3rem] pt-[3rem] pb-[2rem] px-[1rem] bg-BGLight lg:px-[2rem] xxl:w-[1412px] xxl:mx-auto xxl:px-[1rem]"
     >
       <div class="flex justify-between gap-[3rem] flex-wrap">
         <div class="flex flex-col items-start gap-[1rem]">
@@ -140,7 +136,50 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div></div>
+      <div class="flex flex-col-reverse gap-[1rem]">
+        <!-- Copy Right & Term of service -->
+        <div
+          class="flex flex-col-reverse gap-[.5rem] text-[.875rem] text-TextNormal xs:flex-row xs:gap-[1.25rem]"
+        >
+          <div class="font-light">&copy; fatel3. All rights reserved.</div>
+          <a href="#" download class="font-light underline cursor-pointer"
+            >Terms of Service</a
+          >
+        </div>
+        <!-- Social Media -->
+        <div class="flex gap-[1rem]">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/fatel3aps" target="_blank"
+            ><i
+              class="social-media-icon ri-facebook-circle-fill text-[1.5rem] h-[24px] flex justify-center items-center text-TextNormal duration-[.15s] ease-in-out"
+            ></i
+          ></a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/company/fatel3aps/" target="_blank"
+            ><i
+              class="social-media-icon ri-linkedin-fill text-[1.5rem] h-[24px] flex justify-center items-center text-TextNormal duration-[.15s] ease-in-out"
+            ></i
+          ></a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/fatel3aps/" target="_blank"
+            ><i
+              class="social-media-icon ri-instagram-fill text-[1.5rem] h-[24px] flex justify-center items-center text-TextNormal duration-[.15s] ease-in-out"
+            ></i
+          ></a>
+          <!-- X/Twitter -->
+          <a href="https://twitter.com/fatel3aps" target="_blank"
+            ><i
+              class="social-media-icon ri-twitter-x-fill text-[1.5rem] h-[24px] flex justify-center items-center text-TextNormal duration-[.15s] ease-in-out"
+            ></i
+          ></a>
+          <!-- Youtube -->
+          <a href="https://www.youtube.com/@fatel3aps" target="_blank"
+            ><i
+              class="social-media-icon ri-youtube-fill text-[1.5rem] h-[24px] flex justify-center items-center text-TextNormal duration-[.15s] ease-in-out"
+            ></i
+          ></a>
+        </div>
+      </div>
     </div>
   </footer>
 </template>
@@ -175,6 +214,10 @@ onMounted(() => {
     background-color: var(--ltPrimaryDark);
     border-color: var(--ltPrimaryDark);
     transition: all 0.15s ease-in-out;
+  }
+
+  .social-media-icon:hover {
+    color: var(--ltPrimary);
   }
 }
 </style>
