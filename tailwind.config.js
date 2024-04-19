@@ -15,6 +15,7 @@ export default {
       },
       fontFamily: {
         neueRegradeBold: ['Neue-regrade-bold', 'sans-serif'],
+        neueRegradeSemibold: ['Neue-regrade-semibold', 'sans-serif'],
       },
       colors: {
         ltPrimary: '#6270EF',

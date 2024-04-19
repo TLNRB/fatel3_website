@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed, render } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 /*-- Import Assets --*/
 import logoPrimary from "@/assets/images/logo_primary.svg";
 
@@ -238,7 +238,9 @@ const getSubMenuHeight = (navItem: any) => {
           </div>
         </div>
         <!-- Login & Get Started BTN-->
-        <div class="flex justify-center items-center gap-[1rem] ml-[-1rem]">
+        <div
+          class="flex justify-center items-center gap-[1rem] ml-[-1rem] xl:ml-0"
+        >
           <button
             class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
           >
