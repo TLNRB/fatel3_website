@@ -73,7 +73,9 @@ onMounted(() => {
         <!-- Nav Items -->
         <div class="flex gap-[2rem] flex-wrap">
           <!-- Nav Items Individual Pages -->
-          <div class="min-w-[125px] flex flex-col gap-[1.5rem]">
+          <div
+            class="min-w-[125px] flex flex-col gap-[1.5rem] xs:min-w-[150px] xxl:min-w-[200px]"
+          >
             <div class="font-[500] leading-tight">Pages</div>
             <div class="flex flex-col gap-[.875rem]">
               <div
@@ -86,7 +88,9 @@ onMounted(() => {
             </div>
           </div>
           <!-- Nav Items Features -->
-          <div class="min-w-[125px] flex flex-col gap-[1.5rem]">
+          <div
+            class="min-w-[125px] flex flex-col gap-[1.5rem] xs:min-w-[150px] xxl:min-w-[200px]"
+          >
             <div class="font-[500] leading-tight">Features</div>
             <div class="flex flex-col gap-[.875rem]">
               <div
@@ -99,7 +103,9 @@ onMounted(() => {
             </div>
           </div>
           <!-- Nav Items Use cases -->
-          <div class="min-w-[125px] flex flex-col gap-[1.5rem]">
+          <div
+            class="min-w-[125px] flex flex-col gap-[1.5rem] xs:min-w-[150px] xxl:min-w-[200px]"
+          >
             <div class="font-[500] leading-tight">Use Cases</div>
             <div class="flex flex-col gap-[.875rem]">
               <div
@@ -112,7 +118,9 @@ onMounted(() => {
             </div>
           </div>
           <!-- Nav Items Resources -->
-          <div class="min-w-[125px] flex flex-col gap-[1.5rem]">
+          <div
+            class="min-w-[125px] flex flex-col gap-[1.5rem] xs:min-w-[150px] xxl:min-w-fit"
+          >
             <div class="font-[500] leading-tight">Resources</div>
             <div class="flex flex-col gap-[.875rem]">
               <div
