@@ -27,7 +27,7 @@ export default {
         BGSemiDark: '#272733',
         BGDark: '#1f1f2a',
         TextLight: '#ffffff',
-        TextNormal: '#807D8D',
+        TextNormal: '#7b7988',
         TextSemiDark: '#3e3d45',
         TextDark: '#26262f',
         ltBorder: '#DBDBDB',
@@ -41,6 +41,7 @@ export default {
         ltTextPositive: '#4DAA57',
         ltTextNegative: '#FC536B',
         ltHoverPrimary: '#E9ECFF',
+        BGNavDropdown: '#f9f9fc',
       }
     },
   },

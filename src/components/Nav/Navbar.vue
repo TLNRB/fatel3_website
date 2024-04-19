@@ -30,6 +30,7 @@ const navItems = [
     subMenuHeightSM: 206,
     subMenuHeightMD: 206,
     subMenuHeightLG: 206,
+    subMenuHeightXL: 238,
   },
   {
     id: "useCases",
@@ -42,6 +43,7 @@ const navItems = [
     subMenuHeightSM: 115,
     subMenuHeightMD: 115,
     subMenuHeightLG: 115,
+    subMenuHeightXL: 147,
   },
   {
     id: "resources",
@@ -54,6 +56,7 @@ const navItems = [
     subMenuHeightSM: 341,
     subMenuHeightMD: 324,
     subMenuHeightLG: 324,
+    subMenuHeightXL: 324,
   },
   {
     id: "pricing",
@@ -131,6 +134,10 @@ const getSubMenuHeight = (navItem: any) => {
       return {
         height: `${navItem.subMenuHeightLG}px`,
       }; // For large screens
+    } else {
+      return {
+        height: `${navItem.subMenuHeightXL}px`,
+      }; // For the larger screens
     }
   } else {
     return { height: 0 }; // Default height when conditions are not met
@@ -139,12 +146,14 @@ const getSubMenuHeight = (navItem: any) => {
 </script>
 
 <template>
-  <header>
+  <header
+    class="w-[100%] h-[66px] fixed top-0 left-0 right-0 bg-BGLight lg:h-[72px]"
+  >
     <hr
-      class="w-[100%] absolute top-[66px] left-0 right-0 border-ltBorder lg:top-[72px]"
+      class="w-[100%] absolute top-[66px] left-0 right-0 border-ltBorder z-[11] lg:top-[72px]"
     />
     <nav
-      class="w-[100%] fixed top-0 left-0 right-0 flex justify-between p-[1rem] bg-BGLight z-[10] lg:gap-[2rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0 xxxl:gap-[4rem]"
+      class="w-[100%] flex justify-between p-[1rem] bg-BGLight z-[10] lg:gap-[2rem] lg:px-[2rem] xxl:w-[1412px] xxl:mx-auto xxl:px-[1rem] xxxl:gap-[4rem]"
       :class="{ 'menu-active': isMenuOpen }"
     >
       <!-- Logo -->
@@ -156,7 +165,7 @@ const getSubMenuHeight = (navItem: any) => {
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
       <div
-        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight border-t-[1px] border-ltBorder duration-[1s] ease-in-out lg:top-[72px] xl:static xl:flex-row xl:items-center xl:gap-[2rem] xl:p-0 xl:overflow-hidden xl:border-t-0"
+        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight duration-[1s] ease-in-out lg:top-[72px] xl:static xl:flex-row xl:items-center xl:gap-[2rem] xl:p-0 xl:overflow-hidden xl:border-t-0"
         :class="
           isMenuOpen || screenWidth >= 1200
             ? 'menu-dropdown-open'
@@ -215,13 +224,13 @@ const getSubMenuHeight = (navItem: any) => {
             <!-- Navbar Item Sub Menu -->
             <div
               v-if="navItem.subItems"
-              class="overflow-hidden duration-[.375s] ease-in-out bg-BGLight xl:w-[100%] xl:absolute xl:top-[57px] xl:left-[0] xl:overflow-auto xl:drop-shadow-lg"
+              class="overflow-hidden duration-[.375s] ease-in-out xl:w-[100%] xl:absolute xl:top-[72px] xl:left-0 xl:bg-BGNavDropdown"
               :style="getSubMenuHeight(navItem)"
             >
               <!-- Sub menu for features and use cases -->
               <div
                 v-if="navItem.id === 'features' || navItem.id === 'useCases'"
-                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px]"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[185px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[169px] xxl:pr-[550px] xxxl:pl-[201px] xxxl:pr-[525px]"
               >
                 <div
                   v-for="(subItem, index) in navItem.subItems"
@@ -239,7 +248,7 @@ const getSubMenuHeight = (navItem: any) => {
                       </div>
                       <span
                         v-if="subItem.commingSoon"
-                        class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGSemiNormal text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
+                        class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGLight border-[1px] border-ltPrimary text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
                         >Comming soon
                       </span>
                     </div>
@@ -264,7 +273,7 @@ const getSubMenuHeight = (navItem: any) => {
                   <div class="flex flex-col gap-[.5rem] mb-[1.25rem]">
                     <div
                       v-for="(subItem, index) in item.subItems"
-                      :key="subItem.title"
+                      :key="index"
                       class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
                     >
                       <i
@@ -278,7 +287,7 @@ const getSubMenuHeight = (navItem: any) => {
                           </div>
                           <span
                             v-if="subItem.commingSoon"
-                            class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGSemiNormal text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
+                            class="py-[.125rem] px-[.25rem] text-[.625rem] bg-BGLight border-[1px] border-ltPrimary text-ltPrimary leading-tight rounded-[4px] duration-[.15] ease-in-out"
                             >Comming soon
                           </span>
                         </div>
@@ -460,12 +469,6 @@ const getSubMenuHeight = (navItem: any) => {
 
   .sub-menu-item:hover {
     background-color: var(--ltHoverPrimary);
-    transition: all 0.15s ease-in-out;
-  }
-
-  /* comming soon badge */
-  .sub-menu-item:hover span {
-    background-color: var(--BGLight);
     transition: all 0.15s ease-in-out;
   }
 }
