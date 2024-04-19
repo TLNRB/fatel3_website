@@ -20,15 +20,6 @@ const navItems = [
     subMenuHeight: 0,
   },
   {
-    id: "pricing",
-    title: "Pricing",
-    route: "/pricing",
-    subItems: null,
-    activePage: false,
-    subMenuOpen: false,
-    subMenuHeight: 0,
-  },
-  {
     id: "features",
     title: "Features",
     route: "/features",
@@ -60,6 +51,15 @@ const navItems = [
     subMenuHeightXS: 587,
     subMenuHeightSM: 349,
     subMenuHeightMD: 332,
+  },
+  {
+    id: "pricing",
+    title: "Pricing",
+    route: "/pricing",
+    subItems: null,
+    activePage: false,
+    subMenuOpen: false,
+    subMenuHeight: 0,
   },
   {
     id: "showcase",
