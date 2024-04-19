@@ -56,7 +56,7 @@ const navItems = [
     subMenuHeightSM: 341,
     subMenuHeightMD: 324,
     subMenuHeightLG: 324,
-    subMenuHeightXL: 324,
+    subMenuHeightXL: 364,
   },
   {
     id: "pricing",
@@ -165,7 +165,7 @@ const getSubMenuHeight = (navItem: any) => {
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
       <div
-        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight duration-[1s] ease-in-out lg:top-[72px] xl:static xl:flex-row xl:items-center xl:gap-[2rem] xl:p-0 xl:overflow-hidden xl:border-t-0"
+        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight duration-[1s] ease-in-out lg:top-[72px] xl:static xl:flex-row xl:items-center xl:gap-[2rem] xl:p-0 xl:border-t-0"
         :class="
           isMenuOpen || screenWidth >= 1200
             ? 'menu-dropdown-open'
@@ -263,7 +263,7 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- Sub menu for resources -->
               <div
                 v-if="navItem.id === 'resources'"
-                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px]"
+                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[197px] xl:pr-[125px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[181px] xxl:pr-[525px] xxxl:pl-[213px] xxxl:pr-[500px]"
               >
                 <div v-for="(item, index) in navItem.subItems" :key="index">
                   <div class="mb-[.5rem] text-ltPrimary font-light">
