@@ -29,6 +29,7 @@ const navItems = [
     subMenuHeightXS: 388,
     subMenuHeightSM: 206,
     subMenuHeightMD: 206,
+    subMenuHeightLG: 206,
   },
   {
     id: "useCases",
@@ -40,6 +41,7 @@ const navItems = [
     subMenuHeightXS: 206,
     subMenuHeightSM: 115,
     subMenuHeightMD: 115,
+    subMenuHeightLG: 115,
   },
   {
     id: "resources",
@@ -48,9 +50,10 @@ const navItems = [
     subItems: resourcesData,
     activePage: false,
     subMenuOpen: false,
-    subMenuHeightXS: 587,
-    subMenuHeightSM: 349,
-    subMenuHeightMD: 332,
+    subMenuHeightXS: 579,
+    subMenuHeightSM: 341,
+    subMenuHeightMD: 324,
+    subMenuHeightLG: 324,
   },
   {
     id: "pricing",
@@ -124,6 +127,10 @@ const getSubMenuHeight = (navItem: any) => {
       return {
         height: `${navItem.subMenuHeightMD}px`,
       }; // For medium screens
+    } else if (screenWidth.value < 1200) {
+      return {
+        height: `${navItem.subMenuHeightLG}px`,
+      }; // For large screens
     }
   } else {
     return { height: 0 }; // Default height when conditions are not met
@@ -133,8 +140,11 @@ const getSubMenuHeight = (navItem: any) => {
 
 <template>
   <header>
+    <hr
+      class="w-[100%] absolute top-[66px] left-0 right-0 border-ltBorder lg:top-[72px]"
+    />
     <nav
-      class="fixed top-0 left-0 right-0 flex justify-between p-[1rem] bg-BGLight border-b-[1px] border-ltBorder z-[10] lg:px-[2rem]"
+      class="w-[100%] fixed top-0 left-0 right-0 flex justify-between p-[1rem] bg-BGLight z-[10] lg:gap-[2rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0 xxxl:gap-[4rem]"
       :class="{ 'menu-active': isMenuOpen }"
     >
       <!-- Logo -->
@@ -146,26 +156,26 @@ const getSubMenuHeight = (navItem: any) => {
         <span class="hamburger-icon-line hamburger-icon-line-bottom"></span>
       </div>
       <div
-        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight border-t-[1px] border-ltBorder duration-[1s] ease-in-out lg:static lg:flex-row lg:items-center lg:gap-[2rem] lg:p-0 lg:overflow-hidden lg:border-t-0"
+        class="absolute py-[1rem] pl-[1rem] top-[66px] left-0 right-0 bottom-0 w-[100%] flex flex-col gap-[5rem] justify-between bg-BGLight border-t-[1px] border-ltBorder duration-[1s] ease-in-out lg:top-[72px] xl:static xl:flex-row xl:items-center xl:gap-[2rem] xl:p-0 xl:overflow-hidden xl:border-t-0"
         :class="
-          isMenuOpen || screenWidth > 1060
+          isMenuOpen || screenWidth >= 1200
             ? 'menu-dropdown-open'
             : 'menu-dropdown-close'
         "
       >
         <!-- Navbar Items Conatainer -->
-        <div class="flex flex-col gap-[1rem] lg:flex-row lg:gap-[.5rem]">
+        <div class="flex flex-col gap-[1rem] xl:flex-row xl:gap-[.5rem]">
           <!-- Navbar Items -->
           <div v-for="(navItem, index) in navItems" :key="index">
             <!-- Navbar Item -->
             <div
-              class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out lg:rounded-[10px]"
+              class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:rounded-[10px]"
               :class="[
                 {
-                  'pl-[.875rem] pr-[7px] lg:pl-[.75rem] lg:pr-[5px]':
+                  'pl-[.875rem] pr-[7px] xl:pl-[.75rem] xl:pr-[5px]':
                     navItem.subItems,
                 },
-                { 'px-[.875rem] lg:px-[.75rem]': !navItem.subItems },
+                { 'px-[.875rem] xl:px-[.75rem]': !navItem.subItems },
                 { 'bg-BGSemiNormal': navItem.id === 'showcase' },
                 {
                   'text-ltPrimary':
@@ -182,19 +192,19 @@ const getSubMenuHeight = (navItem: any) => {
               @click="setActiveIndex(navItem.id)"
             >
               <div
-                class="text-[1.25rem] leading-[1.3] lg:text-[1rem] lg:whitespace-nowrap lg:leading-[1.25]"
+                class="text-[1.25rem] leading-[1.3] xl:text-[1rem] xl:whitespace-nowrap xl:leading-[1.25]"
               >
                 {{ navItem.title }}
               </div>
               <!-- New Badge for Showcase -->
               <span
                 v-if="navItem.id === 'showcase'"
-                class="absolute top-0 right-0 translate-y-[-4px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px] lg:text-[.625rem] lg:rounded-[4px] lg:translate-y-[-3px] lg:translate-x-[12px]"
+                class="absolute top-0 right-0 translate-y-[-4px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px] xl:text-[.625rem] xl:rounded-[4px] xl:translate-y-[-3px] xl:translate-x-[12px]"
                 >New</span
               >
               <i
                 v-if="navItem.subItems"
-                class="ri-arrow-down-s-line text-[1.25rem] h-[20px] flex justify-center items-center lg:text-[1.125rem] lg:h-[18px]"
+                class="ri-arrow-down-s-line text-[1.25rem] h-[20px] flex justify-center items-center xl:text-[1.125rem] xl:h-[18px]"
                 :class="
                   navItem.id === activeIndex && navItem.subItems
                     ? 'nav-item-arrow-open'
@@ -205,18 +215,18 @@ const getSubMenuHeight = (navItem: any) => {
             <!-- Navbar Item Sub Menu -->
             <div
               v-if="navItem.subItems"
-              class="overflow-hidden duration-[.375s] ease-in-out bg-BGLight lg:w-[100%] lg:absolute lg:top-[57px] lg:left-[0] lg:overflow-auto lg:drop-shadow-lg"
+              class="overflow-hidden duration-[.375s] ease-in-out bg-BGLight xl:w-[100%] xl:absolute xl:top-[57px] xl:left-[0] xl:overflow-auto xl:drop-shadow-lg"
               :style="getSubMenuHeight(navItem)"
             >
               <!-- Sub menu for features and use cases -->
               <div
                 v-if="navItem.id === 'features' || navItem.id === 'useCases'"
-                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px]"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px]"
               >
                 <div
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
-                  class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[350px]"
+                  class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
                 >
                   <i
                     class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
@@ -244,14 +254,14 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- Sub menu for resources -->
               <div
                 v-if="navItem.id === 'resources'"
-                class="flex flex-col gap-[.5rem] ml-[.875rem] mt-[1.5rem] mb-[.25rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px]"
+                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px]"
               >
                 <div v-for="(item, index) in navItem.subItems" :key="index">
                   <div class="mb-[.5rem] text-ltPrimary font-light">
                     {{ item.title }}
                   </div>
                   <!-- Company and connect -->
-                  <div class="flex flex-col gap-[.5rem] mb-[1.5rem]">
+                  <div class="flex flex-col gap-[.5rem] mb-[1.25rem]">
                     <div
                       v-for="(subItem, index) in item.subItems"
                       :key="subItem.title"
@@ -288,12 +298,12 @@ const getSubMenuHeight = (navItem: any) => {
         <!-- Login & Get Started BTN-->
         <div class="flex justify-center items-center gap-[1rem] ml-[-1rem]">
           <button
-            class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight lg:w-fit lg:whitespace-nowrap"
+            class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
           >
             Login
           </button>
           <button
-            class="nav-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight lg:whitespace-nowrap"
+            class="nav-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap xl:text-[.875rem]"
           >
             Get Started
           </button>
@@ -462,6 +472,12 @@ const getSubMenuHeight = (navItem: any) => {
 
 /*-- Media Queries --*/
 @media screen and (min-width: 1060px) {
+  .menu-dropdown-open {
+    min-height: calc(100vh - 72px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
   .menu-dropdown-open {
     min-height: auto;
   }
