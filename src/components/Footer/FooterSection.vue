@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
+import { RouterLink } from "vue-router";
 /*-- Import Assets --*/
 import logoPrimary from "@/assets/images/logo_primary.svg";
 
@@ -38,11 +39,13 @@ const filteredNavItemsResources = computed(() =>
       <div class="flex justify-between gap-[3rem] flex-wrap">
         <div class="flex flex-col items-start gap-[1rem]">
           <!-- Logo -->
-          <img
-            :src="logoPrimary"
-            alt="fatel3 logo"
-            class="h-[40px] cursor-pointer lg:h-[50px]"
-          />
+          <RouterLink to="/">
+            <img
+              :src="logoPrimary"
+              alt="fatel3 logo"
+              class="h-[40px] cursor-pointer lg:h-[50px]"
+            />
+          </RouterLink>
           <div class="mb-[1rem] text-TextNormal font-light xl:mb-[2rem]">
             Manage your inventory easier
           </div>
