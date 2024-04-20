@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { RouterLink } from "vue-router";
 /*-- Import Assets --*/
 import logoPrimary from "@/assets/images/logo_primary.svg";
 
@@ -85,11 +86,13 @@ const getSubMenuHeight = (navItem: any) => {
       :class="{ 'menu-active': isMenuOpen }"
     >
       <!-- Logo -->
-      <img
-        :src="logoPrimary"
-        alt="fatel3 logo"
-        class="h-[34px] cursor-pointer lg:h-[40px]"
-      />
+      <RouterLink to="/"
+        ><img
+          :src="logoPrimary"
+          alt="fatel3 logo"
+          class="h-[34px] cursor-pointer lg:h-[40px]"
+      /></RouterLink>
+
       <!-- Hamburger -->
       <div @click="toggleMenu" class="hamburger-icon">
         <span class="hamburger-icon-line hamburger-icon-line-top"></span>
@@ -108,50 +111,56 @@ const getSubMenuHeight = (navItem: any) => {
         <div class="flex flex-col gap-[1rem] xl:flex-row xl:gap-[.5rem]">
           <!-- Navbar Items -->
           <div v-for="(navItem, index) in navItems" :key="index">
-            <!-- Navbar Item -->
-            <div
-              class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:rounded-[10px]"
-              :class="[
-                {
-                  'pl-[.875rem] pr-[7px] xl:pl-[.75rem] xl:pr-[5px]':
-                    navItem.subItems,
-                },
-                { 'px-[.875rem] xl:px-[.75rem]': !navItem.subItems },
-                { 'bg-BGSemiNormal': navItem.id === 'showcase' },
-                {
-                  'text-ltPrimary':
-                    navItem.activePage &&
-                    (navItem.id === 'home' ||
-                      navItem.id === 'pricing' ||
-                      navItem.id === 'showcase'),
-                },
-                {
-                  'bg-ltHoverPrimary text-ltPrimary':
-                    navItem.id === activeIndex && navItem.subItems,
-                },
-              ]"
-              @click="setActiveIndex(navItem.id)"
-            >
+            <div>
+              <!-- Navbar Items without sub menus -->
+              <RouterLink
+                v-if="!navItem.subItems"
+                :to="navItem.route"
+                class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:px-[.75rem] xl:rounded-[10px]"
+                :class="[
+                  { 'bg-BGSemiNormal': navItem.id === 'showcase' },
+                  {
+                    'text-ltPrimary': navItem.activePage,
+                  },
+                ]"
+                @click="setActiveIndex(navItem.id)"
+              >
+                <div
+                  class="text-[1.25rem] leading-[1.3] xl:text-[1rem] xl:whitespace-nowrap xl:leading-[1.25]"
+                >
+                  {{ navItem.title }}
+                </div>
+                <!-- New Badge for Showcase -->
+                <span
+                  v-if="navItem.id === 'showcase'"
+                  class="absolute top-0 right-0 translate-y-[-3px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px] xl:text-[.625rem] xl:rounded-[4px] xl:translate-x-[12px]"
+                  >New</span
+                >
+              </RouterLink>
+              <!-- Navbar Items with sub menus -->
               <div
-                class="text-[1.25rem] leading-[1.3] xl:text-[1rem] xl:whitespace-nowrap xl:leading-[1.25]"
-              >
-                {{ navItem.title }}
-              </div>
-              <!-- New Badge for Showcase -->
-              <span
-                v-if="navItem.id === 'showcase'"
-                class="absolute top-0 right-0 translate-y-[-3px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px] xl:text-[.625rem] xl:rounded-[4px] xl:translate-x-[12px]"
-                >New</span
-              >
-              <i
                 v-if="navItem.subItems"
-                class="ri-arrow-down-s-line text-[1.25rem] h-[20px] flex justify-center items-center xl:text-[1.125rem] xl:h-[18px]"
-                :class="
-                  navItem.id === activeIndex && navItem.subItems
-                    ? 'nav-item-arrow-open'
-                    : 'nav-item-arrow-close'
-                "
-              ></i>
+                class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] pl-[.875rem] pr-[7px] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:pl-[.75rem] xl:pr-[5px] xl:rounded-[10px]"
+                :class="{
+                  'bg-ltHoverPrimary text-ltPrimary':
+                    navItem.id === activeIndex,
+                }"
+                @click="setActiveIndex(navItem.id)"
+              >
+                <div
+                  class="text-[1.25rem] leading-[1.3] xl:text-[1rem] xl:whitespace-nowrap xl:leading-[1.25]"
+                >
+                  {{ navItem.title }}
+                </div>
+                <i
+                  class="ri-arrow-down-s-line text-[1.25rem] h-[20px] flex justify-center items-center xl:text-[1.125rem] xl:h-[18px]"
+                  :class="
+                    navItem.id === activeIndex
+                      ? 'nav-item-arrow-open'
+                      : 'nav-item-arrow-close'
+                  "
+                ></i>
+              </div>
             </div>
             <!-- Navbar Item Sub Menu -->
             <div
@@ -162,11 +171,13 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- Sub menu for features and use cases -->
               <div
                 v-if="navItem.id === 'features' || navItem.id === 'useCases'"
-                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[185px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[169px] xxl:pr-[550px] xxxl:pl-[201px] xxxl:pr-[525px]"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[157px] xxl:pr-[550px] xxxl:pl-[186px] xxxl:pr-[525px]"
               >
-                <div
+                <RouterLink
+                  :to="navItem.route"
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
+                  @click="setActiveIndex('none')"
                   class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
                 >
                   <i
@@ -190,14 +201,19 @@ const getSubMenuHeight = (navItem: any) => {
                       {{ subItem.shortDesc }}
                     </div>
                   </div>
-                </div>
+                </RouterLink>
               </div>
               <!-- Sub menu for resources -->
               <div
                 v-if="navItem.id === 'resources'"
-                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[197px] xl:pr-[125px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[181px] xxl:pr-[525px] xxxl:pl-[213px] xxxl:pr-[500px]"
+                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[182px] xl:pr-[125px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[169px] xxl:pr-[525px] xxxl:pl-[198px] xxxl:pr-[500px]"
               >
-                <div v-for="(item, index) in navItem.subItems" :key="index">
+                <RouterLink
+                  :to="navItem.route"
+                  v-for="(item, index) in navItem.subItems"
+                  :key="index"
+                  @click="setActiveIndex('none')"
+                >
                   <div class="mb-[.5rem] text-ltPrimary font-light">
                     {{ item.title }}
                   </div>
@@ -231,7 +247,7 @@ const getSubMenuHeight = (navItem: any) => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </RouterLink>
               </div>
             </div>
           </div>
