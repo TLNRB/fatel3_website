@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink } from "vue-router";
+</script>
 
 <template>
   <section
@@ -14,11 +16,12 @@
     >
       Sorry, the page you were looking for could not be found.
     </div>
-    <button
+    <RouterLink
+      to="/"
       class="nav-btn-solid flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap xl:text-[1.125rem] xl:py-[.625rem] xl:px-[1.5rem] xl:rounded-[12px]"
     >
       Go Home
-    </button>
+    </RouterLink>
   </section>
 </template>
 

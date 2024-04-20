@@ -8,8 +8,6 @@ import featuresData from "@/data/featuresData.ts";
 import useCasesData from "@/data/useCasesData.ts";
 import resourcesData from "@/data/resourcesData.ts";
 
-import NotFoundView from "@/views/NotFoundView.vue";
-
 /*-- Navbar --*/
 // Navbar items
 const navItems: any = [
@@ -85,7 +83,6 @@ const navItems: any = [
 <template>
   <Navbar :navItems="navItems" />
   <RouterView />
-  <NotFoundView />
   <!-- <div class="bg-BGLight h-[75vh] w-[100%] flex justify-center items-center">
     hello
   </div> -->
