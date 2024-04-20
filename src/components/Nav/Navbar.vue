@@ -174,7 +174,9 @@ const getSubMenuHeight = (navItem: any) => {
                 class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[157px] xxl:pr-[550px] xxxl:pl-[186px] xxxl:pr-[525px]"
               >
                 <RouterLink
-                  :to="navItem.route"
+                  :to="
+                    navItem.id === 'features' ? navItem.route : subItem.route
+                  "
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
                   @click="setActiveIndex('none')"
@@ -206,22 +208,19 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- Sub menu for resources -->
               <div
                 v-if="navItem.id === 'resources'"
-                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[182px] xl:pr-[125px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[169px] xxl:pr-[525px] xxxl:pl-[198px] xxxl:pr-[500px]"
+                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[184px] xl:pr-[125px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[169px] xxl:pr-[525px] xxxl:pl-[198px] xxxl:pr-[500px]"
               >
-                <RouterLink
-                  :to="navItem.route"
-                  v-for="(item, index) in navItem.subItems"
-                  :key="index"
-                  @click="setActiveIndex('none')"
-                >
+                <div v-for="(item, index) in navItem.subItems" :key="index">
                   <div class="mb-[.5rem] text-ltPrimary font-light">
                     {{ item.title }}
                   </div>
                   <!-- Company and connect -->
                   <div class="flex flex-col gap-[.5rem] mb-[1.25rem]">
-                    <div
+                    <RouterLink
+                      :to="subItem.route"
                       v-for="(subItem, index) in item.subItems"
                       :key="index"
+                      @click="setActiveIndex('none')"
                       class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
                     >
                       <i
@@ -245,9 +244,9 @@ const getSubMenuHeight = (navItem: any) => {
                           {{ subItem.shortDesc }}
                         </div>
                       </div>
-                    </div>
+                    </RouterLink>
                   </div>
-                </RouterLink>
+                </div>
               </div>
             </div>
           </div>
