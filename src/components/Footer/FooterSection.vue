@@ -26,9 +26,13 @@ const filteredNavItemsUseCases = computed(() => {
 });
 
 // Filter navItems to resources sub-items
-const filteredNavItemsResources = computed(() =>
-  navItems.find((item: any) => item.id === "resources")
-);
+const filteredNavItemsResources = computed(() => {
+  const resources = navItems.find((item: any) => item.id === "resources");
+  const filteredResources = resources.subItems.flatMap((item: any) =>
+    item.subItems.filter((subItem: any) => !subItem.commingSoon)
+  );
+  return filteredResources;
+});
 </script>
 
 <template>
@@ -77,13 +81,14 @@ const filteredNavItemsResources = computed(() =>
           >
             <div class="font-[500] leading-tight">Pages</div>
             <div class="flex flex-col gap-[.875rem]">
-              <div
+              <RouterLink
+                :to="navItem.route"
                 v-for="(navItem, index) in filteredNavItemsPages"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
               >
                 {{ navItem.title }}
-              </div>
+              </RouterLink>
             </div>
           </div>
           <!-- Nav Items Features -->
@@ -92,13 +97,14 @@ const filteredNavItemsResources = computed(() =>
           >
             <div class="font-[500] leading-tight">Features</div>
             <div class="flex flex-col gap-[.875rem]">
-              <div
+              <RouterLink
+                to="/features"
                 v-for="(subItem, index) in filteredNavItemsFeatures.subItems"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
               >
                 {{ subItem.title }}
-              </div>
+              </RouterLink>
             </div>
           </div>
           <!-- Nav Items Use cases -->
@@ -107,13 +113,14 @@ const filteredNavItemsResources = computed(() =>
           >
             <div class="font-[500] leading-tight">Use Cases</div>
             <div class="flex flex-col gap-[.875rem]">
-              <div
+              <RouterLink
+                :to="subItem.route"
                 v-for="(subItem, index) in filteredNavItemsUseCases"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
               >
                 {{ subItem.title }}
-              </div>
+              </RouterLink>
             </div>
           </div>
           <!-- Nav Items Resources -->
@@ -122,19 +129,14 @@ const filteredNavItemsResources = computed(() =>
           >
             <div class="font-[500] leading-tight">Resources</div>
             <div class="flex flex-col gap-[.875rem]">
-              <div
-                v-for="(subItem, index) in filteredNavItemsResources.subItems"
+              <RouterLink
+                :to="subItem.route"
+                v-for="(subItem, index) in filteredNavItemsResources"
                 :key="index"
-                class="flex flex-col gap-[.875rem]"
+                class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
               >
-                <div
-                  v-for="(item, index) in subItem.subItems"
-                  :key="index"
-                  class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
-                >
-                  {{ item.title }}
-                </div>
-              </div>
+                {{ subItem.title }}
+              </RouterLink>
             </div>
           </div>
         </div>
