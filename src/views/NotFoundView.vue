@@ -2,20 +2,22 @@
 
 <template>
   <section
-    class="mt-[66px] py-[5rem] px-[1rem] flex flex-col justify-center items-center gap-[1.25rem] lg:mt-[72px] lg:py-[5rem] lg:px-[2rem]"
+    class="min-h-[50vh] mt-[66px] py-[5rem] px-[1rem] flex flex-col justify-center items-center gap-[1rem] md:min-h-[70vh] lg:mt-[72px] lg:px-[2rem] xl:py-[10rem]"
   >
-    <h1 class="font-neueRegradeBold text-[2.5rem] text-ltPrimary leading-tight">
+    <h1
+      class="text-[2rem] font-semibold text-ltPrimary leading-tight xs:text-[2.5rem] md:text-[3rem] xl:text-[4rem]"
+    >
       Page Not Found
     </h1>
     <div
-      class="w-[250px] mb-[1.25rem] text-center text-[1.125rem] text-TextNormal font-light"
+      class="w-[250px] mb-[1rem] text-center text-[1rem] text-TextNormal font-light xs:w-[300px] xs:text-[1.125rem] xl:w-[400px] xl:mb-[1.5rem] xl:text-[1.25rem]"
     >
       Sorry, the page you were looking for could not be found.
     </div>
     <button
-      class="nav-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap xl:text-[.875rem]"
+      class="nav-btn-solid flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap xl:text-[1.125rem] xl:py-[.625rem] xl:px-[1.5rem] xl:rounded-[12px]"
     >
-      Get Started
+      Go Home
     </button>
   </section>
 </template>
