@@ -170,17 +170,48 @@ const getSubMenuHeight = (navItem: any) => {
             >
               <!-- Sub menu for features and use cases -->
               <div
-                v-if="navItem.id === 'features' || navItem.id === 'useCases'"
+                v-if="navItem.id === 'features'"
                 class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[157px] xxl:pr-[550px] xxxl:pl-[186px] xxxl:pr-[525px]"
               >
                 <RouterLink
-                  :to="
-                    navItem.id === 'features' ? navItem.route : subItem.route
-                  "
+                  :to="navItem.route"
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
                   @click="setActiveIndex('none')"
                   class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
+                >
+                  <i
+                    class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
+                    :class="subItem.icon"
+                  ></i>
+                  <div class="flex flex-col gap-[.25rem]">
+                    <div class="leading-tight">
+                      {{ subItem.title }}
+                    </div>
+                    <div
+                      class="text-[.875rem] font-light text-TextNormal leading-tight"
+                    >
+                      {{ subItem.shortDesc }}
+                    </div>
+                  </div>
+                </RouterLink>
+              </div>
+              <!-- Sub menu use cases -->
+              <div
+                v-else-if="navItem.id === 'useCases'"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[157px] xxl:pr-[550px] xxxl:pl-[186px] xxxl:pr-[525px]"
+              >
+                <RouterLink
+                  :to="!subItem.commingSoon ? subItem.route : ''"
+                  v-for="(subItem, index) in navItem.subItems"
+                  :key="index"
+                  @click="setActiveIndex('none')"
+                  class="w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
+                  :class="
+                    !subItem.commingSoon
+                      ? 'sub-menu-item'
+                      : ' cursor-not-allowed'
+                  "
                 >
                   <i
                     class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
@@ -207,7 +238,7 @@ const getSubMenuHeight = (navItem: any) => {
               </div>
               <!-- Sub menu for resources -->
               <div
-                v-if="navItem.id === 'resources'"
+                v-else-if="navItem.id === 'resources'"
                 class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[184px] xl:pr-[125px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[169px] xxl:pr-[525px] xxxl:pl-[198px] xxxl:pr-[500px]"
               >
                 <div v-for="(item, index) in navItem.subItems" :key="index">
@@ -217,11 +248,16 @@ const getSubMenuHeight = (navItem: any) => {
                   <!-- Company and connect -->
                   <div class="flex flex-col gap-[.5rem] mb-[1.25rem]">
                     <RouterLink
-                      :to="subItem.route"
+                      :to="!subItem.commingSoon ? subItem.route : ''"
                       v-for="(subItem, index) in item.subItems"
                       :key="index"
                       @click="setActiveIndex('none')"
-                      class="sub-menu-item w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
+                      class="w-[248px] flex gap-[.625rem] py-[.75rem] px-[.875rem] rounded-[11px] duration-[.15] ease-in-out xs:w-[250px] md:w-[325px]"
+                      :class="
+                        !subItem.commingSoon
+                          ? 'sub-menu-item'
+                          : ' cursor-not-allowed'
+                      "
                     >
                       <i
                         class="text-[1.125rem] text-ltPrimary translate-y-[-3px] flex items-start"
