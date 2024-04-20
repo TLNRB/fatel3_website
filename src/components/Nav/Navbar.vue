@@ -46,7 +46,6 @@ const setActiveIndex = (index: string) => {
 
 const getSubMenuHeight = (navItem: any) => {
   if (activeIndex.value === navItem.id) {
-    console.log(screenWidth.value);
     if (screenWidth.value < 560) {
       return {
         height: `${navItem.subMenuHeightXS}px`,
