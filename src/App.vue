@@ -83,7 +83,7 @@ const navItems: any = [
 <template>
   <Navbar :navItems="navItems" />
   <RouterView />
-  <div class="bg-BGLight h-[50vh] w-[100%] flex justify-center items-center">
+  <div class="bg-BGLight h-[75vh] w-[100%] flex justify-center items-center">
     hello
   </div>
   <FooterSection :navItems="navItems" />

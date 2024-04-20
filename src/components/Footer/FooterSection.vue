@@ -33,7 +33,7 @@ const filteredNavItemsResources = computed(() =>
 <template>
   <footer class="border-t-[1px] border-ltBorder">
     <div
-      class="flex flex-col gap-[3rem] pt-[3rem] pb-[2rem] px-[1rem] bg-BGLight lg:px-[2rem] xxl:w-[1412px] xxl:mx-auto xxl:px-[1rem]"
+      class="flex flex-col gap-[3rem] pt-[3rem] pb-[2rem] px-[1rem] bg-BGLight lg:px-[2rem] xl:gap-[4rem] xl:pt-[4rem] xxl:w-[1412px] xxl:mx-auto xxl:px-[1rem]"
     >
       <div class="flex justify-between gap-[3rem] flex-wrap">
         <div class="flex flex-col items-start gap-[1rem]">
@@ -43,7 +43,7 @@ const filteredNavItemsResources = computed(() =>
             alt="fatel3 logo"
             class="h-[40px] cursor-pointer lg:h-[50px]"
           />
-          <div class="mb-[1rem] text-TextNormal font-light">
+          <div class="mb-[1rem] text-TextNormal font-light xl:mb-[2rem]">
             Manage your inventory easier
           </div>
           <!-- Email -->
@@ -115,7 +115,7 @@ const filteredNavItemsResources = computed(() =>
           </div>
           <!-- Nav Items Resources -->
           <div
-            class="min-w-[125px] flex flex-col gap-[1.5rem] xs:min-w-[150px] xxl:min-w-fit"
+            class="min-w-[125px] flex flex-col gap-[1.5rem] xs:min-w-[150px] sm:min-w-fit"
           >
             <div class="font-[500] leading-tight">Resources</div>
             <div class="flex flex-col gap-[.875rem]">
@@ -136,10 +136,12 @@ const filteredNavItemsResources = computed(() =>
           </div>
         </div>
       </div>
-      <div class="flex flex-col-reverse gap-[1rem]">
+      <div
+        class="flex flex-col-reverse gap-[1rem] sm:flex-row sm:justify-between sm:items-end sm:flex-wrap md:gap-[3rem]"
+      >
         <!-- Copy Right & Term of service -->
         <div
-          class="flex flex-col-reverse gap-[.5rem] text-[.875rem] text-TextNormal xs:flex-row xs:gap-[1.25rem]"
+          class="flex flex-col-reverse gap-[.5rem] text-[.875rem] text-TextNormal xs:flex-row xs:items-center xs:gap-[1.25rem] xs:flex-wrap xl:gap-[1.5rem]"
         >
           <div class="font-light">&copy; fatel3. All rights reserved.</div>
           <a href="#" download class="font-light underline cursor-pointer"
