@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { RouterLink } from "vue-router";
 /*-- Import Assets --*/
 import logoPrimary from "@/assets/images/logo_primary.svg";
@@ -61,16 +61,18 @@ const filteredNavItemsResources = computed(() => {
           >
           <!-- Login & Get Started BTN-->
           <div class="flex justify-center items-center gap-[1rem]">
-            <button
+            <RouterLink
+              to="/login"
               class="footer-btn-outline flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap"
             >
               Login
-            </button>
-            <button
+            </RouterLink>
+            <RouterLink
+              to="/get-started"
               class="footer-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap"
             >
               Get Started
-            </button>
+            </RouterLink>
           </div>
         </div>
         <!-- Nav Items -->
