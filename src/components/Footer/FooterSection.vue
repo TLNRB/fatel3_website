@@ -38,7 +38,7 @@ const filteredNavItemsResources = computed(() => {
 <template>
   <footer class="border-t-[1px] border-ltBorder">
     <div
-      class="flex flex-col gap-[3rem] pt-[3rem] pb-[2rem] px-[1rem] bg-BGLight lg:px-[2rem] xl:gap-[4rem] xl:pt-[4rem] xxl:w-[1412px] xxl:mx-auto xxl:px-[1rem]"
+      class="flex flex-col gap-[3rem] pt-[3rem] pb-[2rem] px-[1rem] bg-BGLight lg:px-[2rem] xl:gap-[4rem] xl:pt-[4rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
     >
       <div class="flex justify-between gap-[3rem] flex-wrap">
         <div class="flex flex-col items-start gap-[1rem]">
