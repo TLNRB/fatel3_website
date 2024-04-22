@@ -1,5 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+/*-- Import Components --*/
+import Hero from "@/components/HeroSection/Hero.vue";
+</script>
 
-<template></template>
+<template>
+  <main>
+    <Hero />
+  </main>
+</template>
 
 <style scoped></style>
