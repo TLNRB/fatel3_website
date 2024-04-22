@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 
 <template>
   <section
-    class="min-h-[50vh] mt-[66px] py-[5rem] px-[1rem] flex flex-col justify-center items-center gap-[1rem] md:min-h-[70vh] lg:mt-[72px] lg:px-[2rem] xl:py-[10rem]"
+    class="min-h-[50vh] py-[5rem] px-[1rem] flex flex-col justify-center items-center gap-[1rem] md:min-h-[70vh] lg:px-[2rem] xl:py-[10rem]"
   >
     <h1
       class="text-[2rem] font-semibold text-ltPrimary leading-tight xs:text-[2.5rem] md:text-[3rem] xl:text-[4rem]"
