@@ -57,7 +57,7 @@ const filteredNavItemsResources = computed(() => {
           <a
             href="mailto:fatel3-info@gmail.com"
             class="text-TextNormal font-light"
-            >fatel3-info@gmail.com</a
+            >fatel3.info@gmail.com</a
           >
           <!-- Login & Get Started BTN-->
           <div class="flex justify-center items-center gap-[1rem]">
