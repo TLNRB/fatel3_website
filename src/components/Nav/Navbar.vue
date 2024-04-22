@@ -82,7 +82,7 @@ const getSubMenuHeight = (navItem: any) => {
       class="w-[100%] absolute top-[66px] left-0 right-0 border-ltBorder z-[11] lg:top-[72px]"
     />
     <nav
-      class="w-[100%] flex justify-between p-[1rem] bg-BGLight z-[10] lg:gap-[2rem] lg:px-[2rem] xxl:w-[1412px] xxl:mx-auto xxl:px-[1rem] xxxl:gap-[4rem]"
+      class="w-[100%] flex justify-between p-[1rem] bg-BGLight z-[10] lg:gap-[2rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0 xxxl:gap-[4rem]"
       :class="{ 'menu-active': isMenuOpen }"
     >
       <!-- Logo -->
@@ -171,7 +171,7 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- Sub menu for features and use cases -->
               <div
                 v-if="navItem.id === 'features'"
-                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[157px] xxl:pr-[550px] xxxl:pl-[186px] xxxl:pr-[525px]"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1396px] xxl:mx-auto xxl:pl-[141px] xxl:pr-[550px] xxxl:pl-[171px] xxxl:pr-[525px]"
               >
                 <RouterLink
                   :to="navItem.route"
@@ -199,7 +199,7 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- Sub menu use cases -->
               <div
                 v-else-if="navItem.id === 'useCases'"
-                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[157px] xxl:pr-[550px] xxxl:pl-[186px] xxxl:pr-[525px]"
+                class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1396px] xxl:mx-auto xxl:pl-[141px] xxl:pr-[550px] xxxl:pl-[171px] xxxl:pr-[525px]"
               >
                 <RouterLink
                   :to="!subItem.commingSoon ? subItem.route : ''"
@@ -239,7 +239,7 @@ const getSubMenuHeight = (navItem: any) => {
               <!-- Sub menu for resources -->
               <div
                 v-else-if="navItem.id === 'resources'"
-                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[184px] xl:pr-[125px] xxl:w-[1412px] xxl:mx-auto xxl:pl-[169px] xxl:pr-[525px] xxxl:pl-[198px] xxxl:pr-[500px]"
+                class="flex flex-col gap-[.75rem] ml-[.875rem] mt-[1.5rem] sm:flex-row sm:flex-wrap sm:gap-[1rem] sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:ml-0 xl:pl-[184px] xl:pr-[125px] xxl:w-[1396px] xxl:mx-auto xxl:pl-[153px] xxl:pr-[525px] xxxl:pl-[183px] xxxl:pr-[500px]"
               >
                 <div v-for="(item, index) in navItem.subItems" :key="index">
                   <div class="mb-[.5rem] text-ltPrimary font-light">
@@ -289,7 +289,7 @@ const getSubMenuHeight = (navItem: any) => {
         </div>
         <!-- Login & Get Started BTN-->
         <div
-          class="flex justify-center items-center gap-[1rem] flex-wrap ml-[-1rem] px-[1rem] xl:ml-0"
+          class="flex justify-center items-center gap-[1rem] flex-wrap ml-[-1rem] px-[1rem] xl:ml-0 xl:px-0"
         >
           <button
             class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
