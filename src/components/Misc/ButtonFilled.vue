@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import { RouterLink } from "vue-router";
 // Prop handling
-const { text, icon, altText } = defineProps(["text", "icon", "altText"]);
+const { text, icon, altText, route } = defineProps([
+  "text",
+  "icon",
+  "altText",
+  "route",
+]);
 </script>
 
 <template>
-  <div
+  <RouterLink
+    :to="route"
     class="btn w-fit flex justify-center items-center gap-[6px] mx-auto py-[.625rem] text-TextLight border-[1px] rounded-[11px] leading-tight cursor-pointer"
     :class="
       icon
@@ -19,7 +26,7 @@ const { text, icon, altText } = defineProps(["text", "icon", "altText"]);
       :alt="altText"
       class="btn-arrow h-[18px] flex justify-center items-center xxl:h-[20px]"
     />
-  </div>
+  </RouterLink>
 </template>
 
 <style scoped>

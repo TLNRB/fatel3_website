@@ -1,5 +1,6 @@
 <script setup lang="ts">
 /*-- Import components --*/
+import ButtonOutline from "@/components/Misc/ButtonOutline.vue";
 
 // FAQs
 const faq = [
@@ -32,6 +33,8 @@ const faq = [
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
     </div>
+    <div></div>
+    <ButtonOutline text="Contact us" theme="light" route="/support" />
   </section>
 </template>
 
