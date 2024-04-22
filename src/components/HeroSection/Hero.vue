@@ -2,7 +2,7 @@
 /*-- Import components --*/
 import ButtonFilled from "@/components/Misc/ButtonFilled.vue";
 /*-- Import assets --*/
-import arrowIcon from "@/assets/images/arrow-right-up-line.svg";
+import arrowIcon from "@/assets/icons/arrow-right-up-line.svg";
 import tempImg from "@/assets/images/temp-fatel3.png";
 </script>
 
