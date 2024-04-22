@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import arrowIcon from "@/assets/images/arrow-right-up-line.svg";
+import tempImg from "@/assets/images/temp-fatel3.png";
 </script>
 
 <template>
   <section
-    class="pt-[3rem] px-[1rem] flex flex-col items-center gap-[4rem] sm:pt-[4rem] lg:px-[2rem] xl:pt-[6rem] xxl:w-[1396px] xxl:gap-[6rem] xxl:mx-auto xxl:px-0"
+    class="pt-[3rem] flex flex-col items-center gap-[4rem] sm:pt-[4rem] xl:pt-[6rem] xxl:w-[1396px] xxl:gap-[6rem] xxl:mx-auto"
   >
     <div
-      class="flex flex-col gap-[2.5rem] lg:w-[100%] lg:flex-row lg:justify-between lg:items-center lg:flex-wrap xl:w-auto xl:gap-[6rem] xxl:w-[100%] xxl:gap-[8rem]"
+      class="flex flex-col gap-[2.5rem] px-[1rem] lg:w-[100%] lg:flex-row lg:justify-between lg:items-center lg:flex-wrap lg:px-[2rem] xl:w-auto xl:gap-[6rem] xxl:w-[100%] xxl:gap-[8rem] xxl:px-0"
     >
       <h1
         class="text-center text-[3rem] font-[500] leading-[1.25] sm:w-[525px] sm:text-[4rem] sm:leading-[1.2] lg:text-start xxl:w-[750px] xxl:text-[5.5rem]"
@@ -39,8 +40,14 @@ import arrowIcon from "@/assets/images/arrow-right-up-line.svg";
         </div>
       </div>
     </div>
-    <div>
-      <div></div>
+    <div
+      class="pt-[.5rem] px-[.5rem] border-t-[1px] border-x-[1px] border-ltBorder rounded-t-[20px] lg:mx-[2rem] lg:rounded-t-[32px] xxl:pt-[1rem] xxl:px-[1rem] xl:w-[1121px] xxl:w-auto xxl:mx-0"
+    >
+      <img
+        class="w-[100%] rounded-t-[20px] lg:rounded-t-[32px] xxl:w-[1396px]"
+        :src="tempImg"
+        alt=""
+      />
     </div>
   </section>
 </template>
