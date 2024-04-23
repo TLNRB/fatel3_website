@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /*-- Import Components --*/
-import Hero from "@/components/HeroSection/Hero.vue";
-import FAQ from "@/components/FAQ/FAQ.vue";
+import Hero from "@/components/HomePage/Hero.vue";
+import FAQ from "@/components/HomePage/FAQ/FAQ.vue";
 </script>
 
 <template>
