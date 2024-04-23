@@ -76,7 +76,7 @@ const getSubMenuHeight = (navItem: any) => {
 
 <template>
   <header
-    class="w-[100%] h-[66px] fixed top-0 left-0 right-0 bg-BGLight lg:h-[72px]"
+    class="w-[100%] h-[66px] fixed top-0 left-0 right-0 bg-BGLight z-[10] lg:h-[72px]"
   >
     <hr
       class="w-[100%] absolute top-[66px] left-0 right-0 border-ltBorder z-[11] lg:top-[72px]"
