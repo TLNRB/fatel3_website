@@ -12,7 +12,7 @@ const { text, icon, altText, route } = defineProps([
 <template>
   <RouterLink
     :to="route"
-    class="btn w-fit flex justify-center items-center gap-[6px] mx-auto py-[.625rem] text-TextLight border-[1px] rounded-[11px] leading-tight cursor-pointer"
+    class="btn w-fit flex justify-center items-center mx-auto py-[.625rem] text-TextLight border-[1px] rounded-[11px] leading-tight cursor-pointer"
     :class="
       icon
         ? 'gap-[6px] pl-[1rem] pr-[.625rem] xxl:gap-[7px] xxl:pl-[1.25rem] xxl:pr-[13px]'
