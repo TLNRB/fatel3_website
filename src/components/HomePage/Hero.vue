@@ -34,7 +34,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
         <ButtonFilled
           text="Get Started"
           :icon="arrowIcon"
-          altText="right up arrow icon"
+          altText="arrow icon"
           route="/support"
           class="lg:ml-0 xxl:py-[.75rem] xxl:text-[1.125rem] xxl:rounded-[13px]"
         />
