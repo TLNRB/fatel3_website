@@ -85,7 +85,9 @@ const navItems: any = [
 
 <template>
   <Navbar v-if="route.path !== '/login'" :navItems="navItems" />
-  <RouterView class="mt-[66px] lg:mt-[72px]" />
+  <RouterView
+    :class="route.path !== '/login' ? 'mt-[66px] lg:mt-[72px]' : ''"
+  />
   <FooterSection v-if="route.path !== '/login'" :navItems="navItems" />
 </template>
 
