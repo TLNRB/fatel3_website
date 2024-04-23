@@ -3,6 +3,7 @@
 import Hero from "@/components/HomePage/Hero.vue";
 import Reviews from "@/components/HomePage/Reviews/Reviews.vue";
 import FAQ from "@/components/HomePage/FAQ/FAQ.vue";
+import CTA from "@/components/CTA/CTA.vue";
 </script>
 
 <template>
@@ -10,6 +11,11 @@ import FAQ from "@/components/HomePage/FAQ/FAQ.vue";
     <Hero />
     <Reviews />
     <FAQ />
+    <CTA
+      textFirstPart="Create Your Inventory with"
+      textHighlighted="fatel3"
+      textSecondPart="Today"
+    />
   </main>
 </template>
 

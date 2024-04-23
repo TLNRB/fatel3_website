@@ -18,6 +18,7 @@ export default {
         neueRegradeSemibold: ['Neue-regrade-semibold', 'sans-serif'],
       },
       colors: {
+        ltPrimaryLight: '#C1C9FF',
         ltPrimary: '#6270EF',
         ltPrimaryDark: '#525fdb',
         ltPrimaryBG: '#6270ef29',
