@@ -295,7 +295,7 @@ const getSubMenuHeight = (navItem: any) => {
             to="/login"
             class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
           >
-            Login
+            Log in
           </RouterLink>
           <RouterLink
             to="/support"
