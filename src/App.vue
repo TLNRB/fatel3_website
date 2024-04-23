@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
+import { RouterView, useRoute } from "vue-router";
 /*-- Import Components --*/
 import Navbar from "@/components/Nav/Navbar.vue";
 import FooterSection from "@/components/Footer/FooterSection.vue";
@@ -7,6 +7,9 @@ import FooterSection from "@/components/Footer/FooterSection.vue";
 import featuresData from "@/data/featuresData.ts";
 import useCasesData from "@/data/useCasesData.ts";
 import resourcesData from "@/data/resourcesData.ts";
+
+// Router
+const route = useRoute();
 
 /*-- Navbar --*/
 // Navbar items
@@ -81,9 +84,9 @@ const navItems: any = [
 </script>
 
 <template>
-  <Navbar :navItems="navItems" />
+  <Navbar v-if="route.path !== '/login'" :navItems="navItems" />
   <RouterView class="mt-[66px] lg:mt-[72px]" />
-  <FooterSection :navItems="navItems" />
+  <FooterSection v-if="route.path !== '/login'" :navItems="navItems" />
 </template>
 
 <style scoped></style>
