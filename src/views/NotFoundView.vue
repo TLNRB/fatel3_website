@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <section
+  <main
     class="min-h-[50vh] py-[5rem] px-[1rem] flex flex-col justify-center items-center gap-[1rem] md:min-h-[70vh] lg:px-[2rem] xl:py-[10rem]"
   >
     <h1
@@ -22,7 +22,7 @@ import { RouterLink } from "vue-router";
     >
       Go Home
     </RouterLink>
-  </section>
+  </main>
 </template>
 
 <style scoped>
