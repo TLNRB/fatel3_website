@@ -74,7 +74,7 @@ const navItems: any = [
   {
     id: "showcase",
     title: "Showcase",
-    route: "/showcase",
+    route: "/#showcase",
     subItems: null,
     activePage: false,
     subMenuOpen: false,
