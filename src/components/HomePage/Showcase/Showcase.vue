@@ -4,23 +4,26 @@ import { RouterLink } from "vue-router";
 import SectionType from "@/components/Misc/SectionType.vue";
 /*-- Import assets --*/
 import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
+import tempImg from "@/assets/images/temp-fatel3.png";
 </script>
 
 <template>
   <section
-    class="mb-[4rem] pt-[4rem] px-[1rem] bg-ltPrimary lg:pb-[4rem] lg:px-[2rem] xl:mb-[6rem] xl:py-[5rem] xxl:pb-[8rem]"
+    class="relative mb-[4rem] pt-[4rem] bg-ltPrimary lg:pb-[4rem] xl:mb-[6rem] xl:py-[5rem] xxl:pb-[8rem]"
   >
     <div
-      class="w-fit mx-auto flex flex-col gap-[2rem] lg:w-[100%] xl:gap-[3rem] xxl:w-[1396px]"
+      class="flex flex-col items-center gap-[2rem] px-[1rem] lg:px-[2rem] lg:w-[100%] lg:items-start xl:gap-[3rem] xxl:w-[1396px] xxl:mx-auto"
     >
-      <div class="flex flex-col gap-[1rem] xl:gap-[1.25rem]">
+      <div
+        class="flex flex-col items-center gap-[1rem] lg:items-start xl:gap-[1.25rem]"
+      >
         <SectionType
           text="showcase"
           bgColor="bg-BGLight"
           textColor="text-ltPrimary"
         />
         <h2
-          class="w-[100%] text-[2rem] text-TextLight font-[500] leading-[1.2] xs:w-[325px] sm:w-[400px] lg:w-[550px] lg:text-[3rem] lg:leading-[1.15] xxl:w-[700px] xxl:text-[4rem]"
+          class="w-[100%] text-center text-[2rem] text-TextLight font-[500] leading-[1.2] xs:w-[325px] sm:w-[500px] lg:w-[550px] lg:text-start lg:text-[3rem] lg:leading-[1.15] xxl:w-[700px] xxl:text-[4rem]"
         >
           Create Your Own Site with Our New Product
           <span
@@ -30,7 +33,7 @@ import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
         </h2>
       </div>
       <div
-        class="w-[100%] text-[15px] text-TextLight font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[500px] lg:text-[1rem] xxl:w-[600px] xxl:text-[17px]"
+        class="w-[100%] text-center text-[15px] text-TextLight font-light leading-snug xs:w-[325px] sm:w-[500px] lg:w-[500px] lg:text-start lg:text-[1rem] xxl:w-[600px] xxl:text-[17px]"
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
@@ -39,7 +42,7 @@ import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
       </div>
       <RouterLink
         to="/support"
-        class="btn w-fit flex justify-center items-center gap-[6px] pl-[1rem] pr-[.625rem] mr-auto py-[.625rem] bg-BGLight text-ltPrimary border-[1px] border-BGLight rounded-[11px] leading-tight cursor-pointer xxl:gap-[7px] xxl:pl-[1.25rem] xxl:pr-[13px]"
+        class="btn w-fit flex justify-center items-center gap-[6px] pl-[1rem] pr-[.625rem] mx-auto py-[.625rem] bg-BGLight text-ltPrimary border-[1px] border-BGLight rounded-[11px] leading-tight cursor-pointer lg:ml-0 xxl:gap-[7px] xxl:pl-[1.25rem] xxl:pr-[13px]"
       >
         <div>Get Started</div>
         <img
@@ -48,6 +51,15 @@ import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
           class="btn-arrow h-[18px] flex justify-center items-center xxl:h-[20px]"
         />
       </RouterLink>
+    </div>
+    <div
+      class="mt-[4rem] border-t-[1px] border-b-[1px] border-ltPrimary sm:px-[1rem] lg:w-[45%] lg:absolute lg:bottom-0 lg:right-0 lg:px-0 xxl:w-[42%] xxxxl:w-[37%]"
+    >
+      <img
+        class="w-[100%] rounded-t-[20px] lg:rounded-tr-[0px] xxl:rounded-tl-[24px] xxxxl:rounded-tl-[32px]"
+        :src="tempImg"
+        alt=""
+      />
     </div>
   </section>
 </template>

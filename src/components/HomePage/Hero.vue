@@ -44,7 +44,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
       class="pt-[.5rem] px-[.5rem] border-t-[1px] border-x-[1px] border-ltBorder rounded-t-[20px] lg:mx-[2rem] lg:rounded-t-[32px] xxl:pt-[1rem] xxl:px-[1rem] xl:w-[1121px] xxl:w-auto xxl:mx-0"
     >
       <img
-        class="w-[100%] rounded-t-[20px] lg:rounded-t-[32px] xxl:w-[1396px]"
+        class="w-[100%] rounded-t-[12px] lg:rounded-t-[24px] xxl:w-[1396px]"
         :src="tempImg"
         alt=""
       />
