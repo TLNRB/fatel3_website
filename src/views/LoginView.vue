@@ -35,7 +35,7 @@ const passwordVisible = ref<boolean>(false);
         />
         <div class="relative">
           <input
-            type="password"
+            :type="passwordVisible ? 'text' : 'password'"
             name=""
             id=""
             placeholder="Password"
