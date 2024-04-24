@@ -45,6 +45,7 @@ export default {
         ltTextPositive: '#4DAA57',
         ltTextNegative: '#FC536B',
         ltHoverPrimary: '#E9ECFF',
+        ltHoverPrimaryDark: '#828BF8',
         BGNavDropdown: '#f9f9fc',
       }
     },
