@@ -10,7 +10,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
 <template>
   <section
     id="showcase"
-    class="relative mb-[4rem] pt-[4rem] bg-ltPrimary lg:pb-[4rem] xl:mb-[6rem] xl:py-[5rem] xxl:pb-[8rem]"
+    class="relative mb-[4rem] pt-[4rem] bg-ltPrimary lg:pb-[4rem] xl:mb-[6rem] xl:py-[6rem] xxl:py-[7rem] xxl:mb-[7rem]"
   >
     <div
       class="flex flex-col items-center gap-[2rem] px-[1rem] lg:px-[2rem] lg:w-[100%] lg:items-start xl:gap-[3rem] xxl:w-[1396px] xxl:mx-auto"
@@ -57,7 +57,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
       class="mt-[4rem] border-t-[1px] border-b-[1px] border-ltPrimary sm:px-[1rem] lg:w-[45%] lg:absolute lg:bottom-0 lg:right-0 lg:px-0 xxl:w-[42%] xxxxl:w-[37%]"
     >
       <img
-        class="w-[100%] rounded-t-[20px] lg:rounded-tr-[0px] xxl:rounded-tl-[24px] xxxxl:rounded-tl-[32px]"
+        class="w-[100%] rounded-t-[20px] lg:rounded-tr-[0px] xxl:rounded-tl-[24px]"
         :src="tempImg"
         alt=""
       />

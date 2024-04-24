@@ -29,7 +29,7 @@ const reviews: any = [
 
 <template>
   <section
-    class="py-[4rem] px-[1rem] bg-BGDark xs:mx-[1rem] xs:rounded-[24px] lg:mx-[2rem] lg:px-[2rem] xl:py-[5rem] xxl:w-[1396px] xxl:mx-auto xxl:pb-[8rem]"
+    class="py-[4rem] px-[1rem] bg-BGDark xs:mx-[1rem] xs:rounded-[24px] lg:mx-[2rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:py-[7rem]"
   >
     <div class="flex flex-col items-center gap-[3rem] xl:gap-[4rem]">
       <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
