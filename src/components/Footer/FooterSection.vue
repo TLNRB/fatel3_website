@@ -83,14 +83,26 @@ const filteredNavItemsResources = computed(() => {
           >
             <div class="font-[500] leading-tight">Pages</div>
             <div class="flex flex-col gap-[.875rem]">
-              <RouterLink
-                :to="navItem.route"
+              <div
                 v-for="(navItem, index) in filteredNavItemsPages"
                 :key="index"
-                class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
+                class="h-[21px]"
               >
-                {{ navItem.title }}
-              </RouterLink>
+                <RouterLink
+                  v-if="navItem.id !== 'showcase'"
+                  :to="navItem.route"
+                  class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
+                >
+                  {{ navItem.title }}
+                </RouterLink>
+                <a
+                  v-else
+                  :href="navItem.route"
+                  class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
+                >
+                  {{ navItem.title }}
+                </a>
+              </div>
             </div>
           </div>
           <!-- Nav Items Features -->
