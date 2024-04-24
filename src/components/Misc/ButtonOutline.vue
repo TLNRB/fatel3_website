@@ -35,8 +35,8 @@ const { text, theme, route } = defineProps(["text", "theme", "route"]);
   }
 
   .btn-outline-dark:hover {
-    color: var(--ltPrimaryDark);
-    border-color: var(--ltPrimaryDark);
+    color: var(--dtPrimary);
+    border-color: var(--dtPrimary);
   }
 }
 </style>

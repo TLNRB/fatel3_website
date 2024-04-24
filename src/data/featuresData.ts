@@ -66,7 +66,7 @@ const features = [
     ],
   },
   {
-    title: "High Customizability",
+    title: "Highly Customizable",
     icon: "ri-tools-line",
     shortDesc: "Customize your inventory to your own needs",
     subItems: [
