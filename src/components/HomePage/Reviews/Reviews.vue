@@ -33,7 +33,11 @@ const reviews: any = [
   >
     <div class="flex flex-col items-center gap-[3rem] xl:gap-[4rem]">
       <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
-        <SectionType text="reviews" />
+        <SectionType
+          text="reviews"
+          bgColor="bg-ltPrimary"
+          textColor="text-TextLight"
+        />
         <h2
           class="w-[100%] text-center text-[2rem] text-TextLight font-[500] leading-[1.15] xs:w-[300px] lg:w-[500px] lg:text-[3rem] xxl:w-[550px] xxl:text-[4rem]"
         >
