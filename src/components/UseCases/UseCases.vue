@@ -11,7 +11,7 @@ import useCases from "@/data/useCasesData";
 
 <template>
   <section
-    class="py-[4rem] px-[1rem] flex flex-col items-center lg:py-[5rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+    class="py-[4rem] px-[1rem] flex flex-col items-center lg:py-[5rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:py-[7rem] xxl:px-0"
   >
     <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
       <SectionType
