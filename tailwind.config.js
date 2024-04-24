@@ -28,7 +28,6 @@ export default {
         BGSemiNormal: '#F0F0F2',
         BGSemiDark: '#37363D',
         BGDark: '#272733',
-        BGDark: '#1f1f2a',
         TextLight: '#ffffff',
         TextSemiNormal: '#9A97A7',
         TextNormal: '#7b7988',
