@@ -9,6 +9,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
 
 <template>
   <section
+    id="showcase"
     class="relative mb-[4rem] pt-[4rem] bg-ltPrimary lg:pb-[4rem] xl:mb-[6rem] xl:py-[5rem] xxl:pb-[8rem]"
   >
     <div

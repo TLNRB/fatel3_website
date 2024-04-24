@@ -114,11 +114,10 @@ const getSubMenuHeight = (navItem: any) => {
             <div>
               <!-- Navbar Items without sub menus -->
               <RouterLink
-                v-if="!navItem.subItems"
+                v-if="!navItem.subItems && navItem.id !== 'showcase'"
                 :to="navItem.route"
                 class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:px-[.75rem] xl:rounded-[10px]"
                 :class="[
-                  { 'bg-BGSemiNormal': navItem.id === 'showcase' },
                   {
                     'text-ltPrimary': navItem.activePage,
                   },
@@ -130,16 +129,27 @@ const getSubMenuHeight = (navItem: any) => {
                 >
                   {{ navItem.title }}
                 </div>
+              </RouterLink>
+              <a
+                v-else-if="!navItem.subItems && navItem.id === 'showcase'"
+                :href="navItem.route"
+                class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:px-[.75rem] xl:rounded-[10px]"
+                :class="[{ 'bg-BGSemiNormal': navItem.id === 'showcase' }]"
+                @click="setActiveIndex(navItem.id)"
+                ><div
+                  class="text-[1.25rem] leading-[1.3] xl:text-[1rem] xl:whitespace-nowrap xl:leading-[1.25]"
+                >
+                  {{ navItem.title }}
+                </div>
                 <!-- New Badge for Showcase -->
                 <span
-                  v-if="navItem.id === 'showcase'"
                   class="absolute top-0 right-0 translate-y-[-3px] translate-x-[13px] py-[.125rem] px-[.25rem] text-[.75rem] leading-none bg-BGLight text-ltPrimary rounded-[5px] xl:text-[.625rem] xl:rounded-[4px] xl:translate-x-[12px]"
                   >New</span
-                >
-              </RouterLink>
+                ></a
+              >
               <!-- Navbar Items with sub menus -->
               <div
-                v-if="navItem.subItems"
+                v-else-if="navItem.subItems"
                 class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] pl-[.875rem] pr-[7px] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:pl-[.75rem] xl:pr-[5px] xl:rounded-[10px]"
                 :class="{
                   'bg-ltHoverPrimary text-ltPrimary':
