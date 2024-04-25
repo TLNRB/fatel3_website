@@ -28,7 +28,7 @@ const activeFeatureSubMenus = computed(() => {
   >
     <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
       <SectionType
-        text="use cases"
+        text="features"
         bgColor="bg-ltPrimary"
         textColor="text-TextLight"
       />
@@ -76,7 +76,12 @@ const activeFeatureSubMenus = computed(() => {
           ></i>
 
           <div
-            class="text-center text-[.875rem] font-light text-TextNormal leading-tight"
+            class="text-center text-[.875rem] font-light leading-tight duration-[.3s]"
+            :class="
+              activeFeature === feature.title
+                ? 'text-ltPrimary'
+                : 'text-TextNormal'
+            "
           >
             {{ feature.title }}
           </div>
