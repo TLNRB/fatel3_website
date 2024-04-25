@@ -112,7 +112,7 @@ const filteredNavItemsResources = computed(() => {
             <div class="font-[500] leading-tight">Features</div>
             <div class="flex flex-col gap-[.875rem]">
               <RouterLink
-                to="/features"
+                :to="{ name: 'features', query: { feature: subItem.title } }"
                 v-for="(subItem, index) in filteredNavItemsFeatures.subItems"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
