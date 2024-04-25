@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 /*-- Import Components --*/
 import SectionType from "@/components/Misc/SectionType.vue";
 import ButtonFilled from "@/components/Misc/ButtonFilled.vue";
@@ -19,6 +20,21 @@ const setActiveFeature = (feature: string) => {
 // Get active feature submenus
 const activeFeatureSubMenus = computed(() => {
   return featuresData.find((feature) => feature.title === activeFeature.value);
+});
+const router = useRouter();
+
+watch(
+  () => router.currentRoute.value,
+  () => {
+    setActiveFeature(router.currentRoute.value.query.feature as string);
+  }
+);
+
+onMounted(() => {
+  const featureTitle = router.currentRoute.value.query.feature as string;
+  if (featureTitle) {
+    setActiveFeature(featureTitle);
+  }
 });
 </script>
 
@@ -107,7 +123,9 @@ const activeFeatureSubMenus = computed(() => {
               ></i>
             </div>
           </div>
-          <div class="text-[.875rem] font-light leading-snug xxl:text-[15px]">
+          <div
+            class="text-[.875rem] font-light text-TextNormal leading-snug xxl:text-[15px]"
+          >
             {{ subItem.longDesc }}
           </div>
         </div>
