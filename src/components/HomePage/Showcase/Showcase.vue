@@ -29,7 +29,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
           Create Your Own Site with Our New Product
           <span
             class="px-[.375rem] bg-ltHoverPrimaryDark font-[500] rounded-[8px] lg:px-[.5rem] lg:rounded-[12px] xxl:px-[.75rem] xxl:rounded-[16px]"
-            >Sowcase</span
+            >Showcase</span
           >
         </h2>
       </div>
