@@ -38,10 +38,19 @@ const activeIndex = ref<string>("none"); // Track active index
 
 // Method to set active index
 const setActiveIndex = (index: string) => {
-  if (activeIndex.value === index) {
-    activeIndex.value = "none";
+  if (index === "features" || index === "useCases" || index === "resources") {
+    if (activeIndex.value === index) {
+      activeIndex.value = "none";
+    } else {
+      activeIndex.value = index;
+    }
   } else {
-    activeIndex.value = index;
+    if (activeIndex.value === index) {
+      activeIndex.value = "none";
+    } else {
+      activeIndex.value = index;
+    }
+    toggleMenu();
   }
 };
 
