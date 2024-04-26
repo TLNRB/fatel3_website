@@ -128,7 +128,7 @@ const filteredNavItemsResources = computed(() => {
             <div class="font-[500] leading-tight">Use Cases</div>
             <div class="flex flex-col gap-[.875rem]">
               <RouterLink
-                :to="subItem.route"
+                :to="`/use-cases/${subItem.route}`"
                 v-for="(subItem, index) in filteredNavItemsUseCases"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"

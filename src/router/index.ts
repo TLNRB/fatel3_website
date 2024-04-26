@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 /*-- Import Views --*/
 import HomeView from "@/views/HomeView.vue";
 import AllFeaturesView from "@/views/AllFeaturesView.vue";
+import UseCaseView from "@/views/UseCaseView.vue";
 import LoginView from "@/views/LoginView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 
@@ -17,6 +18,11 @@ const router = createRouter({
       path: "/features",
       name: "features",
       component: AllFeaturesView,
+    },
+    {
+      path: "/use-cases/:route",
+      name: "usecase",
+      component: UseCaseView,
     },
     {
       path: "/login",

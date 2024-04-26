@@ -1,7 +1,7 @@
 const useCases = [
   {
     title: "Reselling",
-    route: "/reselling",
+    route: "reselling",
     icon: "ri-price-tag-3-line",
     shortDesc: "For the ones reselling various items and products",
     longDesc:
@@ -10,7 +10,7 @@ const useCases = [
   },
   {
     title: "E-commerce",
-    route: "/e-commerce",
+    route: "e-commerce",
     icon: "ri-shopping-cart-line",
     shortDesc: "Integration with the most used e-commerce platforms",
     longDesc:
