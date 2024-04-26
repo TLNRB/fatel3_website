@@ -87,8 +87,81 @@ let btnActive = ref<string>("yearly");
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-[1.5rem] flex-wrap lg:gap-[2rem]"
-      ></div>
+        class="flex justify-center items-end gap-[1.5rem] flex-wrap lg:gap-[2rem]"
+      >
+        <div
+          v-for="(plan, index) in plansData"
+          :key="index"
+          class="w-[250px] border-[1px] rounded-[14px]"
+          :class="
+            plan.isMostPopular ? ' border-ltPrimary' : ' border-ltBorderNormal'
+          "
+        >
+          <div
+            v-if="plan.isMostPopular"
+            class="flex justify-center items-center py-[.375rem] bg-ltPrimary text-[.875rem] text-TextLight leading-tight rounded-t-[12px]"
+          >
+            Most Popular
+          </div>
+          <div class="p-[1rem]">
+            <div>
+              <h3 class="text-[1.375rem] font-[500] leading-tight">
+                {{ plan.title }}
+              </h3>
+              <div
+                class="mt-[.5rem] mb-[1.5rem] text-[.875rem] font-light text-TextNormal leading-tight"
+              >
+                {{ plan.desc }}
+              </div>
+              <div
+                v-if="btnActive === 'monthly' && plan.title !== 'Enterprise'"
+                class="flex items-center gap-[.625rem]"
+              >
+                <div class="text-[3rem] font-[500] leading-none">
+                  <span class="font-extralight">€</span>{{ plan.monthlyPrice }}
+                </div>
+                <div class="text-[1.125rem] font-light translate-y-[1px]">
+                  eur/month
+                </div>
+              </div>
+              <div
+                v-else-if="
+                  btnActive === 'yearly' && plan.title !== 'Enterprise'
+                "
+                class="flex items-center gap-[.625rem]"
+              >
+                <div class="text-[3rem] font-[500] leading-none">
+                  <span class="font-extralight">€</span>{{ plan.yearlyPrice }}
+                </div>
+                <div class="text-[1.125rem] font-light translate-y-[1px]">
+                  eur/year
+                </div>
+              </div>
+              <div
+                v-else-if="plan.title === 'Enterprise'"
+                class="h-[48px] flex items-center text-[1.25rem] font-[500] leading-none"
+              >
+                {{ plan.monthlyPrice }}
+              </div>
+              <div
+                v-if="btnActive === 'monthly'"
+                class="mt-[.5rem] text-[.875rem] font-light text-TextNormal"
+              >
+                Billed monthly
+              </div>
+              <div
+                v-else-if="btnActive === 'yearly'"
+                class="mt-[.5rem] text-[.875rem] font-light text-TextNormal"
+              >
+                Billed annualy
+              </div>
+            </div>
+            <hr class="my-[1.5rem] border-ltBorderNormal" />
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
     </section>
     <FAQ :faqs="faqs" :descriptionCondition="false" :buttonCondition="false" />
     <CTA
