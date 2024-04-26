@@ -18,7 +18,7 @@ const useCase = computed(() =>
 
 <template>
   <main
-    class="py-[4rem] px-[1rem] lg:py-[5rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+    class="py-[4rem] px-[1rem] lg:py-[5rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:py-[7rem] xxl:px-0"
   >
     <div class="flex justify-center gap-[3rem] flex-wrap md:justify-between">
       <div class="w-fit flex flex-col gap-[3rem]">
