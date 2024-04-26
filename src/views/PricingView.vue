@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { RouterLink } from "vue-router";
 /*-- Import Components --*/
 import CTA from "@/components/CTA/CTA.vue";
 import FAQ from "@/components/FAQ/FAQ.vue";
@@ -157,8 +158,21 @@ let btnActive = ref<string>("yearly");
               </div>
             </div>
             <hr class="my-[1.5rem] border-ltBorderNormal" />
-            <div></div>
-            <div></div>
+            <div class="flex flex-col gap-[1rem]">
+              <div
+                v-for="(shortSubItem, index) in plan.shortSubList"
+                ::key="index"
+                class="font-light leading-tight"
+              >
+                {{ shortSubItem.data }} {{ shortSubItem.title }}
+              </div>
+            </div>
+            <RouterLink
+              to="/support"
+              class="btn w-fit flex justify-center items-center mt-[3rem] mx-auto py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight cursor-pointer xxl:py-[.625rem] xxl:px-[1.25rem] xxl:rounded-[11px]"
+            >
+              <div>Get started</div>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -173,4 +187,18 @@ let btnActive = ref<string>("yearly");
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  background-color: var(--ltPrimary);
+  border-color: var(--ltPrimary);
+  transition: border-color, background-color 0.15s ease-in-out;
+}
+
+/*-- Hover isn't visible on touchscreen devices --*/
+@media (hover: hover) {
+  .btn:hover {
+    background-color: var(--ltPrimaryDark);
+    border-color: var(--ltPrimaryDark);
+  }
+}
+</style>
