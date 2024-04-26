@@ -5,26 +5,12 @@ import ButtonOutline from "@/components/Misc/ButtonOutline.vue";
 /*-- Import assets --*/
 import addIcon from "@/assets/icons/add-line.svg";
 
-// FAQs
-const faqs: any = [
-  {
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-  },
-  {
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod, consectetur adipiscing elit, sed do eiusmod?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
+// Prop handling
+const { faqs, descriptionCondition, buttonCondition } = defineProps([
+  "faqs",
+  "descriptionCondition",
+  "buttonCondition",
+]);
 
 // Toggle FAQ answer
 const activeFAQIndex = ref<number>(-1);
@@ -47,6 +33,7 @@ const toggleActiveFAQ = (index: number) => {
       Frequently Asked Questions
     </h2>
     <div
+      v-if="descriptionCondition"
       class="w-[100%] text-center text-TextNormal font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[500px] lg:text-[1.125rem] xxl:w-[550px] xxl:text-[1.25rem]"
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -90,7 +77,12 @@ const toggleActiveFAQ = (index: number) => {
         </div>
       </div>
     </div>
-    <ButtonOutline text="Contact us" theme="light" route="/support" />
+    <ButtonOutline
+      v-if="buttonCondition"
+      text="Contact us"
+      theme="light"
+      route="/support"
+    />
   </section>
 </template>
 
