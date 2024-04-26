@@ -10,10 +10,10 @@ const useCases = [
       "Ambitious resellers who sell different types of products and seek for a system that helps grow their business.",
     commingSoon: false,
     pageTitle: "Meets fatel3 for Managing Inventory",
-    pageDescOne:
+    pageDesc: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    pageDescTwo:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
     pageReviewText:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     pageReviewAuthor: "John Doe",
