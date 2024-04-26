@@ -10,7 +10,7 @@ import aboutUsImage from "@/assets/images/temp-review.jpg";
 
 <template>
   <main class="flex flex-col items-center pt-[3rem] lg:pt-[4rem] xl:pt-[5rem]">
-    <div class="px-[1rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0">
+    <section class="px-[1rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0">
       <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
         <SectionType
           text="about us"
@@ -65,7 +65,86 @@ import aboutUsImage from "@/assets/images/temp-review.jpg";
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    <section
+      class="w-[100%] py-[4rem] px-[1rem] flex flex-col items-center gap-[2rem] bg-BGDark lg:py-[5rem] lg:px-[2rem] xxl:gap-[3rem] xxl:py-[6rem]"
+    >
+      <h2
+        class="text-[1.75rem] font-[500] text-TextLight leading-tight lg:text-[2rem] xxl:text-[3rem]"
+      >
+        Our People
+      </h2>
+      <div
+        class="flex justify-center items-center gap-[3rem] flex-wrap xxl:gap-[4rem]"
+      >
+        <div class="flex flex-col items-center">
+          <div
+            class="h-[125px] w-[125px] flex justify-center items-center p-[3px] border-[2px] border-ltPrimary rounded-[41px] xxl:h-[150px] xxl:w-[150px] xxl:rounded-[49px]"
+          >
+            <img
+              :src="aboutUsImage"
+              alt="person image"
+              class="h-[100%] object-cover rounded-[38px] xxl:rounded-[46px]"
+            />
+          </div>
+          <div
+            class="mt-[1rem] mb-[.25rem] text-[1.375rem] font-[500] text-TextLight leading-tight xxl:mt-[1.125rem] xxl:mb-[.375rem] xxl:text-[1.75rem]"
+          >
+            Ádám Lőrincz
+          </div>
+          <div
+            class="font-light text-ltPrimary leading-tight xxl:text-[1.125rem]"
+          >
+            Co-founder
+          </div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div
+            class="h-[125px] w-[125px] flex justify-center items-center p-[3px] border-[2px] border-ltPrimary rounded-[41px] xxl:h-[150px] xxl:w-[150px] xxl:rounded-[49px]"
+          >
+            <img
+              :src="aboutUsImage"
+              alt="person image"
+              class="h-[100%] object-cover rounded-[38px] xxl:rounded-[46px]"
+            />
+          </div>
+          <div
+            class="mt-[1rem] mb-[.25rem] text-[1.375rem] font-[500] text-TextLight leading-tight xxl:mt-[1.125rem] xxl:mb-[.375rem] xxl:text-[1.75rem]"
+          >
+            Norbert Tolnai
+          </div>
+          <div
+            class="font-light text-ltPrimary leading-tight xxl:text-[1.125rem]"
+          >
+            Co-founder
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="flex flex-col items-center gap-[2rem] my-[4rem] px-[1rem] lg:gap-[3rem] lg:my-[6rem] lg:px-[2rem] xxl:w-[1396px] xxl:my-[8rem] xxl:mx-auto xxl:px-0"
+    >
+      <h2
+        class="text-[1.75rem] font-[500] text-ltPrimary leading-tight lg:text-[2rem] xxl:text-[3rem]"
+      >
+        Our Values
+      </h2>
+      <div
+        class="flex justify-center items-center gap-[2rem] sm:gap-[3rem] xxl:gap-[4rem]"
+      >
+        <div class="w-[240px] flex flex-col">
+          <div
+            class="mt-[1rem] mb-[.5rem] text-[1.125rem] font-[500] leading-tight"
+          >
+            Trust
+          </div>
+          <div class="text-[.875rem] font-light leading-tight">
+            Ambitious resellers who sell different types of products and seek
+            for a system that helps grow their business.
+          </div>
+        </div>
+      </div>
+    </section>
     <CTA
       textFirstPart="Create Your Inventory with"
       textHighlighted="fatel3"
