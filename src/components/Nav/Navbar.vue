@@ -187,7 +187,7 @@ const getSubMenuHeight = (navItem: any) => {
               class="overflow-hidden duration-[.375s] ease-in-out xl:w-[100%] xl:absolute xl:top-[72px] xl:left-0 xl:bg-BGNavDropdown xl:border-b-[1px] xl:border-ltBorder"
               :style="getSubMenuHeight(navItem)"
             >
-              <!-- Sub menu for features and use cases -->
+              <!-- Sub menu for features -->
               <div
                 v-if="navItem.id === 'features'"
                 class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1396px] xxl:mx-auto xxl:pl-[141px] xxl:pr-[550px] xxxl:pl-[171px] xxxl:pr-[525px]"
@@ -215,13 +215,15 @@ const getSubMenuHeight = (navItem: any) => {
                   </div>
                 </RouterLink>
               </div>
-              <!-- Sub menu use cases -->
+              <!-- Sub menu for use cases -->
               <div
                 v-else-if="navItem.id === 'useCases'"
                 class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1396px] xxl:mx-auto xxl:pl-[141px] xxl:pr-[550px] xxxl:pl-[171px] xxxl:pr-[525px]"
               >
                 <RouterLink
-                  :to="!subItem.commingSoon ? subItem.route : ''"
+                  :to="
+                    !subItem.commingSoon ? `/use-cases/${subItem.route}` : ''
+                  "
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
                   @click="setActiveIndex('none')"
