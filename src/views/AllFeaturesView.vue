@@ -26,7 +26,9 @@ const router = useRouter();
 watch(
   () => router.currentRoute.value,
   () => {
-    setActiveFeature(router.currentRoute.value.query.feature as string);
+    if (router.currentRoute.value.query.feature) {
+      setActiveFeature(router.currentRoute.value.query.feature as string);
+    }
   }
 );
 
