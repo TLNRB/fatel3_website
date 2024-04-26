@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 /*-- Import Components --*/
 import CTA from "@/components/CTA/CTA.vue";
 import FAQ from "@/components/FAQ/FAQ.vue";
@@ -26,6 +27,9 @@ const faqs: any = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
 ];
+
+// Active Button
+let btnActive = ref<string>("yearly");
 </script>
 
 <template>
@@ -33,19 +37,14 @@ const faqs: any = [
     <section class="px-[1rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0">
       <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
         <SectionType
-          text="about us"
+          text="pricing"
           bgColor="bg-ltPrimary"
           textColor="text-TextLight"
         />
         <h1
-          class="w-[100%] text-center text-[2rem] font-[500] leading-[1.15] xs:w-[325px] sm:w-[350px] lg:w-[550px] lg:text-[3rem] xxl:w-[700px] xxl:text-[4rem]"
+          class="w-[100%] text-center text-[2rem] font-[500] leading-[1.15] xs:w-[325px] lg:w-[500px] lg:text-[3rem] xxl:w-[650px] xxl:text-[4rem]"
         >
-          We Make Inventorying
-          <span
-            class="px-[.375rem] bg-BGSemiNormal font-[500] rounded-[8px] lg:px-[.5rem] lg:rounded-[12px] xxl:px-[.75rem] xxl:rounded-[16px]"
-            >Easier</span
-          >
-          for
+          Find the Suitable Plan for
           <span class="font-[500] text-ltPrimary">You</span>
         </h1>
       </div>
@@ -55,6 +54,37 @@ const faqs: any = [
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </div>
+    </section>
+    <section
+      class="flex flex-col items-center gap-[3rem] mt-[3rem] mb-[5rem] px-[1rem] lg:px-[2rem] xl:mt-[4rem] xl:mb-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+    >
+      <div
+        class="w-fit flex justify-center items-center p-[.25rem] border-[1px] border-ltBorder rounded-[14px]"
+      >
+        <div
+          class="py-[.5rem] px-[1rem] rounded-[10px] leading-tight translate-y-[.5px] cursor-pointer duration-[.15s] ease-in-out"
+          :class="
+            btnActive === 'yearly'
+              ? 'bg-ltPrimary text-TextLight'
+              : 'bg-BGLight text-TextSemiDark'
+          "
+          @click="btnActive = 'yearly'"
+        >
+          Yearly
+        </div>
+        <div
+          class="py-[.5rem] px-[1rem] rounded-[10px] leading-tight translate-y-[.5px] cursor-pointer duration-[.15s] ease-in-out"
+          :class="
+            btnActive === 'monthly'
+              ? 'bg-ltPrimary text-TextLight'
+              : 'bg-BGLight text-TextSemiDark'
+          "
+          @click="btnActive = 'monthly'"
+        >
+          Monthly
+        </div>
+      </div>
+      <div></div>
     </section>
     <FAQ :faqs="faqs" :descriptionCondition="false" :buttonCondition="false" />
     <CTA
