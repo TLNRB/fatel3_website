@@ -6,6 +6,8 @@ import FAQ from "@/components/FAQ/FAQ.vue";
 import SectionType from "@/components/Misc/SectionType.vue";
 /*-- Import assets --*/
 import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
+/*-- Import data --*/
+import plansData from "@/data/plansData.ts";
 
 // FAQs
 const faqs: any = [
@@ -84,7 +86,9 @@ let btnActive = ref<string>("yearly");
           Monthly
         </div>
       </div>
-      <div></div>
+      <div
+        class="flex justify-center items-center gap-[1.5rem] flex-wrap lg:gap-[2rem]"
+      ></div>
     </section>
     <FAQ :faqs="faqs" :descriptionCondition="false" :buttonCondition="false" />
     <CTA
