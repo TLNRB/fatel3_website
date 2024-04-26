@@ -6,6 +6,42 @@ import ButtonFilled from "@/components/Misc/ButtonFilled.vue";
 /*-- Import assets --*/
 import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
 import aboutUsImage from "@/assets/images/temp-review.jpg";
+
+// Values
+const ourValues = [
+  {
+    icon: "ri-shield-check-line",
+    title: "Trust",
+    description:
+      "Ambitious resellers who sell different types of products and seek for a system that helps grow their business.",
+  },
+  {
+    icon: "ri-heart-add-line",
+    title: "Customer driven",
+    description:
+      "Ambitious resellers who sell different types of products and seek for a system that helps grow their business.",
+  },
+  {
+    icon: "ri-speed-up-line",
+    title: "Speed",
+    description:
+      "Ambitious resellers who sell different types of products and seek for a system that helps grow their business.",
+  },
+];
+
+// People
+const ourPeople = [
+  {
+    personName: "Ádám Lőrincz",
+    personTitle: "Co-founder",
+    personImg: aboutUsImage,
+  },
+  {
+    personName: "Norbert Tolnai",
+    personTitle: "Co-founder",
+    personImg: aboutUsImage,
+  },
+];
 </script>
 
 <template>
@@ -77,12 +113,16 @@ import aboutUsImage from "@/assets/images/temp-review.jpg";
       <div
         class="flex justify-center items-center gap-[3rem] flex-wrap xxl:gap-[4rem]"
       >
-        <div class="flex flex-col items-center">
+        <div
+          v-for="(person, index) in ourPeople"
+          :key="index"
+          class="flex flex-col items-center"
+        >
           <div
             class="h-[125px] w-[125px] flex justify-center items-center p-[3px] border-[2px] border-ltPrimary rounded-[41px] xxl:h-[150px] xxl:w-[150px] xxl:rounded-[49px]"
           >
             <img
-              :src="aboutUsImage"
+              :src="person.personImg"
               alt="person image"
               class="h-[100%] object-cover rounded-[38px] xxl:rounded-[46px]"
             />
@@ -90,33 +130,12 @@ import aboutUsImage from "@/assets/images/temp-review.jpg";
           <div
             class="mt-[1rem] mb-[.25rem] text-[1.375rem] font-[500] text-TextLight leading-tight xxl:mt-[1.125rem] xxl:mb-[.375rem] xxl:text-[1.75rem]"
           >
-            Ádám Lőrincz
+            {{ person.personName }}
           </div>
           <div
             class="font-light text-ltPrimary leading-tight xxl:text-[1.125rem]"
           >
-            Co-founder
-          </div>
-        </div>
-        <div class="flex flex-col items-center">
-          <div
-            class="h-[125px] w-[125px] flex justify-center items-center p-[3px] border-[2px] border-ltPrimary rounded-[41px] xxl:h-[150px] xxl:w-[150px] xxl:rounded-[49px]"
-          >
-            <img
-              :src="aboutUsImage"
-              alt="person image"
-              class="h-[100%] object-cover rounded-[38px] xxl:rounded-[46px]"
-            />
-          </div>
-          <div
-            class="mt-[1rem] mb-[.25rem] text-[1.375rem] font-[500] text-TextLight leading-tight xxl:mt-[1.125rem] xxl:mb-[.375rem] xxl:text-[1.75rem]"
-          >
-            Norbert Tolnai
-          </div>
-          <div
-            class="font-light text-ltPrimary leading-tight xxl:text-[1.125rem]"
-          >
-            Co-founder
+            {{ person.personTitle }}
           </div>
         </div>
       </div>
@@ -130,17 +149,30 @@ import aboutUsImage from "@/assets/images/temp-review.jpg";
         Our Values
       </h2>
       <div
-        class="flex justify-center items-center gap-[2rem] sm:gap-[3rem] xxl:gap-[4rem]"
+        class="flex flex-col justify-center items-center gap-[2rem] lg:flex-row xxl:gap-[4rem]"
       >
-        <div class="w-[240px] flex flex-col">
+        <div
+          v-for="(value, index) in ourValues"
+          :key="index"
+          class="w-[240px] flex flex-col xs:w-[275px]"
+        >
           <div
-            class="mt-[1rem] mb-[.5rem] text-[1.125rem] font-[500] leading-tight"
+            class="min-w-[50px] min-h-[50px] w-[50px] h-[50px] flex justify-center items-center border-[1px] border-ltBorderNormal rounded-[16px] xxl:min-w-[56px] xxl:min-h-[56px] xxl:w-[56px] xxl:h-[56px] xxl:rounded-[18px]"
           >
-            Trust
+            <i
+              class="text-[1.75rem] h-[28px] flex justify-center items-center text-ltPrimary translate-y-[1px] xxl:text-[2rem] xxl:h-[32px]"
+              :class="value.icon"
+            ></i>
           </div>
-          <div class="text-[.875rem] font-light leading-tight">
-            Ambitious resellers who sell different types of products and seek
-            for a system that helps grow their business.
+          <div
+            class="mt-[1rem] mb-[.5rem] pl-[.125rem] text-[1.125rem] font-[500] leading-tight xxl:pl-[3px]"
+          >
+            {{ value.title }}
+          </div>
+          <div
+            class="pl-[.125rem] text-[.875rem] font-light leading-tight xxl:pl-[3px]"
+          >
+            {{ value.description }}
           </div>
         </div>
       </div>
