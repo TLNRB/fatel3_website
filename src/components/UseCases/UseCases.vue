@@ -73,7 +73,7 @@ import useCases from "@/data/useCasesData";
           </div>
           <RouterLink
             v-if="!useCase.commingSoon"
-            :to="useCase.route"
+            :to="`/use-cases/${useCase.route}`"
             class="mt-[1rem] ml-0 mr-auto text-TextNormal text-[.875rem] font-light underline cursor-pointer"
           >
             Read more

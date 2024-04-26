@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 /*-- Import Components --*/
 import ButtonFilled from "@/components/Misc/ButtonFilled.vue";
@@ -11,29 +11,49 @@ import useCasesData from "@/data/useCasesData";
 // Getting the right use case
 const route = useRoute();
 
-const useCase = () => {
-  useCasesData.find((useCase) => useCase.route === route.params.route);
-};
+const useCase = computed(() =>
+  useCasesData.find((useCase: any) => useCase.route == route.params.route)
+);
 </script>
 
 <template>
   <main
-    class="py-[4rem] px-[1rem] flex flex-col items-center lg:py-[5rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+    class="py-[4rem] px-[1rem] flex flex-col flex-wrap lg:py-[5rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
   >
-    <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
-      <h2
-        class="w-[100%] text-center text-[2rem] font-[500] leading-[1.15] xs:w-[300px] sm:w-[350px] lg:w-[550px] lg:text-[3rem] xxl:w-[700px] xxl:text-[4rem]"
+    <div class="flex flex-col gap-[3rem]">
+      <h1
+        class="w-[100%] text-[2rem] font-[500] leading-[1.15] xs:w-[325px] sm:w-[375px] lg:w-[550px] lg:text-[3rem] xxl:w-[750px] xxl:text-[4rem]"
       >
-        All the Tools <span class="font-[500] text-ltPrimary">You</span> Need
-        for Inventorying
-      </h2>
+        <span class="font-[500] text-ltPrimary">{{ useCase?.title }}</span>
+        {{ useCase?.pageTitle }}
+      </h1>
+      <div
+        class="w-[100%] flex flex-col gap-[1rem] pl-[.25rem] text-TextNormal xs:w-[330px] sm:w-[380px] lg:w-[555px] xxl:w-[605px]"
+      >
+        <div
+          v-for="(paragraph, index) in useCase?.pageDesc"
+          :key="index"
+          class="font-light"
+        >
+          {{ paragraph }}
+        </div>
+      </div>
+      <ButtonFilled
+        text="Get Started"
+        :icon="arrowIcon"
+        altText="arrow icon"
+        route="/support"
+        class="hidden md:flex md:mx-0 xl:mt-[1rem]"
+      />
     </div>
-    <div
-      class="w-[100%] mt-[1.5rem] text-center text-TextNormal font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[550px] lg:text-[1.125rem] xl:mt-[2rem] xxl:w-[600px] xxl:text-[1.25rem]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    </div>
+    <div class="w-[100%] xs:w-[300px] lg:w-[400px]"></div>
+    <ButtonFilled
+      text="Get Started"
+      :icon="arrowIcon"
+      altText="arrow icon"
+      route="/support"
+      class="flex mt-[3rem] md:hidden"
+    />
   </main>
 </template>
 
