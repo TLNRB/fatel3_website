@@ -23,6 +23,30 @@ const plans = [
         title: "Inventory Location",
       },
     ],
+    longSubList: [
+      {
+        title: "Core Features",
+        features: [
+          { title: "Users", data: "2", icon: "" },
+          { title: "Inventory locations", data: "2", icon: "" },
+          { title: "Item reads", data: "200 000", icon: "" },
+          { title: "Inventory imports", data: "", icon: "ri-check-line" },
+          { title: "Reports", data: "", icon: "ri-check-line" },
+          { title: "Images", data: "", icon: "" },
+        ],
+      },
+      {
+        title: "Core Features",
+        features: [
+          { title: "Users", data: "2", icon: "" },
+          { title: "Inventory locations", data: "2", icon: "" },
+          { title: "Item reads", data: "200 000", icon: "" },
+          { title: "Inventory imports", data: "", icon: "ri-check-line" },
+          { title: "Reports", data: "", icon: "ri-check-line" },
+          { title: "Images", data: "", icon: "" },
+        ],
+      },
+    ],
   },
   {
     title: "Standard",
@@ -48,6 +72,19 @@ const plans = [
         title: "Inventory Location",
       },
     ],
+    longSubList: [
+      {
+        title: "Core Features",
+        features: [
+          { title: "Users", data: "3", icon: "" },
+          { title: "Inventory locations", data: "3", icon: "" },
+          { title: "Item reads", data: "400 000", icon: "" },
+          { title: "Inventory imports", data: "", icon: "ri-check-line" },
+          { title: "Reports", data: "", icon: "ri-check-line" },
+          { title: "Images", data: "", icon: "ri-check-line" },
+        ],
+      },
+    ],
   },
   {
     title: "Enterprise",
@@ -71,6 +108,19 @@ const plans = [
       {
         data: "10+",
         title: "Inventory Location",
+      },
+    ],
+    longSubList: [
+      {
+        title: "Core Features",
+        features: [
+          { title: "Users", data: "Unlimited", icon: "" },
+          { title: "Inventory locations", data: "Unlimited", icon: "" },
+          { title: "Item reads", data: "1 000 000+", icon: "" },
+          { title: "Inventory imports", data: "", icon: "ri-check-line" },
+          { title: "Reports", data: "", icon: "ri-check-line" },
+          { title: "Images", data: "", icon: "ri-check-line" },
+        ],
       },
     ],
   },
