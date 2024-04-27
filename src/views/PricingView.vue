@@ -218,7 +218,7 @@ onUnmounted(() => {
       </div>
     </section>
     <section
-      class="flex flex-col items-center gap-[3rem] mb-[2rem] px-[1rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+      class="flex flex-col items-center mb-[2rem] px-[1rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
     >
       <div class="flex flex-col items-center gap-[1.5rem]">
         <h2
@@ -235,7 +235,7 @@ onUnmounted(() => {
       </div>
       <!-- Feature list dropdown btn -->
       <div
-        class="btn w-fit flex justify-center items-center gap-[6px] pl-[1rem] pr-[.625rem] mx-auto py-[.625rem] text-TextLight border-[1px] rounded-[11px] leading-tight cursor-pointer xxl:gap-[7px] xxl:pl-[1.25rem] xxl:pr-[13px]"
+        class="btn w-fit flex justify-center items-center gap-[6px] mt-[3rem] mb-[2.5rem] pl-[1rem] pr-[.625rem] mx-auto py-[.625rem] text-TextLight border-[1px] rounded-[11px] leading-tight cursor-pointer xxl:gap-[7px] xxl:pl-[1.25rem] xxl:pr-[13px]"
         @click="featureListActive = !featureListActive"
       >
         <div>Feature list</div>
@@ -251,13 +251,13 @@ onUnmounted(() => {
         <!-- Plans btn for small screen -->
         <div
           v-if="screenWidth < 768"
-          class="flex justify-center items-center gap-[.75rem] flex-wrap"
+          class="sticky top-[66px] flex justify-center items-center gap-[.75rem] flex-wrap bg-BGLight py-[.5rem] pb-[1.5rem]"
         >
           <div
             v-for="(plan, index) in plansData"
             :key="index"
             @click="setActivePlan(plan.title)"
-            class="py-[.375rem] px-[.875rem] text-[.875rem] border-[1px] rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
+            class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
             :class="
               activePlan === plan.title
                 ? 'text-ltPrimary border-ltPrimary'
@@ -269,18 +269,16 @@ onUnmounted(() => {
         </div>
 
         <!-- Feature list table -->
-        <div
-          class="w-[100%] mt-[1.5rem] xs:w-[300px] md:w-[700px] xl:w-[1000px]"
-        >
+        <div class="w-[100%] xs:w-[300px] md:w-[700px] xl:w-[1000px]">
           <table class="min-w-full">
             <!-- Plans btn for large screen -->
-            <thead>
+            <thead class="sticky top-[66px] bg-BGLight lg:top-[72px]">
               <tr v-if="screenWidth >= 768">
                 <th></th>
                 <th
                   v-for="(plan, index) in plansData"
                   :key="index"
-                  class="min-w-[100px] pb-[1.5rem]"
+                  class="min-w-[100px] pt-[.5rem] pb-[1.5rem]"
                 >
                   <div class="text-[1.125rem] font-[500] leading-none">
                     {{ plan.title }}
@@ -295,7 +293,7 @@ onUnmounted(() => {
               </tr>
             </thead>
             <tbody
-              class="border-[1px] border-BGSemiNormal rounded-[10px]"
+              class="border-[1px] border-BGSemiNormal"
               v-for="(
                 featureList, featureListIndex
               ) in activePlanLongSubMenus?.longSubList"
@@ -304,7 +302,7 @@ onUnmounted(() => {
               <tr>
                 <th
                   :colspan="screenWidth >= 768 ? '4' : '2'"
-                  class="w-[100%] py-[.75rem] px-[1rem] text-left font-[500] bg-BGSemiNormal leading-none"
+                  class="sticky top-[128px] w-[100%] py-[.75rem] px-[1rem] text-left font-[500] bg-BGSemiNormal leading-none md:top-[161px] lg:top-[167px]"
                 >
                   {{ featureList.title }}
                 </th>
