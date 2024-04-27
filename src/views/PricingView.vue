@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { RouterLink } from "vue-router";
 /*-- Import Components --*/
 import CTA from "@/components/CTA/CTA.vue";
@@ -46,6 +46,22 @@ const setActivePlan = (plan: string) => {
 
 const activePlanLongSubMenus = computed(() => {
   return plansData.find((plan) => plan.title === activePlan.value);
+});
+
+// Screen width
+const screenWidth = ref<number>(window.innerWidth); // Get initial screen width
+
+function handleResize() {
+  screenWidth.value = window.innerWidth; // Update screen width on resize
+}
+
+// Add resize event listener when component is mounted
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+});
+// Remove resize event listener when component is mounted
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
 });
 </script>
 
@@ -195,7 +211,7 @@ const activePlanLongSubMenus = computed(() => {
               to="/support"
               class="btn w-fit flex justify-center items-center mt-[3rem] mx-auto py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight cursor-pointer xxl:py-[.625rem] xxl:px-[1.25rem] xxl:rounded-[11px]"
             >
-              <div>Get started</div>
+              Get started
             </RouterLink>
           </div>
         </div>
@@ -231,9 +247,12 @@ const activePlanLongSubMenus = computed(() => {
         />
       </div>
       <!-- Feature list -->
-      <div>
-        <!-- Plans btn -->
-        <div class="flex justify-center items-center gap-[.75rem] flex-wrap">
+      <div v-if="featureListActive">
+        <!-- Plans btn for small screen -->
+        <div
+          v-if="screenWidth < 768"
+          class="flex justify-center items-center gap-[.75rem] flex-wrap"
+        >
           <div
             v-for="(plan, index) in plansData"
             :key="index"
@@ -248,29 +267,51 @@ const activePlanLongSubMenus = computed(() => {
             {{ plan.title }}
           </div>
         </div>
+
         <!-- Feature list table -->
         <div
-          class="w-[100%] mt-[1.5rem] border-[1px] border-BGSemiNormal rounded-[10px] xs:w-[300px]"
+          class="w-[100%] mt-[1.5rem] xs:w-[300px] md:w-[700px] xl:w-[1000px]"
         >
           <table class="min-w-full">
+            <!-- Plans btn for large screen -->
+            <thead>
+              <tr v-if="screenWidth >= 768">
+                <th></th>
+                <th
+                  v-for="(plan, index) in plansData"
+                  :key="index"
+                  class="min-w-[100px] pb-[1.5rem]"
+                >
+                  <div class="text-[1.125rem] font-[500] leading-none">
+                    {{ plan.title }}
+                  </div>
+                  <RouterLink
+                    to="/support"
+                    class="btn-light w-fit flex justify-center items-center mt-[1rem] mx-auto py-[.375rem] px-[.875rem] text-[.875rem] rounded-[9px] leading-tight cursor-pointer"
+                  >
+                    Get started
+                  </RouterLink>
+                </th>
+              </tr>
+            </thead>
             <tbody
+              class="border-[1px] border-BGSemiNormal rounded-[10px]"
               v-for="(
-                featureList, index
+                featureList, featureListIndex
               ) in activePlanLongSubMenus?.longSubList"
-              :key="index"
+              :key="featureListIndex"
             >
               <tr>
                 <th
-                  colspan="2"
+                  :colspan="screenWidth >= 768 ? '4' : '2'"
                   class="w-[100%] py-[.75rem] px-[1rem] text-left font-[500] bg-BGSemiNormal leading-none"
-                  :class="index === 0 ? 'rounded-t-[8px]' : 'rounded-none'"
                 >
                   {{ featureList.title }}
                 </th>
               </tr>
               <tr
-                v-for="(feature, index) in featureList.features"
-                :key="index"
+                v-for="(feature, featureIndex) in featureList.features"
+                :key="featureIndex"
                 class="border-b-[1px] border-BGSemiNormal last:border-b-0"
               >
                 <td
@@ -279,6 +320,7 @@ const activePlanLongSubMenus = computed(() => {
                   {{ feature.title }}
                 </td>
                 <td
+                  v-if="screenWidth < 768"
                   class="min-w-[100px] p-[1rem] text-center text-[.875rem] leading-tight"
                 >
                   <div v-if="feature.data" class="font-light">
@@ -288,6 +330,37 @@ const activePlanLongSubMenus = computed(() => {
                     v-else-if="feature.icon"
                     class="text-[1.25rem] h-[18px] flex justify-center items-center"
                     :class="feature.icon"
+                  ></i>
+                  <div v-else></div>
+                </td>
+                <td
+                  v-else-if="screenWidth >= 768"
+                  v-for="(plan, id) in plansData"
+                  :key="id"
+                  class="min-w-[100px] p-[1rem] text-center text-[.875rem] leading-tight"
+                >
+                  <div
+                    v-if="
+                      plan.longSubList[featureListIndex]?.features[featureIndex]
+                        .data
+                    "
+                    class="font-light"
+                  >
+                    {{
+                      plan.longSubList[featureListIndex]?.features[featureIndex]
+                        .data
+                    }}
+                  </div>
+                  <i
+                    v-else-if="
+                      plan.longSubList[featureListIndex]?.features[featureIndex]
+                        .icon
+                    "
+                    class="text-[1.25rem] h-[18px] flex justify-center items-center"
+                    :class="
+                      plan.longSubList[featureListIndex]?.features[featureIndex]
+                        .icon
+                    "
                   ></i>
                   <div v-else></div>
                 </td>
@@ -314,6 +387,12 @@ const activePlanLongSubMenus = computed(() => {
   transition: border-color, background-color 0.15s ease-in-out;
 }
 
+.btn-light {
+  background-color: var(--ltHoverPrimary);
+  color: var(--ltPrimary);
+  transition: all 0.15s ease-in-out;
+}
+
 .btn-arrow {
   transform: translateY(0.5px) rotate(0);
   transition: all 0.3s ease-in-out;
@@ -328,6 +407,11 @@ const activePlanLongSubMenus = computed(() => {
   .btn:hover {
     background-color: var(--ltPrimaryDark);
     border-color: var(--ltPrimaryDark);
+  }
+
+  .btn-light:hover {
+    background-color: var(--ltPrimary);
+    color: var(--TextLight);
   }
 }
 </style>
