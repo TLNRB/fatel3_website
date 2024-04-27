@@ -6,7 +6,7 @@ import CTA from "@/components/CTA/CTA.vue";
 import FAQ from "@/components/FAQ/FAQ.vue";
 import SectionType from "@/components/Misc/SectionType.vue";
 /*-- Import assets --*/
-import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
+import dropdownIcon from "@/assets/icons/arrow-down-s-line.svg";
 /*-- Import data --*/
 import plansData from "@/data/plansData.ts";
 
@@ -33,6 +33,16 @@ const faqs: any = [
 
 // Active Button
 let btnActive = ref<string>("yearly");
+
+// Active Feature List
+let featureListActive = ref<boolean>(false);
+
+// Active Plan
+const activePlan = ref<string>("Basic");
+
+const setActivePlan = (plan: string) => {
+  activePlan.value = plan;
+};
 </script>
 
 <template>
@@ -61,6 +71,7 @@ let btnActive = ref<string>("yearly");
     <section
       class="flex flex-col items-center gap-[3rem] mt-[3rem] mb-[5rem] px-[1rem] lg:px-[2rem] xl:mt-[4rem] xl:mb-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
     >
+      <!-- Yearly/Monthly Button -->
       <div
         class="w-fit flex justify-center items-center p-[.25rem] border-[1px] border-ltBorder rounded-[14px]"
       >
@@ -87,6 +98,7 @@ let btnActive = ref<string>("yearly");
           Monthly
         </div>
       </div>
+      <!-- Plans -->
       <div
         class="flex justify-center items-end gap-[1.5rem] flex-wrap lg:gap-[2rem]"
       >
@@ -185,6 +197,57 @@ let btnActive = ref<string>("yearly");
         </div>
       </div>
     </section>
+    <section
+      class="flex flex-col items-center gap-[3rem] mb-[4rem] px-[1rem] lg:px-[2rem] xl:mb-[5rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+    >
+      <div class="flex flex-col items-center gap-[1.5rem]">
+        <h2
+          class="w-[100%] text-center text-[2rem] font-[500] leading-[1.15] xs:w-[325px] lg:w-[500px] lg:text-[3rem]"
+        >
+          Compare Our Plans
+        </h2>
+        <div
+          class="w-[100%] mx-auto text-center text-TextNormal font-light leading-snug xs:w-[330px] sm:w-[475px] lg:w-[550px] lg:text-[1.125rem] xxl:w-[600px] xxl:text-[1.125rem]"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+      </div>
+      <!-- Feature list dropdown btn -->
+      <div
+        class="btn w-fit flex justify-center items-center gap-[6px] pl-[1rem] pr-[.625rem] mx-auto py-[.625rem] text-TextLight border-[1px] rounded-[11px] leading-tight cursor-pointer xxl:gap-[7px] xxl:pl-[1.25rem] xxl:pr-[13px]"
+        @click="featureListActive = !featureListActive"
+      >
+        <div>Feature list</div>
+        <img
+          :src="dropdownIcon"
+          alt="dropdown icon"
+          class="btn-arrow h-[18px] flex justify-center items-center xxl:h-[20px]"
+          :class="{ 'btn-arrow-active': featureListActive }"
+        />
+      </div>
+      <!-- Feature list -->
+      <div>
+        <!-- Plans btn -->
+        <div class="flex justify-center items-center gap-[.75rem] flex-wrap">
+          <div
+            v-for="(plan, index) in plansData"
+            :key="index"
+            @click="setActivePlan(plan.title)"
+            class="py-[.375rem] px-[.875rem] text-[.875rem] border-[1px] rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
+            :class="
+              activePlan === plan.title
+                ? 'text-ltPrimary border-ltPrimary'
+                : 'text-TextSemiDark border-ltBorderNormal'
+            "
+          >
+            {{ plan.title }}
+          </div>
+        </div>
+        <!-- Feature list table -->
+        <table></table>
+      </div>
+    </section>
     <FAQ :faqs="faqs" :descriptionCondition="false" :buttonCondition="false" />
     <CTA
       textFirstPart="Create Your Inventory with"
@@ -200,6 +263,15 @@ let btnActive = ref<string>("yearly");
   background-color: var(--ltPrimary);
   border-color: var(--ltPrimary);
   transition: border-color, background-color 0.15s ease-in-out;
+}
+
+.btn-arrow {
+  transform: translateY(0.5px) rotate(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-arrow-active {
+  transform: translateY(0.5px) rotate(180deg);
 }
 
 /*-- Hover isn't visible on touchscreen devices --*/
