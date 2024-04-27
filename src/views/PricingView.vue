@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
 /*-- Import Components --*/
 import CTA from "@/components/CTA/CTA.vue";
@@ -43,6 +43,10 @@ const activePlan = ref<string>("Basic");
 const setActivePlan = (plan: string) => {
   activePlan.value = plan;
 };
+
+const activePlanLongSubMenus = computed(() => {
+  return plansData.find((plan) => plan.title === activePlan.value);
+});
 </script>
 
 <template>
@@ -198,7 +202,7 @@ const setActivePlan = (plan: string) => {
       </div>
     </section>
     <section
-      class="flex flex-col items-center gap-[3rem] mb-[4rem] px-[1rem] lg:px-[2rem] xl:mb-[5rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+      class="flex flex-col items-center gap-[3rem] mb-[2rem] px-[1rem] lg:px-[2rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
     >
       <div class="flex flex-col items-center gap-[1.5rem]">
         <h2
@@ -245,7 +249,52 @@ const setActivePlan = (plan: string) => {
           </div>
         </div>
         <!-- Feature list table -->
-        <table></table>
+        <div
+          class="w-[100%] mt-[1.5rem] border-[1px] border-BGSemiNormal rounded-[10px] xs:w-[300px]"
+        >
+          <table class="min-w-full">
+            <tbody
+              v-for="(
+                featureList, index
+              ) in activePlanLongSubMenus?.longSubList"
+              :key="index"
+            >
+              <tr>
+                <th
+                  colspan="2"
+                  class="w-[100%] py-[.75rem] px-[1rem] text-left font-[500] bg-BGSemiNormal leading-none"
+                  :class="index === 0 ? 'rounded-t-[8px]' : 'rounded-none'"
+                >
+                  {{ featureList.title }}
+                </th>
+              </tr>
+              <tr
+                v-for="(feature, index) in featureList.features"
+                :key="index"
+                class="border-b-[1px] border-BGSemiNormal last:border-b-0"
+              >
+                <td
+                  class="py-[1rem] pl-[1rem] text-[.875rem] font-light leading-tight"
+                >
+                  {{ feature.title }}
+                </td>
+                <td
+                  class="min-w-[100px] p-[1rem] text-center text-[.875rem] leading-tight"
+                >
+                  <div v-if="feature.data" class="font-light">
+                    {{ feature.data }}
+                  </div>
+                  <i
+                    v-else-if="feature.icon"
+                    class="text-[1.25rem] h-[18px] flex justify-center items-center"
+                    :class="feature.icon"
+                  ></i>
+                  <div v-else></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
     <FAQ :faqs="faqs" :descriptionCondition="false" :buttonCondition="false" />
