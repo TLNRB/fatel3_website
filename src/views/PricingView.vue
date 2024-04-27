@@ -93,22 +93,30 @@ let btnActive = ref<string>("yearly");
         <div
           v-for="(plan, index) in plansData"
           :key="index"
-          class="w-[250px] border-[1px] rounded-[14px]"
+          class="w-[250px] border-[1px] rounded-[14px] lg:w-[300px] lg:rounded-[16px]"
           :class="
             plan.isMostPopular ? ' border-ltPrimary' : ' border-ltBorderNormal'
           "
         >
           <div
             v-if="plan.isMostPopular"
-            class="flex justify-center items-center py-[.375rem] bg-ltPrimary text-[.875rem] text-TextLight leading-tight rounded-t-[12px]"
+            class="flex justify-center items-center py-[.375rem] bg-ltPrimary text-[.875rem] text-TextLight leading-tight rounded-t-[12px] lg:rounded-t-[14px]"
           >
             Most Popular
           </div>
-          <div class="p-[1rem]">
+          <div class="p-[1rem] lg:p-[1.5rem]">
             <div>
-              <h3 class="text-[1.375rem] font-[500] leading-tight">
-                {{ plan.title }}
-              </h3>
+              <div class="flex justify-between items-center">
+                <h3 class="text-[1.375rem] font-[500] leading-tight">
+                  {{ plan.title }}
+                </h3>
+                <div
+                  v-if="btnActive === 'yearly' && plan.title !== 'Enterprise'"
+                  class="py-[.25rem] px-[.625rem] bg-ltPrimary text-[.75rem] text-TextLight rounded-[8px] leading-tight"
+                >
+                  Save 20%
+                </div>
+              </div>
               <div
                 class="mt-[.5rem] mb-[1.5rem] text-[.875rem] font-light text-TextNormal leading-tight"
               >
@@ -157,12 +165,12 @@ let btnActive = ref<string>("yearly");
                 Billed annualy
               </div>
             </div>
-            <hr class="my-[1.5rem] border-ltBorderNormal" />
+            <hr class="my-[1.5rem] border-ltBorder" />
             <div class="flex flex-col gap-[1rem]">
               <div
                 v-for="(shortSubItem, index) in plan.shortSubList"
                 ::key="index"
-                class="font-light leading-tight"
+                class="text-[15px] font-light leading-tight"
               >
                 {{ shortSubItem.data }} {{ shortSubItem.title }}
               </div>
