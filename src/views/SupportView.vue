@@ -43,6 +43,93 @@ const setActiveTopic = (id: string) => {
   activeTopic.value = id;
   toggleActiveItem("");
 };
+
+// Date
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+// Get today's date
+const today = new Date();
+// Get today's day and month and week day
+const currentDay = today.getDate();
+const currentMonth = monthNames[today.getMonth()];
+const currentYear = today.getFullYear();
+const weekday = weekdayNames[today.getDay()];
+
+// Make today's day and month active as default
+const clickedDay = ref();
+const clickedMonth = ref();
+const clickedYear = ref();
+const clickedWeekday = ref();
+
+// Define an array of days that will be displayed
+const days = ref([
+  {
+    date: currentDay,
+    month: currentMonth,
+    year: currentYear,
+    weekDay: weekday,
+    active: false,
+  },
+]);
+
+// Loop through the next 6 days after todays date
+for (let i = 1; i <= 6; i++) {
+  const nextDay = new Date();
+  // Get the next day's date
+  nextDay.setDate(currentDay + i);
+  // Get the next day's day and month and week day
+  const nextDayOfMonth = nextDay.getDate();
+  const nextMonth = monthNames[nextDay.getMonth()];
+  const nextYear = nextDay.getFullYear();
+  const weekday = weekdayNames[nextDay.getDay()];
+  // Push the next day's data to the days array
+  days.value.push({
+    date: nextDayOfMonth,
+    month: nextMonth,
+    year: nextYear,
+    weekDay: weekday,
+    active: false,
+  });
+}
+
+const handleTimetableFilter = (
+  weekday: string,
+  date: number,
+  month: string,
+  year: number
+) => {
+  console.log(weekday, date, month, year);
+  // Make the clicked day active for styling
+  days.value.forEach((day) =>
+    day.date === date ? (day.active = true) : (day.active = false)
+  );
+  // Display and store the clicked day's data
+  clickedDay.value = date;
+  clickedMonth.value = month;
+  clickedYear.value = year;
+  clickedWeekday.value = weekday;
+};
+
+const activeDate = ref<string>("");
+const setActiveDate = (id: string) => {
+  activeDate.value = id;
+  toggleActiveItem("");
+};
 </script>
 
 <template>
@@ -111,7 +198,7 @@ const setActiveTopic = (id: string) => {
           <div
             v-for="(topic, index) in topics"
             :key="index"
-            class="py-[.5rem] px-[.75rem] text-[.875rem] font-light leading-tight rounded-[5px] duration-[.15s] ease-in-out cursor-pointer xxl:text-[15px]"
+            class="py-[.5rem] px-[.75rem] text-[.875rem] font-light leading-tight translate-y-[1px] rounded-[5px] duration-[.15s] ease-in-out cursor-pointer xxl:text-[15px] xxl:translate-y-[.5px]"
             :class="
               activeTopic === topic.id
                 ? 'bg-ltHoverPrimary text-ltPrimary'
@@ -120,6 +207,43 @@ const setActiveTopic = (id: string) => {
             @click="setActiveTopic(topic.id)"
           >
             {{ topic.title }}
+          </div>
+        </div>
+      </div>
+      <!-- Date -->
+      <div class="w-[100%] relative flex flex-col">
+        <div class="font-[500] leading-none">
+          Select Date
+          <span
+            v-if="clickedMonth && clickedYear"
+            class="font-light text-TextNormal"
+            >- {{ clickedMonth }} {{ clickedYear }}</span
+          >
+        </div>
+        <div
+          class="flex items-center gap-[1.125rem] flex-wrap mt-[1rem] xxl:gap-[1.5rem] xxl:mt-[1.25rem]"
+        >
+          <div
+            v-for="(day, index) in days"
+            :key="index"
+            class="w-[90px] h-[80px] flex flex-col justify-center items-center gap-[.625rem] p-[.875rem] border-[1px] rounded-[10px] cursor-pointer duration-[.15s] ease-in-out"
+            :class="day.active ? 'border-ltPrimary' : 'border-ltBorderNormal'"
+            @click="
+              handleTimetableFilter(day.weekDay, day.date, day.month, day.year)
+            "
+          >
+            <div
+              class="text-[.875rem] font-light uppercase leading-none duration-[.15s] ease-in-out"
+              :class="day.active ? 'text-ltPrimary' : 'text-TextNormal'"
+            >
+              {{ day.weekDay }}
+            </div>
+            <div
+              class="text-[1.375rem] font-[500] leading-none duration-[.15s] ease-in-out"
+              :class="day.active ? 'text-ltPrimary' : 'text-TextSemiDark'"
+            >
+              {{ day.date }}
+            </div>
           </div>
         </div>
       </div>
