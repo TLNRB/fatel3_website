@@ -44,6 +44,22 @@ const setActiveTopic = (id: string) => {
   toggleActiveItem("");
 };
 
+// Time
+const times = ref([
+  { startTime: "12:00", endTime: "13:00", reserved: false },
+  { startTime: "13:00", endTime: "14:00", reserved: true },
+  { startTime: "14:00", endTime: "15:00", reserved: false },
+  { startTime: "15:00", endTime: "16:00", reserved: true },
+  { startTime: "16:00", endTime: "17:00", reserved: false },
+  { startTime: "17:00", endTime: "18:00", reserved: false },
+  { startTime: "18:00", endTime: "19:00", reserved: false },
+]);
+
+const activeTime = ref<string>("");
+const setActiveTime = (startTime: string) => {
+  activeTime.value = startTime;
+};
+
 // Date
 const monthNames = [
   "January",
@@ -235,6 +251,30 @@ const setActiveDate = (
             >
               {{ day.date }}
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- Time -->
+      <div class="w-[100%] relative flex flex-col">
+        <div class="font-[500] leading-none">Select Time</div>
+        <div
+          class="flex items-center gap-[1.125rem] flex-wrap mt-[1rem] xxl:gap-[1.5rem] xxl:mt-[1.25rem]"
+        >
+          <div
+            v-for="(time, index) in times"
+            :key="index"
+            class="flex justify-center items-center py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] rounded-[6px] leading-[1.2] duration-[.15s] ease-in-out xxl:text-[15px]"
+            :class="[
+              activeTime === time.startTime
+                ? 'border-ltPrimary text-ltPrimary'
+                : 'border-ltBorderNormal text-TextSemiDark',
+              time.reserved
+                ? 'text-ltBorderNormal line-through cursor-not-allowed'
+                : 'cursor-pointer',
+            ]"
+            @click="!time.reserved ? setActiveTime(time.startTime) : ''"
+          >
+            {{ time.startTime }} - {{ time.endTime }}
           </div>
         </div>
       </div>
