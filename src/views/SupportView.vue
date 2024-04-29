@@ -31,7 +31,7 @@ const toggleActiveItem = (id: string) => {
   activeItem.value = activeItem.value === id ? "" : id;
 };
 // Topic
-const topics = [
+const topics: any = [
   { id: "getStarted", title: "Get Started" },
   { id: "priceAndBilling", title: "Price & Billing" },
   { id: "showcaseSetup", title: "Showcase setup" },

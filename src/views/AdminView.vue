@@ -3,22 +3,28 @@ import { ref } from "vue";
 /*-- Import Components --*/
 import SectionType from "@/components/Misc/SectionType.vue";
 import Bookings from "@/components/Admin/Bookings/Bookings.vue";
+import FAQs from "@/components/Admin/FAQs/FAQs.vue";
 
 // Sections
-const sections = [
+const sections: any = [
   {
+    id: "bookings",
     title: "Bookings",
   },
   {
+    id: "faqHome",
     title: "FAQ Home",
   },
   {
+    id: "faqPricing",
     title: "FAQ Pricing",
   },
   {
+    id: "features",
     title: "Features",
   },
   {
+    id: "useCases",
     title: "Use cases",
   },
 ];
@@ -31,7 +37,7 @@ const setActiveSection = (section: string) => {
 };
 
 // Bookings
-const bookings = [
+const bookings: any = [
   {
     day: 10,
     month: 5,
@@ -58,6 +64,27 @@ const bookings = [
     message: "",
   },
 ];
+
+// FAQs
+const faqs: any = [
+  {
+    question:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+  },
+  {
+    question:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod, consectetur adipiscing elit, sed do eiusmod?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+];
 </script>
 
 <template>
@@ -76,10 +103,10 @@ const bookings = [
       <div
         v-for="(section, index) in sections"
         :key="index"
-        @click="setActiveSection(section.title)"
+        @click="setActiveSection(section.id)"
         class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
         :class="
-          activeSection === section.title
+          activeSection === section.id
             ? 'text-ltPrimary border-ltPrimary'
             : 'text-TextSemiDark border-ltBorderNormal'
         "
@@ -88,7 +115,9 @@ const bookings = [
       </div>
     </div>
     <!-- Section Content -->
-    <Bookings v-if="activeSection === 'Bookings'" :bookings="bookings" />
+    <Bookings v-if="activeSection === 'bookings'" :bookings="bookings" />
+    <FAQs v-else-if="activeSection === 'faqHome'" :faqs="faqs" />
+    <FAQs v-else-if="activeSection === 'faqPricing'" :faqs="faqs" />
   </main>
 </template>
 
