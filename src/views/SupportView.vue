@@ -172,7 +172,7 @@ const setActiveDate = (
       class="w-[100%] flex flex-col items-center gap-[2.5rem] md:w-[700px] xxl:w-[816px]"
     >
       <!-- Topic -->
-      <div class="w-[100%] relative flex flex-col">
+      <div class="w-[100%] flex flex-col">
         <div class="font-[500] leading-none">What can we help you with?</div>
         <div
           class="flex justify-between items-center mt-[1rem] py-[.625rem] pl-[.875rem] pr-[.625rem] border-[1px] border-ltBorderNormal rounded-[6px] cursor-pointer duration-[.15s] ease-in-out xxl:mt-[1.25rem] xxl:py-[.75rem] xxl:pl-[1rem] xxl:rounded-[7px]"
@@ -220,7 +220,7 @@ const setActiveDate = (
         </div>
       </div>
       <!-- Date -->
-      <div class="w-[100%] relative flex flex-col">
+      <div class="w-[100%] flex flex-col">
         <div class="font-[500] leading-none">
           Select Date
           <span
@@ -258,12 +258,12 @@ const setActiveDate = (
       <div class="w-[100%] relative flex flex-col">
         <div class="font-[500] leading-none">Select Time</div>
         <div
-          class="flex items-center gap-[1.125rem] flex-wrap mt-[1rem] xxl:gap-[1.5rem] xxl:mt-[1.25rem]"
+          class="flex items-center gap-[1.125rem] flex-wrap mt-[1rem] xxl:gap-[1.25rem] xxl:mt-[1.25rem]"
         >
           <div
             v-for="(time, index) in times"
             :key="index"
-            class="flex justify-center items-center py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] rounded-[6px] leading-[1.2] duration-[.15s] ease-in-out xxl:text-[15px]"
+            class="flex justify-center items-center py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] rounded-[6px] leading-[1.2] duration-[.15s] ease-in-out xxl:text-[15px] xxl:rounded-[7px]"
             :class="[
               activeTime === time.startTime
                 ? 'border-ltPrimary text-ltPrimary'
@@ -277,6 +277,40 @@ const setActiveDate = (
             {{ time.startTime }} - {{ time.endTime }}
           </div>
         </div>
+      </div>
+      <!-- Name  -->
+      <div
+        class="w-[100%] flex flex-col gap-[2.5rem] mt-[1rem] md:flex-row md:justify-between md:gap-0 md:flex-wrap"
+      >
+        <div
+          class="w-[100%] flex flex-col gap-[1rem] md:w-[47.5%] xxl:gap-[1.25rem]"
+        >
+          <div class="font-[500] leading-none">First Name</div>
+          <input
+            type="text"
+            placeholder="Your first name"
+            class="input-field py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
+          />
+        </div>
+        <div
+          class="w-[100%] flex flex-col gap-[1rem] md:w-[47.5%] xxl:gap-[1.25rem]"
+        >
+          <div class="font-[500] leading-none">Last Name</div>
+          <input
+            type="text"
+            placeholder="Your last name"
+            class="input-field py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
+          />
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="w-[100%] flex flex-col gap-[1rem] xxl:gap-[1.25rem]">
+        <div class="font-[500] leading-none">Email Address</div>
+        <input
+          type="email"
+          placeholder="example@email.com"
+          class="input-field py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
+        />
       </div>
     </section>
   </main>
@@ -292,5 +326,19 @@ const setActiveDate = (
 .item-arrow-close {
   transform: translateY(1px) rotate(0deg);
   transition: transform 0.25s ease-in-out;
+}
+
+.input-field {
+  border-color: var(--ltBorderNormal);
+  transition: all 0.15s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: var(--ltPrimary);
+}
+
+::placeholder {
+  color: var(--TextSemiNormal);
+  font-weight: 200;
 }
 </style>
