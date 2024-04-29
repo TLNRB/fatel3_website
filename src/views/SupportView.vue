@@ -312,6 +312,18 @@ const setActiveDate = (
           class="input-field py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
         />
       </div>
+
+      <!-- Email -->
+      <div class="w-[100%] flex flex-col gap-[1rem] xxl:gap-[1.25rem]">
+        <div class="font-[500] leading-none">
+          Add more information
+          <span class="font-light text-TextNormal">(Optional)</span>
+        </div>
+        <textarea
+          placeholder="I have a problem with..."
+          class="input-field min-h-[100px] py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
+        ></textarea>
+      </div>
     </section>
   </main>
 </template>
@@ -340,5 +352,9 @@ const setActiveDate = (
 ::placeholder {
   color: var(--TextSemiNormal);
   font-weight: 200;
+}
+
+textarea {
+  resize: none;
 }
 </style>
