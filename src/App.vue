@@ -19,7 +19,6 @@ const navItems: any = [
     title: "Home",
     route: "/",
     subItems: null,
-    activePage: true,
     subMenuOpen: false,
     subMenuHeight: 0,
   },
@@ -28,7 +27,6 @@ const navItems: any = [
     title: "Features",
     route: "/features",
     subItems: featuresData,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeightXS: 388,
     subMenuHeightSM: 206,
@@ -41,7 +39,6 @@ const navItems: any = [
     title: "Use Cases",
     route: "/use-cases",
     subItems: useCasesData,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeightXS: 206,
     subMenuHeightSM: 115,
@@ -54,7 +51,6 @@ const navItems: any = [
     title: "Resources",
     route: "/resources",
     subItems: resourcesData,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeightXS: 579,
     subMenuHeightSM: 341,
@@ -67,7 +63,6 @@ const navItems: any = [
     title: "Pricing",
     route: "/pricing",
     subItems: null,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeight: 0,
   },
@@ -76,7 +71,6 @@ const navItems: any = [
     title: "Showcase",
     route: "/#showcase",
     subItems: null,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeight: 0,
   },
@@ -88,7 +82,10 @@ const navItems: any = [
   <RouterView
     :class="route.path !== '/login' ? 'mt-[66px] lg:mt-[72px]' : ''"
   />
-  <FooterSection v-if="route.path !== '/login'" :navItems="navItems" />
+  <FooterSection
+    v-if="route.path !== '/login' && route.path !== '/admin'"
+    :navItems="navItems"
+  />
 </template>
 
 <style scoped></style>
