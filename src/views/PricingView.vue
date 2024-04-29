@@ -208,7 +208,7 @@ onUnmounted(() => {
               </div>
             </div>
             <RouterLink
-              to="/support"
+              :to="{ name: 'support', query: { id: 'getStarted' } }"
               class="btn w-fit flex justify-center items-center mt-[3rem] mx-auto py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight cursor-pointer xxl:py-[.625rem] xxl:px-[1.25rem] xxl:rounded-[11px]"
             >
               Get started
@@ -284,7 +284,7 @@ onUnmounted(() => {
                     {{ plan.title }}
                   </div>
                   <RouterLink
-                    to="/support"
+                    :to="{ name: 'support', query: { id: 'getStarted' } }"
                     class="btn-light w-fit flex justify-center items-center mt-[1rem] mx-auto py-[.375rem] px-[.875rem] text-[.875rem] rounded-[9px] leading-tight cursor-pointer"
                   >
                     Get started

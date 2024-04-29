@@ -217,7 +217,7 @@ onMounted(() => {
             :class="activeTopic ? 'text-TextSemiDark' : 'text-TextSemiNormal'"
           >
             {{
-              activeTopic
+              activeTopic && activeTopic !== "support"
                 ? topics.find((topic) => topic.id === activeTopic)?.title
                 : "Select a topic"
             }}
