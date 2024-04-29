@@ -314,12 +314,14 @@ const getSubMenuHeight = (navItem: any) => {
         >
           <RouterLink
             to="/login"
+            @click="setActiveIndex('none')"
             class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
           >
             Log in
           </RouterLink>
           <RouterLink
             to="/support"
+            @click="setActiveIndex('none')"
             class="nav-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap xl:text-[.875rem]"
           >
             Get Started

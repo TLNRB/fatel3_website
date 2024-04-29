@@ -160,7 +160,7 @@ const ourPeople = [
             class="min-w-[50px] min-h-[50px] w-[50px] h-[50px] flex justify-center items-center border-[1px] border-ltBorderNormal rounded-[16px] xxl:min-w-[56px] xxl:min-h-[56px] xxl:w-[56px] xxl:h-[56px] xxl:rounded-[18px]"
           >
             <i
-              class="text-[1.75rem] h-[28px] flex justify-center items-center text-ltPrimary translate-y-[1px] xxl:text-[2rem] xxl:h-[32px]"
+              class="text-[1.75rem] h-[28px] flex justify-center items-center text-ltPrimary xxl:text-[2rem] xxl:h-[32px]"
               :class="value.icon"
             ></i>
           </div>
