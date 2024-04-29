@@ -31,11 +31,11 @@ const toggleActiveItem = (id: string) => {
 };
 // Topic
 const topics = [
-  { id: "getStarted", title: "Get Started", active: false },
-  { id: "priceAndBilling", title: "Price & Billing", active: false },
-  { id: "showcaseSetup", title: "Showcase setup", active: false },
-  { id: "somethingWentWrong", title: "Something went wrong", active: false },
-  { id: "somethingElse", title: "Something else", active: false },
+  { id: "getStarted", title: "Get Started" },
+  { id: "priceAndBilling", title: "Price & Billing" },
+  { id: "showcaseSetup", title: "Showcase setup" },
+  { id: "somethingWentWrong", title: "Something went wrong" },
+  { id: "somethingElse", title: "Something else" },
 ];
 
 const activeTopic = ref<string>("");
@@ -107,13 +107,12 @@ for (let i = 1; i <= 6; i++) {
   });
 }
 
-const handleTimetableFilter = (
+const setActiveDate = (
   weekday: string,
   date: number,
   month: string,
   year: number
 ) => {
-  console.log(weekday, date, month, year);
   // Make the clicked day active for styling
   days.value.forEach((day) =>
     day.date === date ? (day.active = true) : (day.active = false)
@@ -123,12 +122,6 @@ const handleTimetableFilter = (
   clickedMonth.value = month;
   clickedYear.value = year;
   clickedWeekday.value = weekday;
-};
-
-const activeDate = ref<string>("");
-const setActiveDate = (id: string) => {
-  activeDate.value = id;
-  toggleActiveItem("");
 };
 </script>
 
@@ -160,7 +153,7 @@ const setActiveDate = (id: string) => {
       </div>
     </section>
     <section
-      class="w-[100%] flex flex-col items-center gap-[2.5rem] md:w-[700px] xxl:w-[800px]"
+      class="w-[100%] flex flex-col items-center gap-[2.5rem] md:w-[700px] xxl:w-[816px]"
     >
       <!-- Topic -->
       <div class="w-[100%] relative flex flex-col">
@@ -226,14 +219,12 @@ const setActiveDate = (id: string) => {
           <div
             v-for="(day, index) in days"
             :key="index"
-            class="w-[90px] h-[80px] flex flex-col justify-center items-center gap-[.625rem] p-[.875rem] border-[1px] rounded-[10px] cursor-pointer duration-[.15s] ease-in-out"
+            class="w-[90px] h-[80px] flex flex-col justify-center items-center gap-[.625rem] p-[.875rem] border-[1px] rounded-[10px] cursor-pointer duration-[.15s] ease-in-out xxl:w-[96px] xxl:h-[86px] xxl:p-[1rem]"
             :class="day.active ? 'border-ltPrimary' : 'border-ltBorderNormal'"
-            @click="
-              handleTimetableFilter(day.weekDay, day.date, day.month, day.year)
-            "
+            @click="setActiveDate(day.weekDay, day.date, day.month, day.year)"
           >
             <div
-              class="text-[.875rem] font-light uppercase leading-none duration-[.15s] ease-in-out"
+              class="text-[.875rem] font-light uppercase leading-none duration-[.15s] ease-in-out xxl:text-[15px]"
               :class="day.active ? 'text-ltPrimary' : 'text-TextNormal'"
             >
               {{ day.weekDay }}
