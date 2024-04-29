@@ -85,7 +85,7 @@ import useCases from "@/data/useCasesData";
       text="Get Started"
       :icon="arrowIcon"
       altText="arrow icon"
-      route="/support"
+      :route="{ name: 'support', query: { id: 'getStarted' } }"
     />
   </section>
 </template>

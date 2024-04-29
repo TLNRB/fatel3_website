@@ -35,7 +35,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
           text="Get Started"
           :icon="arrowIcon"
           altText="arrow icon"
-          route="/support"
+          :route="{ name: 'support', query: { id: 'getStarted' } }"
           class="lg:ml-0 xxl:py-[.75rem] xxl:text-[1.125rem] xxl:rounded-[13px]"
         />
       </div>

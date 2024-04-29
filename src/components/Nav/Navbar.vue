@@ -269,7 +269,13 @@ const getSubMenuHeight = (navItem: any) => {
                   <!-- Company and connect -->
                   <div class="flex flex-col gap-[.5rem] mb-[1.25rem]">
                     <RouterLink
-                      :to="!subItem.commingSoon ? subItem.route : ''"
+                      :to="
+                        !subItem.commingSoon
+                          ? subItem.route === '/support'
+                            ? { name: 'support', query: { id: 'support' } }
+                            : subItem.route
+                          : ''
+                      "
                       v-for="(subItem, index) in item.subItems"
                       :key="index"
                       @click="setActiveIndex('none')"
@@ -320,7 +326,7 @@ const getSubMenuHeight = (navItem: any) => {
             Log in
           </RouterLink>
           <RouterLink
-            to="/support"
+            :to="{ name: 'support', query: { id: 'getStarted' } }"
             @click="setActiveIndex('none')"
             class="nav-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap xl:text-[.875rem]"
           >

@@ -24,7 +24,7 @@ const { textFirstPart, textHighlighted, textSecondPart } = defineProps([
       {{ textSecondPart }}
     </h2>
     <RouterLink
-      to="/support"
+      :to="{ name: 'support', query: { id: 'getStarted' } }"
       class="btn w-fit flex justify-center items-center gap-[6px] mx-auto py-[.625rem] pl-[1rem] pr-[.625rem] text-ltPrimary border-[1px] rounded-[11px] leading-tight cursor-pointer md:mx-0 xxl:gap-[10px] xxl:py-[1rem] xxl:pl-[1.5rem] xxl:pr-[1.125rem] xxl:text-[1.25rem] xxl:rounded-[16px]"
     >
       <div>Get Started</div>

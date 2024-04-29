@@ -60,7 +60,7 @@ import featuresData from "@/data/featuresData";
           text="Get Started"
           :icon="arrowIcon"
           altText="arrow icon"
-          route="/support"
+          :route="{ name: 'support', query: { id: 'getStarted' } }"
         />
       </div>
     </div>

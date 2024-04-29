@@ -67,7 +67,7 @@ onMounted(() => {
       text="Get Started"
       :icon="arrowIcon"
       altText="arrow icon"
-      route="/support"
+      :route="{ name: 'support', query: { id: 'getStarted' } }"
       class="mt-[2.5rem] my-[3rem] xl:my-[4rem]"
     />
     <div

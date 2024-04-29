@@ -42,7 +42,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
         ut labore et dolore magna aliqua.
       </div>
       <RouterLink
-        to="/support"
+        :to="{ name: 'support', query: { id: 'getStarted' } }"
         class="btn w-fit flex justify-center items-center gap-[6px] pl-[1rem] pr-[.625rem] mx-auto py-[.625rem] bg-BGLight text-ltPrimary border-[1px] border-BGLight rounded-[11px] leading-tight cursor-pointer lg:ml-0 xxl:gap-[7px] xxl:pl-[1.25rem] xxl:pr-[13px]"
       >
         <div>Get Started</div>

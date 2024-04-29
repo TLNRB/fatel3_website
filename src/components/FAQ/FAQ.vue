@@ -81,7 +81,7 @@ const toggleActiveFAQ = (index: number) => {
       v-if="buttonCondition"
       text="Contact us"
       theme="light"
-      route="/support"
+      :route="{ name: 'support', query: { id: 'support' } }"
     />
   </section>
 </template>

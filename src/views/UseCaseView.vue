@@ -43,7 +43,7 @@ const useCase = computed(() =>
           text="Get Started"
           :icon="arrowIcon"
           altText="arrow icon"
-          route="/support"
+          :route="{ name: 'support', query: { id: 'getStarted' } }"
           class="hidden md:flex md:mx-0 lg:mt-[1rem]"
         />
       </div>
