@@ -40,7 +40,7 @@ const navItems: any = [
     route: "/use-cases",
     subItems: useCasesData,
     subMenuOpen: false,
-    subMenuHeightXS: 206,
+    subMenuHeightXS: 115,
     subMenuHeightSM: 115,
     subMenuHeightMD: 115,
     subMenuHeightLG: 115,
