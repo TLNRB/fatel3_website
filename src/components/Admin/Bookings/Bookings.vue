@@ -74,7 +74,7 @@ const { bookings } = defineProps(["bookings"]);
         :class="booking.message ? 'mt-[.25rem]' : 'mt-auto'"
       >
         <button
-          class="py-[.375rem] px-[.875rem] bg-ltBGNegative text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
+          class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
         >
           Delete
         </button>
