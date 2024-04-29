@@ -143,7 +143,7 @@ const setActiveDate = (
 
 <template>
   <main
-    class="py-[4rem] px-[1rem] flex flex-col items-center gap-[3rem] lg:py-[5rem] lg:px-[2rem] xl:gap-[4rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+    class="pt-[3rem] pb-[4rem] px-[1rem] flex flex-col items-center gap-[3rem] lg:pt-[4rem] lg:pb-[5rem] lg:px-[2rem] xl:gap-[4rem] xl:pt-[5rem] xl:pb-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
   >
     <section class="flex flex-col items-center">
       <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
@@ -324,12 +324,30 @@ const setActiveDate = (
           class="input-field min-h-[100px] py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
         ></textarea>
       </div>
+      <button
+        class="btn w-fit flex justify-center items-center mr-auto py-[.5rem] px-[1rem] text-TextLight rounded-[10px] leading-tight cursor-pointer xxl:py-[.625rem] xxl:px-[1.25rem] xxl:rounded-[11px]"
+      >
+        Reserve
+      </button>
     </section>
   </main>
 </template>
 
 <style scoped>
-/* Nav Item Arrow */
+/* Button */
+.btn {
+  background-color: var(--ltPrimary);
+  transition: background-color 0.15s ease-in-out;
+}
+
+/*-- Hover isn't visible on touchscreen devices --*/
+@media (hover: hover) {
+  .btn:hover {
+    background-color: var(--ltPrimaryDark);
+  }
+}
+
+/* Item Arrow */
 .item-arrow-open {
   transform: translateY(1px) rotate(180deg);
   transition: transform 0.25s ease-in-out;
@@ -340,6 +358,7 @@ const setActiveDate = (
   transition: transform 0.25s ease-in-out;
 }
 
+/* Input Field */
 .input-field {
   border-color: var(--ltBorderNormal);
   transition: all 0.15s ease-in-out;

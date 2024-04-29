@@ -68,7 +68,7 @@ const filteredNavItemsResources = computed(() => {
               Log in
             </RouterLink>
             <RouterLink
-              to="/get-started"
+              to="/support"
               class="footer-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap"
             >
               Get Started
