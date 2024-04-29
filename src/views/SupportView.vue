@@ -23,34 +23,119 @@ const contactTitleLast = ref<string>("to Get Help");
 const contactContent = ref<string>(
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 );
+
+/* Support */
+const activeItem = ref<string>("");
+const toggleActiveItem = (id: string) => {
+  activeItem.value = activeItem.value === id ? "" : id;
+};
+// Topic
+const topics = [
+  { id: "getStarted", title: "Get Started", active: false },
+  { id: "priceAndBilling", title: "Price & Billing", active: false },
+  { id: "showcaseSetup", title: "Showcase setup", active: false },
+  { id: "somethingWentWrong", title: "Something went wrong", active: false },
+  { id: "somethingElse", title: "Something else", active: false },
+];
+
+const activeTopic = ref<string>("");
+const setActiveTopic = (id: string) => {
+  activeTopic.value = id;
+  toggleActiveItem("");
+};
 </script>
 
 <template>
   <main
-    class="py-[4rem] px-[1rem] flex flex-col items-center lg:py-[5rem] lg:px-[2rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
+    class="py-[4rem] px-[1rem] flex flex-col items-center gap-[3rem] lg:py-[5rem] lg:px-[2rem] xl:gap-[4rem] xl:py-[6rem] xxl:w-[1396px] xxl:mx-auto xxl:px-0"
   >
-    <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
-      <SectionType
-        :text="getStartedSection"
-        bgColor="bg-ltPrimary"
-        textColor="text-TextLight"
-      />
-      <h2
-        class="w-[100%] text-center text-[2rem] font-[500] leading-[1.15] xs:w-[300px] sm:w-[350px] lg:w-[500px] lg:text-[3rem] xxl:w-[700px] xxl:text-[4rem]"
+    <section class="flex flex-col items-center">
+      <div class="flex flex-col items-center gap-[1rem] xl:gap-[1.25rem]">
+        <SectionType
+          :text="getStartedSection"
+          bgColor="bg-ltPrimary"
+          textColor="text-TextLight"
+        />
+        <h2
+          class="w-[100%] text-center text-[2rem] font-[500] leading-[1.15] xs:w-[300px] sm:w-[350px] lg:w-[500px] lg:text-[3rem] xxl:w-[700px] xxl:text-[4rem]"
+        >
+          {{ getStartedTitleFirst }}
+          <span class="font-[500] text-ltPrimary">{{
+            getStartedTitleHighlighted
+          }}</span>
+          {{ getStartedTitleLast }}
+        </h2>
+      </div>
+      <div
+        class="w-[100%] mt-[1.5rem] text-center text-TextNormal font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[550px] lg:text-[1.125rem] xl:mt-[2rem] xxl:w-[600px] xxl:text-[1.25rem]"
       >
-        {{ getStartedTitleFirst }}
-        <span class="font-[500] text-ltPrimary">{{
-          getStartedTitleHighlighted
-        }}</span>
-        {{ getStartedTitleLast }}
-      </h2>
-    </div>
-    <div
-      class="w-[100%] mt-[1.5rem] text-center text-TextNormal font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[550px] lg:text-[1.125rem] xl:mt-[2rem] xxl:w-[600px] xxl:text-[1.25rem]"
+        {{ getStartedContent }}
+      </div>
+    </section>
+    <section
+      class="w-[100%] flex flex-col items-center gap-[2.5rem] md:w-[700px] xxl:w-[800px]"
     >
-      {{ getStartedContent }}
-    </div>
+      <!-- Topic -->
+      <div class="w-[100%] relative flex flex-col">
+        <div class="font-[500] leading-none">What can we help you with?</div>
+        <div
+          class="flex justify-between items-center mt-[1rem] py-[.625rem] pl-[.875rem] pr-[.625rem] border-[1px] border-ltBorderNormal rounded-[6px] cursor-pointer duration-[.15s] ease-in-out xxl:mt-[1.25rem] xxl:py-[.75rem] xxl:pl-[1rem] xxl:rounded-[7px]"
+          :class="
+            activeItem === 'topic'
+              ? 'border-ltPrimary'
+              : 'border-ltBorderNormal'
+          "
+          @click="toggleActiveItem('topic')"
+        >
+          <div
+            class="text-[.875rem] font-light leading-tight translate-y-[1px] xxl:text-[15px] xxl:translate-y-[.5px]"
+            :class="activeTopic ? 'text-TextSemiDark' : 'text-TextSemiNormal'"
+          >
+            {{
+              activeTopic
+                ? topics.find((topic) => topic.id === activeTopic)?.title
+                : "Select a topic"
+            }}
+          </div>
+          <i
+            class="ri-arrow-down-s-line text-[1.25rem] h-[16px] flex justify-center items-center text-TextSemiDark xxl:text-[1.5rem] xxl:h-[20px]"
+            :class="
+              activeItem === 'topic' ? 'item-arrow-open' : 'item-arrow-close'
+            "
+          ></i>
+        </div>
+        <div
+          class="flex flex-col gap-[.125rem] mt-[.625rem] p-[.625rem] border-[1px] border-ltBorderNormal rounded-[6px] xxl:rounded-[7px]"
+          :class="activeItem === 'topic' ? 'block' : 'hidden'"
+        >
+          <div
+            v-for="(topic, index) in topics"
+            :key="index"
+            class="py-[.5rem] px-[.75rem] text-[.875rem] font-light leading-tight rounded-[5px] duration-[.15s] ease-in-out cursor-pointer xxl:text-[15px]"
+            :class="
+              activeTopic === topic.id
+                ? 'bg-ltHoverPrimary text-ltPrimary'
+                : 'bg-transparent text-TextSemidark'
+            "
+            @click="setActiveTopic(topic.id)"
+          >
+            {{ topic.title }}
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Nav Item Arrow */
+.item-arrow-open {
+  transform: translateY(1px) rotate(180deg);
+  transition: transform 0.25s ease-in-out;
+}
+
+.item-arrow-close {
+  transform: translateY(1px) rotate(0deg);
+  transition: transform 0.25s ease-in-out;
+}
+</style>
