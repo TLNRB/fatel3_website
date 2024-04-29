@@ -126,11 +126,6 @@ const getSubMenuHeight = (navItem: any) => {
                 v-if="!navItem.subItems && navItem.id !== 'showcase'"
                 :to="navItem.route"
                 class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:px-[.75rem] xl:rounded-[10px]"
-                :class="[
-                  {
-                    'text-ltPrimary': navItem.activePage,
-                  },
-                ]"
                 @click="setActiveIndex(navItem.id)"
               >
                 <div
@@ -318,6 +313,13 @@ const getSubMenuHeight = (navItem: any) => {
         <div
           class="flex justify-center items-center gap-[1rem] flex-wrap ml-[-1rem] px-[1rem] xl:ml-0 xl:px-0"
         >
+          <RouterLink
+            to="/admin"
+            @click="setActiveIndex('none')"
+            class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
+          >
+            admin
+          </RouterLink>
           <RouterLink
             to="/login"
             @click="setActiveIndex('none')"
