@@ -5,6 +5,7 @@ import AllFeaturesView from "@/views/AllFeaturesView.vue";
 import UseCaseView from "@/views/UseCaseView.vue";
 import AboutUsView from "@/views/AboutUsView.vue";
 import PricingView from "@/views/PricingView.vue";
+import SupportView from "@/views/SupportView.vue";
 import LoginView from "@/views/LoginView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 /*-- Import data --*/
@@ -53,6 +54,11 @@ const router = createRouter({
       path: "/pricing",
       name: "pricing",
       component: PricingView,
+    },
+    {
+      path: "/support",
+      name: "support",
+      component: SupportView,
     },
     {
       path: "/login",
