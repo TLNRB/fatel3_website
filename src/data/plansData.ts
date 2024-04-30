@@ -1,4 +1,4 @@
-const plans = [
+const plans: any = [
   {
     title: "Basic",
     desc: "For small businesses",

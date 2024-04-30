@@ -1,6 +1,6 @@
 import tempImg from "@/assets/images/temp-review.jpg";
 
-const useCases = [
+const useCases: any = [
   {
     title: "Reselling",
     route: "reselling",

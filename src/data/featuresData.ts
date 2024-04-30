@@ -1,4 +1,4 @@
-const features = [
+const features: any = [
   {
     title: "Inventory Management",
     icon: "ri-equalizer-3-line",

@@ -33,7 +33,7 @@ const router = createRouter({
         const useCases = useCasesData;
         const route = to.params.route;
         const exists = useCases.some(
-          (useCase) => useCase.route === route && !useCase.commingSoon
+          (useCase: any) => useCase.route === route && !useCase.commingSoon
         );
 
         if (!exists) {
