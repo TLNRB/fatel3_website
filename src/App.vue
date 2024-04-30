@@ -4,9 +4,9 @@ import { RouterView, useRoute } from "vue-router";
 import Navbar from "@/components/Nav/Navbar.vue";
 import FooterSection from "@/components/Footer/FooterSection.vue";
 /*-- Import Data --*/
-import featuresData from "@/data/featuresData.ts";
-import useCasesData from "@/data/useCasesData.ts";
-import resourcesData from "@/data/resourcesData.ts";
+import featuresData from "@/data/featuresData";
+import useCasesData from "@/data/useCasesData";
+import resourcesData from "@/data/resourcesData";
 
 // Router
 const route = useRoute();

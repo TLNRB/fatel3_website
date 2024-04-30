@@ -19,7 +19,9 @@ const setActiveFeature = (feature: string) => {
 
 // Get active feature submenus
 const activeFeatureSubMenus = computed(() => {
-  return featuresData.find((feature) => feature.title === activeFeature.value);
+  return featuresData.find(
+    (feature: any) => feature.title === activeFeature.value
+  );
 });
 const router = useRouter();
 

@@ -8,7 +8,7 @@ import SectionType from "@/components/Misc/SectionType.vue";
 /*-- Import assets --*/
 import dropdownIcon from "@/assets/icons/arrow-down-s-line.svg";
 /*-- Import data --*/
-import plansData from "@/data/plansData.ts";
+import plansData from "@/data/plansData";
 
 // FAQs
 const faqs: any = [
@@ -45,7 +45,7 @@ const setActivePlan = (plan: string) => {
 };
 
 const activePlanLongSubMenus = computed(() => {
-  return plansData.find((plan) => plan.title === activePlan.value);
+  return plansData.find((plan: any) => plan.title === activePlan.value);
 });
 
 // Screen width
