@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Prop handling
-const { faqs } = defineProps(["faqs"]);
+const { storeFAQs } = defineProps(["storeFAQs"]);
 </script>
 
 <template>
@@ -8,7 +8,7 @@ const { faqs } = defineProps(["faqs"]);
     class="w-[100%] flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]"
   >
     <div
-      v-for="(faq, index) in faqs"
+      v-for="(faq, index) in storeFAQs.faqs"
       :key="index"
       class="w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
     >

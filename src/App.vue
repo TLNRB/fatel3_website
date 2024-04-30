@@ -10,9 +10,11 @@ import useCasesData from "@/data/useCasesData";
 import resourcesData from "@/data/resourcesData";
 /*-- Import Store --*/
 import { useStoreAuth } from "@/stores/storeAuth";
+import { useStoreFAQsHome } from "@/stores/storeFAQsHome";
 
 // Store handling
 const storeAuth = useStoreAuth();
+const storeFAQsHome = useStoreFAQsHome();
 
 // Router
 const route = useRoute();
@@ -84,6 +86,7 @@ const navItems: any = [
 
 onMounted(() => {
   storeAuth.init();
+  storeFAQsHome.getFAQs();
 });
 </script>
 
