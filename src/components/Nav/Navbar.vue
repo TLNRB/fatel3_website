@@ -3,6 +3,17 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { RouterLink } from "vue-router";
 /*-- Import Assets --*/
 import logoPrimary from "@/assets/images/logo_primary.svg";
+/*-- Import Store --*/
+import { useStoreAuth } from "@/stores/storeAuth";
+
+// Store handling
+const storeAuth = useStoreAuth();
+
+// Log out
+const logOut = () => {
+  storeAuth.logOutUser();
+  setActiveIndex("none");
+};
 
 // Prop handling
 const { navItems } = defineProps(["navItems"]);
@@ -314,13 +325,24 @@ const getSubMenuHeight = (navItem: any) => {
           class="flex justify-center items-center gap-[1rem] flex-wrap ml-[-1rem] px-[1rem] xl:ml-0 xl:px-0"
         >
           <RouterLink
+            v-if="
+              storeAuth.user.id && storeAuth.user.email === 'admin@admin.com'
+            "
             to="/admin"
             @click="setActiveIndex('none')"
             class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
           >
             admin
           </RouterLink>
+          <button
+            v-if="storeAuth.user.id"
+            @click="logOut"
+            class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
+          >
+            Log out
+          </button>
           <RouterLink
+            v-else-if="!storeAuth.user.id"
             to="/login"
             @click="setActiveIndex('none')"
             class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
