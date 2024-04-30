@@ -11,6 +11,8 @@ import LoginView from "@/views/LoginView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 /*-- Import data --*/
 import useCasesData from "@/data/useCasesData";
+/*-- Import store --*/
+import { useStoreAuth } from "@/stores/storeAuth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -80,6 +82,23 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return { top: 0 };
   },
+});
+
+router.beforeEach(async (to, from) => {
+  const storeAuth = useStoreAuth();
+  if (!storeAuth.user.id && to.name === "admin") {
+    return { name: "home" };
+  }
+  if (storeAuth.user.id && to.name === "login") {
+    return false;
+  }
+  if (
+    storeAuth.user.id &&
+    to.name === "admin" &&
+    storeAuth.user.email !== "admin@admin.com"
+  ) {
+    return false;
+  }
 });
 
 export default router;

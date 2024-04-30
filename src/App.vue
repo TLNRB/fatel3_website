@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
 /*-- Import Components --*/
 import Navbar from "@/components/Nav/Navbar.vue";
@@ -7,6 +8,11 @@ import FooterSection from "@/components/Footer/FooterSection.vue";
 import featuresData from "@/data/featuresData";
 import useCasesData from "@/data/useCasesData";
 import resourcesData from "@/data/resourcesData";
+/*-- Import Store --*/
+import { useStoreAuth } from "@/stores/storeAuth";
+
+// Store handling
+const storeAuth = useStoreAuth();
 
 // Router
 const route = useRoute();
@@ -75,6 +81,10 @@ const navItems: any = [
     subMenuHeight: 0,
   },
 ];
+
+onMounted(() => {
+  storeAuth.init();
+});
 </script>
 
 <template>
