@@ -4,6 +4,11 @@ import { ref } from "vue";
 import SectionType from "@/components/Misc/SectionType.vue";
 import Bookings from "@/components/Admin/Bookings/Bookings.vue";
 import FAQs from "@/components/Admin/FAQs/FAQs.vue";
+/*-- Import Store --*/
+import { useStoreFAQsHome } from "@/stores/storeFAQsHome";
+
+// Store handling
+const storeFAQsHome = useStoreFAQsHome();
 
 // Sections
 const sections: any = [
@@ -116,8 +121,8 @@ const faqs: any = [
     </div>
     <!-- Section Content -->
     <Bookings v-if="activeSection === 'bookings'" :bookings="bookings" />
-    <FAQs v-else-if="activeSection === 'faqHome'" :faqs="faqs" />
-    <FAQs v-else-if="activeSection === 'faqPricing'" :faqs="faqs" />
+    <FAQs v-else-if="activeSection === 'faqHome'" :storeFAQs="storeFAQsHome" />
+    <FAQs v-else-if="activeSection === 'faqPricing'" :storeFAQs="faqs" />
   </main>
 </template>
 
