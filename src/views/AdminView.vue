@@ -17,20 +17,16 @@ const sections: any = [
     title: "Bookings",
   },
   {
+    id: "reviews",
+    title: "Reviews",
+  },
+  {
     id: "faqHome",
     title: "FAQ Home",
   },
   {
     id: "faqPricing",
     title: "FAQ Pricing",
-  },
-  {
-    id: "features",
-    title: "Features",
-  },
-  {
-    id: "useCases",
-    title: "Use cases",
   },
 ];
 

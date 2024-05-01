@@ -2,6 +2,7 @@
 import { ref, reactive } from "vue";
 /*-- Import Components --*/
 import AddFAQ from "@/components/Admin/FAQs/AddFAQ.vue";
+import EditFAQ from "@/components/Admin/FAQs/EditFAQ.vue";
 import DeleteFAQ from "@/components/Admin/FAQs/DeleteFAQ.vue";
 // Prop handling
 const { storeFAQs } = defineProps(["storeFAQs"]);
@@ -23,6 +24,7 @@ const valueClear = () => {
 const addModal = ref<boolean>(false);
 
 const toggleAdd = () => {
+  closeEditFAQ();
   addModal.value = !addModal.value;
 };
 
@@ -37,10 +39,36 @@ const closeAddFAQ = () => {
   valueClear();
 };
 
-// Delete Section
+// Edit FAQ section
+const editFAQid = ref<string>("");
+
+const editSingleFAQ = (index: string) => {
+  editFAQid.value = index;
+  for (let i = 0; i < storeFAQs.faqs.length; i++) {
+    // Getting the input values by id
+    if (storeFAQs.faqs[i].id === index) {
+      newFAQ.question = storeFAQs.faqs[i].question;
+      newFAQ.answer = storeFAQs.faqs[i].answer;
+    }
+  }
+};
+
+const saveEditFAQ = () => {
+  storeFAQs.updateFAQ(newFAQ, editFAQid.value);
+  valueClear();
+  editFAQid.value = "";
+};
+
+const closeEditFAQ = () => {
+  valueClear();
+  editFAQid.value = "";
+};
+
+// Delete FAQ section
 const deleteFAQid = ref<string>("");
 
 const openDeleteModal = (index: string) => {
+  closeEditFAQ();
   deleteFAQid.value = index;
 };
 
@@ -58,53 +86,72 @@ const confirmDelete = () => {
   <section class="w-[100%] flex flex-col gap-[3rem]">
     <!-- FAQs -->
     <div class="flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]">
-      <div
-        v-for="faq in storeFAQs.faqs"
-        :key="faq.id"
-        class="w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
-      >
-        <!-- Question -->
-        <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
-          <div
-            class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
-          >
-            Question
-          </div>
-          <div
-            class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
-          >
-            {{ faq.question }}
-          </div>
-        </div>
-        <!-- Answer -->
-        <div class="flex items-center gap-[1rem] mb-[.5rem] xs:gap-[1.5rem]">
-          <div
-            class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
-          >
-            Answer
-          </div>
-          <div
-            class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
-          >
-            {{ faq.answer }}
-          </div>
-        </div>
-
-        <!-- BTNs -->
+      <div v-for="faq in storeFAQs.faqs" :key="faq.id">
+        <!-- Display FAQ -->
         <div
-          class="flex justify-center items-center gap-[.75rem] flex-wrap mt-auto"
+          v-if="editFAQid !== faq.id"
+          class="h-[100%] w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltBorderNormal rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
         >
-          <button
-            class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
+          <!-- Question -->
+          <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
+            <div
+              class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
+            >
+              Question
+            </div>
+            <div
+              class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
+            >
+              {{ faq.question }}
+            </div>
+          </div>
+          <!-- Answer -->
+          <div class="flex items-center gap-[1rem] mb-[.5rem] xs:gap-[1.5rem]">
+            <div
+              class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
+            >
+              Answer
+            </div>
+            <div
+              class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
+            >
+              {{ faq.answer }}
+            </div>
+          </div>
+          <!-- BTNs -->
+          <div
+            class="flex justify-center items-center gap-[.75rem] flex-wrap mt-auto"
           >
-            Edit
-          </button>
-          <button
-            @click="openDeleteModal(faq.id)"
-            class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
-          >
-            Delete
-          </button>
+            <button
+              @click="editSingleFAQ(faq.id)"
+              class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
+            >
+              Edit
+            </button>
+            <button
+              @click="openDeleteModal(faq.id)"
+              class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+        <!-- Edit FAQ -->
+        <EditFAQ
+          v-else-if="editFAQid === faq.id"
+          :newFAQ="newFAQ"
+          @savedChanges="saveEditFAQ"
+          @canceledChanges="closeEditFAQ"
+        />
+        <!-- Delete FAQ -->
+        <div
+          v-if="deleteFAQid === faq.id"
+          class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
+        >
+          <DeleteFAQ
+            @savedChanges="confirmDelete"
+            @canceledChanges="closeDeleteModal"
+          />
         </div>
       </div>
     </div>
@@ -126,16 +173,6 @@ const confirmDelete = () => {
         :newFAQ="newFAQ"
         @savedChanges="addFAQ"
         @canceledChanges="closeAddFAQ"
-      />
-    </div>
-    <!-- Delete FAQ -->
-    <div
-      v-if="deleteFAQid"
-      class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
-    >
-      <DeleteFAQ
-        @savedChanges="confirmDelete"
-        @canceledChanges="closeDeleteModal"
       />
     </div>
   </section>
