@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
 
 // Prop handling
@@ -30,7 +30,7 @@ const cancelChanges = () => {
 <template>
   <form
     @submit.prevent="saveChanges"
-    class="w-[245px] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
+    class="w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
   >
     <!-- Question -->
     <div class="flex items-start gap-[1rem] xs:gap-[1.5rem]">
@@ -74,7 +74,7 @@ const cancelChanges = () => {
         type="submit"
         class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
       >
-        Add
+        Confirm
       </button>
       <button
         type="button"

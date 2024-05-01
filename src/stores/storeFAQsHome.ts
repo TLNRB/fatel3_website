@@ -4,6 +4,7 @@ import {
   onSnapshot,
   doc,
   addDoc,
+  updateDoc,
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase.js";
@@ -36,6 +37,13 @@ export const useStoreFAQsHome = defineStore("storeFAQsHome", {
     // Add FAQ
     async addFAQ(faqContent: any) {
       await addDoc(faqHomeCollectionRef, {
+        question: faqContent.question,
+        answer: faqContent.answer,
+      });
+    },
+    // Update FAQ
+    async updateFAQ(faqContent: any, id: string) {
+      await updateDoc(doc(faqHomeCollectionRef, id), {
         question: faqContent.question,
         answer: faqContent.answer,
       });
