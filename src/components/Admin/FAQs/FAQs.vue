@@ -60,7 +60,7 @@ const closeAddFAQ = () => {
           </div>
         </div>
         <!-- Answer -->
-        <div class="flex items-center gap-[1rem] mb-[.25rem] xs:gap-[1.5rem]">
+        <div class="flex items-center gap-[1rem] mb-[.5rem] xs:gap-[1.5rem]">
           <div
             class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
           >
