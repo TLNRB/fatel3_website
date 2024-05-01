@@ -10,11 +10,11 @@ import useCasesData from "@/data/useCasesData";
 import resourcesData from "@/data/resourcesData";
 /*-- Import Store --*/
 import { useStoreAuth } from "@/stores/storeAuth";
-import { useStoreFAQsHome } from "@/stores/storeFAQsHome";
+import { useStoreFAQs } from "@/stores/storeFAQs";
 
 // Store handling
 const storeAuth = useStoreAuth();
-const storeFAQsHome = useStoreFAQsHome();
+const storeFAQs = useStoreFAQs();
 
 // Router
 const route = useRoute();
@@ -86,7 +86,8 @@ const navItems: any = [
 
 onMounted(() => {
   storeAuth.init();
-  storeFAQsHome.getFAQs();
+  storeFAQs.getFAQs("home");
+  storeFAQs.getFAQs("pricing");
 });
 </script>
 
@@ -102,3 +103,4 @@ onMounted(() => {
 </template>
 
 <style scoped></style>
+@/stores/storeFAQs
