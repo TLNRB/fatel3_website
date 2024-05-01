@@ -2,6 +2,7 @@
 import { ref, reactive } from "vue";
 /*-- Import Components --*/
 import AddFAQ from "@/components/Admin/FAQs/AddFAQ.vue";
+import DeleteFAQ from "@/components/Admin/FAQs/DeleteFAQ.vue";
 // Prop handling
 const { storeFAQs } = defineProps(["storeFAQs"]);
 
@@ -35,6 +36,22 @@ const closeAddFAQ = () => {
   toggleAdd();
   valueClear();
 };
+
+// Delete Section
+const deleteFAQid = ref<string>("");
+
+const openDeleteModal = (index: string) => {
+  deleteFAQid.value = index;
+};
+
+const closeDeleteModal = () => {
+  deleteFAQid.value = "";
+};
+
+const confirmDelete = () => {
+  storeFAQs.deleteFAQ(deleteFAQid.value);
+  closeDeleteModal();
+};
 </script>
 
 <template>
@@ -42,8 +59,8 @@ const closeAddFAQ = () => {
     <!-- FAQs -->
     <div class="flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]">
       <div
-        v-for="(faq, index) in storeFAQs.faqs"
-        :key="index"
+        v-for="faq in storeFAQs.faqs"
+        :key="faq.id"
         class="w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
       >
         <!-- Question -->
@@ -83,6 +100,7 @@ const closeAddFAQ = () => {
             Edit
           </button>
           <button
+            @click="openDeleteModal(faq.id)"
             class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
           >
             Delete
@@ -108,6 +126,16 @@ const closeAddFAQ = () => {
         :newFAQ="newFAQ"
         @savedChanges="addFAQ"
         @canceledChanges="closeAddFAQ"
+      />
+    </div>
+    <!-- Delete FAQ -->
+    <div
+      v-if="deleteFAQid"
+      class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
+    >
+      <DeleteFAQ
+        @savedChanges="confirmDelete"
+        @canceledChanges="closeDeleteModal"
       />
     </div>
   </section>
