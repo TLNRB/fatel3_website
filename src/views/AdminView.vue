@@ -5,10 +5,10 @@ import SectionType from "@/components/Misc/SectionType.vue";
 import Bookings from "@/components/Admin/Bookings/Bookings.vue";
 import FAQs from "@/components/Admin/FAQs/FAQs.vue";
 /*-- Import Store --*/
-import { useStoreFAQsHome } from "@/stores/storeFAQsHome";
+import { useStoreFAQs } from "@/stores/storeFAQs";
 
 // Store handling
-const storeFAQsHome = useStoreFAQsHome();
+const storeFAQs = useStoreFAQs();
 
 // Sections
 const sections: any = [
@@ -117,9 +117,18 @@ const faqs: any = [
     </div>
     <!-- Section Content -->
     <Bookings v-if="activeSection === 'bookings'" :bookings="bookings" />
-    <FAQs v-else-if="activeSection === 'faqHome'" :storeFAQs="storeFAQsHome" />
-    <FAQs v-else-if="activeSection === 'faqPricing'" :storeFAQs="faqs" />
+    <FAQs
+      v-else-if="activeSection === 'faqHome'"
+      :storeFAQs="storeFAQs"
+      collectionID="home"
+    />
+    <FAQs
+      v-else-if="activeSection === 'faqPricing'"
+      :storeFAQs="storeFAQs"
+      collectionIndex="pricing"
+    />
   </main>
 </template>
 
 <style scoped></style>
+@/stores/storeFAQs

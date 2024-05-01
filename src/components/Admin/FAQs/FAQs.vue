@@ -4,8 +4,12 @@ import { ref, reactive } from "vue";
 import AddFAQ from "@/components/Admin/FAQs/AddFAQ.vue";
 import EditFAQ from "@/components/Admin/FAQs/EditFAQ.vue";
 import DeleteFAQ from "@/components/Admin/FAQs/DeleteFAQ.vue";
+
 // Prop handling
-const { storeFAQs } = defineProps(["storeFAQs"]);
+const { storeFAQs, collectionID } = defineProps(["storeFAQs", "collectionID"]);
+
+// Collecyion index to string
+const collectionIndex = ref<string>(collectionID);
 
 //-- FAQ handling
 // V-model for faq inputs
@@ -29,7 +33,7 @@ const toggleAdd = () => {
 };
 
 const addFAQ = () => {
-  storeFAQs.addFAQ(newFAQ);
+  storeFAQs.addFAQ(collectionIndex.value, newFAQ);
   toggleAdd();
   valueClear();
 };
@@ -44,17 +48,27 @@ const editFAQid = ref<string>("");
 
 const editSingleFAQ = (index: string) => {
   editFAQid.value = index;
-  for (let i = 0; i < storeFAQs.faqs.length; i++) {
-    // Getting the input values by id
-    if (storeFAQs.faqs[i].id === index) {
-      newFAQ.question = storeFAQs.faqs[i].question;
-      newFAQ.answer = storeFAQs.faqs[i].answer;
+  if (collectionID === "home") {
+    for (let i = 0; i < storeFAQs.faqsHome.length; i++) {
+      // Getting the input values by id
+      if (storeFAQs.faqsHome[i].id === index) {
+        newFAQ.question = storeFAQs.faqsHome[i].question;
+        newFAQ.answer = storeFAQs.faqsHome[i].answer;
+      }
+    }
+  } else {
+    for (let i = 0; i < storeFAQs.faqsPricing.length; i++) {
+      // Getting the input values by id
+      if (storeFAQs.faqsPricing[i].id === index) {
+        newFAQ.question = storeFAQs.faqsPricing[i].question;
+        newFAQ.answer = storeFAQs.faqsPricing[i].answer;
+      }
     }
   }
 };
 
 const saveEditFAQ = () => {
-  storeFAQs.updateFAQ(newFAQ, editFAQid.value);
+  storeFAQs.updateFAQ(collectionIndex.value, newFAQ, editFAQid.value);
   valueClear();
   editFAQid.value = "";
 };
@@ -77,7 +91,7 @@ const closeDeleteModal = () => {
 };
 
 const confirmDelete = () => {
-  storeFAQs.deleteFAQ(deleteFAQid.value);
+  storeFAQs.deleteFAQ(collectionIndex.value, deleteFAQid.value);
   closeDeleteModal();
 };
 </script>
@@ -86,7 +100,12 @@ const confirmDelete = () => {
   <section class="w-[100%] flex flex-col gap-[3rem]">
     <!-- FAQs -->
     <div class="flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]">
-      <div v-for="faq in storeFAQs.faqs" :key="faq.id">
+      <div
+        v-for="faq in collectionID === 'home'
+          ? storeFAQs.faqsHome
+          : storeFAQs.faqsPricing"
+        :key="faq.id"
+      >
         <!-- Display FAQ -->
         <div
           v-if="editFAQid !== faq.id"
