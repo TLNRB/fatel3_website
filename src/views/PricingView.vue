@@ -9,27 +9,11 @@ import SectionType from "@/components/Misc/SectionType.vue";
 import dropdownIcon from "@/assets/icons/arrow-down-s-line.svg";
 /*-- Import data --*/
 import plansData from "@/data/plansData";
+/*-- Import Store --*/
+import { useStoreFAQs } from "@/stores/storeFAQs";
 
-// FAQs
-const faqs: any = [
-  {
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-  },
-  {
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod, consectetur adipiscing elit, sed do eiusmod?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
+// Store handling
+const storeFAQs = useStoreFAQs();
 
 // Active Button
 let btnActive = ref<string>("yearly");
@@ -368,7 +352,12 @@ onUnmounted(() => {
         </div>
       </div>
     </section>
-    <FAQ :faqs="faqs" :descriptionCondition="false" :buttonCondition="false" />
+    <FAQ
+      :faqs="storeFAQs"
+      collectionID="pricing"
+      :descriptionCondition="false"
+      :buttonCondition="false"
+    />
     <CTA
       textFirstPart="Create Your Inventory with"
       textHighlighted="fatel3"

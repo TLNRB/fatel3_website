@@ -6,11 +6,13 @@ import ButtonOutline from "@/components/Misc/ButtonOutline.vue";
 import addIcon from "@/assets/icons/add-line.svg";
 
 // Prop handling
-const { faqs, descriptionCondition, buttonCondition } = defineProps([
-  "faqs",
-  "descriptionCondition",
-  "buttonCondition",
-]);
+const { faqs, collectionID, descriptionCondition, buttonCondition } =
+  defineProps([
+    "faqs",
+    "collectionID",
+    "descriptionCondition",
+    "buttonCondition",
+  ]);
 
 // Toggle FAQ answer
 const activeFAQIndex = ref<number>(-1);
@@ -43,8 +45,10 @@ const toggleActiveFAQ = (index: number) => {
       class="flex flex-col gap-[1rem] my-[1.5rem] xl:gap-[1.125rem] xl:my-[2rem]"
     >
       <div
-        v-for="(faq, index) in faqs"
-        :key="index"
+        v-for="(faq, index) in collectionID === 'home'
+          ? faqs.faqsHome
+          : faqs.faqsPricing"
+        :key="faq.id"
         class="w-[100%] p-[1.25rem] border-[1px] border-ltPrimary rounded-[14px] md:w-[725px] lg:w-[775px] lg:p-[1.5rem] xxl:w-[825px] xxl:px-[1.75rem]"
       >
         <div
