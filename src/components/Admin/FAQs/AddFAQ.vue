@@ -88,6 +88,11 @@ const cancelChanges = () => {
 </template>
 
 <style scoped>
+input[type="text"],
+textarea {
+  outline: none;
+}
+
 textarea {
   resize: none;
 }
