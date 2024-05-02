@@ -7,27 +7,11 @@ import Showcase from "@/components/HomePage/Showcase/Showcase.vue";
 import Reviews from "@/components/HomePage/Reviews/Reviews.vue";
 import FAQ from "@/components/FAQ/FAQ.vue";
 import CTA from "@/components/CTA/CTA.vue";
+/*-- Import Store --*/
+import { useStoreFAQs } from "@/stores/storeFAQs";
 
-// FAQs
-const faqs: any = [
-  {
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-  },
-  {
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod, consectetur adipiscing elit, sed do eiusmod?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
+// Store handling
+const storeFAQs = useStoreFAQs();
 </script>
 
 <template>
@@ -37,7 +21,12 @@ const faqs: any = [
     <UseCases />
     <Showcase />
     <Reviews />
-    <FAQ :faqs="faqs" :descriptionCondition="true" :buttonCondition="true" />
+    <FAQ
+      :faqs="storeFAQs"
+      collectionID="home"
+      :descriptionCondition="true"
+      :buttonCondition="true"
+    />
     <CTA
       textFirstPart="Create Your Inventory with"
       textHighlighted="fatel3"

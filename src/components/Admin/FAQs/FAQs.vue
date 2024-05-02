@@ -13,7 +13,7 @@ const collectionIndex = ref<string>(collectionID);
 
 //-- FAQ handling
 // V-model for faq inputs
-const newFAQ = reactive({
+const newFAQ: any = reactive({
   question: "",
   answer: "",
 });
