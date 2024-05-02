@@ -88,7 +88,7 @@ export const useStoreReviews = defineStore("storeReviews", {
     },
     // Close Add Review
     closeAddReview() {
-      if (this.imgName != null && this.img != null) {
+      if (this.imgName !== null && this.img !== null) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), this.imgName);
         //Check if another class uses the same picture
@@ -98,13 +98,12 @@ export const useStoreReviews = defineStore("storeReviews", {
             imageCondition = true;
           }
         }
-
         if (!imageCondition) {
           deleteObject(imageRef);
         }
       }
-      this.img = "";
-      this.imgName = "";
+      this.img = null;
+      this.imgName = null;
     },
     // Update Review
     async updateReview(reviewContent: any, id: string) {

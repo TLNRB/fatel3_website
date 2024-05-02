@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 // Prop handling
@@ -8,7 +8,7 @@ const { newFAQ } = defineProps(["newFAQ"]);
 const emit = defineEmits(["savedChanges", "canceledChanges"]);
 
 // Temporary data
-const error = ref("");
+const error = ref<string>("");
 
 // Handle form submission
 const saveChanges = () => {

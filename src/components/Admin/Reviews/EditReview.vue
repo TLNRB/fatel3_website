@@ -23,11 +23,12 @@ const saveChanges = () => {
     !newReview.name ||
     !newReview.businessPosition ||
     !newReview.review ||
-    !storeReviews.imgName ||
-    !storeReviews.img
+    (!storeReviews.imgName && storeReviews.img) ||
+    (storeReviews.imgName && !storeReviews.img)
   ) {
     error.value = "Fill in every information or wait for image upload (5s)";
   } else {
+    console.log("savedChanges");
     emit("savedChanges");
     error.value = "";
     image.value = "";
@@ -52,12 +53,12 @@ const cancelChanges = () => {
 <template>
   <form
     @submit.prevent="saveChanges"
-    class="w-[245px] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
+    class="w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
   >
     <!-- Name -->
-    <div class="flex items-start gap-[1rem] xs:gap-[1.5rem]">
+    <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
       <div
-        class="min-w-[70px] w-[70px] mt-[.5rem] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
+        class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
       >
         Name
       </div>
@@ -70,9 +71,9 @@ const cancelChanges = () => {
       />
     </div>
     <!-- Business Position -->
-    <div class="flex items-start gap-[1rem] xs:gap-[1.5rem]">
+    <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
       <div
-        class="min-w-[70px] w-[70px] mt-[.5rem] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
+        class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
       >
         Business
       </div>
@@ -89,7 +90,7 @@ const cancelChanges = () => {
     <!-- Image -->
     <div class="flex items-start gap-[1rem] xs:gap-[1.5rem]">
       <div
-        class="min-w-[70px] w-[70px] mt-[.5rem] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
+        class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
       >
         Image
       </div>
@@ -97,21 +98,20 @@ const cancelChanges = () => {
         class="w-[100%] flex flex-col items-start sm:flex-row sm:items-center sm:gap-[1rem]"
       >
         <img
-          v-if="image"
           :src="image ? storeReviews.img : newReview.img"
           alt="Image of the reviewer or the business"
-          class="h-[50px] text-[12px] font-light text-TextNormal sm:text-[13px]"
+          class="h-[50px]"
         />
         <label
           class="h-[34px] w-[100%] overflow-hidden flex flex-col justify-center cursor-pointer sm:h-[35px]"
           :class="error && !newReview.imgName ? ' border-ltTextNegative' : ''"
         >
           <span
-            class="text-[12px] font-light leading-tight sm:text-[14px]"
+            class="text-[12px] font-light leading-tight sm:text-[13]"
             :class="
               image || newReview.imgName
-                ? 'text-TextSemiDark  text-[13px] sm:text-[14px]'
-                : 'text-ltBorderNormal pl-[.75rem] text-[12px] sm:text-[13px]'
+                ? 'text-TextSemiDark'
+                : 'text-ltBorderNormal'
             "
             >{{
               image
@@ -153,7 +153,7 @@ const cancelChanges = () => {
         type="submit"
         class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
       >
-        Add
+        Confirm
       </button>
       <button
         type="button"
