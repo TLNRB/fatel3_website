@@ -87,7 +87,7 @@ export const useStoreReviews = defineStore("storeReviews", {
       this.img = null;
     },
     // Close Add Review
-    closeAddCoach() {
+    closeAddReview() {
       if (this.imgName != null && this.img != null) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), this.imgName);
