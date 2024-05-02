@@ -1,101 +1,110 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 /*-- Import Components --*/
-import AddFAQ from "@/components/Admin/FAQs/AddFAQ.vue";
+/* import AddFAQ from "@/components/Admin/FAQs/AddFAQ.vue";
 import EditFAQ from "@/components/Admin/FAQs/EditFAQ.vue";
-import DeleteFAQ from "@/components/Admin/FAQs/DeleteFAQ.vue";
+import DeleteFAQ from "@/components/Admin/FAQs/DeleteFAQ.vue"; */
 
 // Prop handling
-const { storeFAQs, collectionID } = defineProps(["storeFAQs", "collectionID"]);
+const { storeReviews } = defineProps(["storeReviews"]);
 
-// Collecyion index to string
-const collectionIndex = ref<string>(collectionID);
-
-//-- FAQ handling
-// V-model for faq inputs
-const newFAQ: any = reactive({
-  question: "",
-  answer: "",
+//-- Review handling
+// V-model for review inputs
+const newReview: any = reactive({
+  name: "",
+  businessPosition: "",
+  review: "",
+  imgName: "",
+  img: "",
 });
+
+const image = ref<any>(null);
 
 // Clear values
 const valueClear = () => {
-  newFAQ.question = "";
-  newFAQ.answer = "";
+  (newReview.name = ""),
+    (newReview.businessPosition = ""),
+    (newReview.review = ""),
+    (newReview.imgName = ""),
+    (newReview.img = ""),
+    (image.value = null);
 };
 
-// Add FAQ section
+// Image upload class
+const handleImageUpload = (file: any) => {
+  image.value = file;
+  storeReviews.getImageUrl(file.value.name, file.value);
+};
+
+// Add Review section
 const addModal = ref<boolean>(false);
 
 const toggleAdd = () => {
-  if (editFAQid.value) {
-    closeEditFAQ();
+  if (editReviewid.value) {
+    closeEditReview();
   }
   addModal.value = !addModal.value;
 };
 
-const addFAQ = () => {
-  storeFAQs.addFAQ(collectionIndex.value, newFAQ);
+const addReview = () => {
+  storeReviews.addReview(newReview);
   toggleAdd();
   valueClear();
 };
 
-const closeAddFAQ = () => {
+const closeAddReview = () => {
+  storeReviews.closeAddReview();
   toggleAdd();
   valueClear();
 };
 
-// Edit FAQ section
-const editFAQid = ref<string>("");
+// Edit Review section
+const editReviewid = ref<string>("");
 
-const editSingleFAQ = (index: string) => {
-  editFAQid.value = index;
-  if (collectionID === "home") {
-    for (let i = 0; i < storeFAQs.faqsHome.length; i++) {
-      // Getting the input values by id
-      if (storeFAQs.faqsHome[i].id === index) {
-        newFAQ.question = storeFAQs.faqsHome[i].question;
-        newFAQ.answer = storeFAQs.faqsHome[i].answer;
-      }
-    }
-  } else {
-    for (let i = 0; i < storeFAQs.faqsPricing.length; i++) {
-      // Getting the input values by id
-      if (storeFAQs.faqsPricing[i].id === index) {
-        newFAQ.question = storeFAQs.faqsPricing[i].question;
-        newFAQ.answer = storeFAQs.faqsPricing[i].answer;
-      }
+const editReview = (index: string) => {
+  editReviewid.value = index;
+  for (let i = 0; i < storeReviews.reviews.length; i++) {
+    // Getting the input values by id
+    if (storeReviews.reviews[i].id === index) {
+      newReview.name = storeReviews.reviews[i].name;
+      newReview.businessPosition = storeReviews.reviews[i].businessPosition;
+      newReview.review = storeReviews.reviews[i].review;
+      newReview.imgName = storeReviews.reviews[i].imgName;
+      newReview.img = storeReviews.reviews[i].img;
     }
   }
 };
 
-const saveEditFAQ = () => {
-  storeFAQs.updateFAQ(collectionIndex.value, newFAQ, editFAQid.value);
+const saveEditReview = async () => {
+  // Checking if the image changed
+  storeReviews.updateImage(editReviewid.value);
+  storeReviews.updateReview(newReview, editReviewid.value);
   valueClear();
-  editFAQid.value = "";
+  editReviewid.value = "";
 };
 
-const closeEditFAQ = () => {
+const closeEditReview = () => {
+  storeReviews.closeEditing(editReviewid.value);
   valueClear();
-  editFAQid.value = "";
+  editReviewid.value = "";
 };
 
-// Delete FAQ section
-const deleteFAQid = ref<string>("");
+// Delete Review section
+const deleteReviewid = ref<string>("");
 
 const openDeleteModal = (index: string) => {
-  if (editFAQid.value) {
-    closeEditFAQ();
+  if (editReviewid.value) {
+    closeEditReview();
   }
-  deleteFAQid.value = index;
+  deleteReviewid.value = index;
 };
 
 const closeDeleteModal = () => {
-  deleteFAQid.value = "";
+  deleteReviewid.value = "";
 };
 
 const confirmDelete = () => {
-  storeFAQs.deleteFAQ(collectionIndex.value, deleteFAQid.value);
+  storeReviews.deleteReview(deleteReviewid.value);
   closeDeleteModal();
 };
 </script>
