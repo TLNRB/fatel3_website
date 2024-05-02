@@ -133,7 +133,7 @@ const confirmDelete = () => {
             </div>
           </div>
           <!-- Business Position -->
-          <div class="flex items-center gap-[1rem] mb-[.5rem] xs:gap-[1.5rem]">
+          <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
             <div
               class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
             >
@@ -143,6 +143,32 @@ const confirmDelete = () => {
               class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
             >
               {{ review.businessPosition }}
+            </div>
+          </div>
+          <!-- Image -->
+          <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
+            <div
+              class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
+            >
+              Image
+            </div>
+            <div
+              class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
+            >
+              {{ review.imgName }}
+            </div>
+          </div>
+          <!-- Review -->
+          <div class="flex items-center gap-[1rem] mb-[.5rem] xs:gap-[1.5rem]">
+            <div
+              class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
+            >
+              Review
+            </div>
+            <div
+              class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
+            >
+              {{ review.review }}
             </div>
           </div>
           <!-- BTNs -->
@@ -167,6 +193,7 @@ const confirmDelete = () => {
         <EditReview
           v-else-if="editReviewid === review.id"
           :newReview="newReview"
+          :storeReviews="storeReviews"
           @savedChanges="saveEditReview"
           @canceledChanges="closeEditReview"
           @imageSelected="handleImageUpload"
