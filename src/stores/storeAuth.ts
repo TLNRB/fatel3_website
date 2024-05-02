@@ -6,10 +6,20 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
+interface User {
+  id: string;
+  email: string;
+}
+
+interface State {
+  user: User;
+  error: string | null;
+}
+
 export const useStoreAuth = defineStore("storeAuth", {
-  state: () => ({
+  state: (): State => ({
     user: { id: "", email: "" },
-    error: "",
+    error: null,
   }),
 
   actions: {
@@ -35,7 +45,7 @@ export const useStoreAuth = defineStore("storeAuth", {
           this.error = error.message;
           console.log("error message: ", error.message);
           setInterval(() => {
-            this.error = "";
+            this.error = null;
           }, 5000);
         });
     },
