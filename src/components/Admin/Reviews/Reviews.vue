@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 /*-- Import Components --*/
-/* import AddFAQ from "@/components/Admin/FAQs/AddFAQ.vue";
-import EditFAQ from "@/components/Admin/FAQs/EditFAQ.vue";
-import DeleteFAQ from "@/components/Admin/FAQs/DeleteFAQ.vue"; */
+import AddReview from "@/components/Admin/Reviews/AddReview.vue";
+import EditReview from "@/components/Admin/Reviews/EditReview.vue";
+import DeleteReview from "@/components/Admin/Reviews/DeleteReview.vue";
 
 // Prop handling
 const { storeReviews } = defineProps(["storeReviews"]);
@@ -111,43 +111,38 @@ const confirmDelete = () => {
 
 <template>
   <section class="w-[100%] flex flex-col gap-[3rem]">
-    <!-- FAQs -->
+    <!-- Reviews -->
     <div class="flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]">
-      <div
-        v-for="faq in collectionID === 'home'
-          ? storeFAQs.faqsHome
-          : storeFAQs.faqsPricing"
-        :key="faq.id"
-      >
-        <!-- Display FAQ -->
+      <div v-for="review in storeReviews.reviews" :key="review.id">
+        <!-- Display Review -->
         <div
-          v-if="editFAQid !== faq.id"
+          v-if="editReviewid !== review.id"
           class="h-[100%] w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltBorderNormal rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
         >
-          <!-- Question -->
+          <!-- Name -->
           <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
             <div
               class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
             >
-              Question
+              Name
             </div>
             <div
               class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
             >
-              {{ faq.question }}
+              {{ review.name }}
             </div>
           </div>
-          <!-- Answer -->
+          <!-- Business Position -->
           <div class="flex items-center gap-[1rem] mb-[.5rem] xs:gap-[1.5rem]">
             <div
               class="min-w-[70px] w-[70px] text-[13px] font-light text-TextNormal sm:min-w-[75px] sm:w-[75px] sm:text-[.875rem]"
             >
-              Answer
+              Business
             </div>
             <div
               class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
             >
-              {{ faq.answer }}
+              {{ review.businessPosition }}
             </div>
           </div>
           <!-- BTNs -->
@@ -155,39 +150,40 @@ const confirmDelete = () => {
             class="flex justify-center items-center gap-[.75rem] flex-wrap mt-auto"
           >
             <button
-              @click="editSingleFAQ(faq.id)"
+              @click="editReview(review.id)"
               class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
             >
               Edit
             </button>
             <button
-              @click="openDeleteModal(faq.id)"
+              @click="openDeleteModal(review.id)"
               class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
             >
               Delete
             </button>
           </div>
         </div>
-        <!-- Edit FAQ -->
-        <EditFAQ
-          v-else-if="editFAQid === faq.id"
-          :newFAQ="newFAQ"
-          @savedChanges="saveEditFAQ"
-          @canceledChanges="closeEditFAQ"
+        <!-- Edit Review -->
+        <EditReview
+          v-else-if="editReviewid === review.id"
+          :newReview="newReview"
+          @savedChanges="saveEditReview"
+          @canceledChanges="closeEditReview"
+          @imageSelected="handleImageUpload"
         />
-        <!-- Delete FAQ -->
+        <!-- Delete Review -->
         <div
-          v-if="deleteFAQid === faq.id"
+          v-if="deleteReviewid === review.id"
           class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
         >
-          <DeleteFAQ
+          <DeleteReview
             @savedChanges="confirmDelete"
             @canceledChanges="closeDeleteModal"
           />
         </div>
       </div>
     </div>
-    <!--  Add FAQ -->
+    <!--  Add Review -->
     <button
       class="btn w-fit flex justify-center items-center gap-[.25rem] mx-auto py-[.5rem] pl-[.875rem] pr-[.5rem] bg-ltPrimary text-[.875rem] text-TextLight rounded-[9px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
       @click="toggleAdd"
@@ -201,10 +197,12 @@ const confirmDelete = () => {
       v-if="addModal"
       class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
     >
-      <AddFAQ
-        :newFAQ="newFAQ"
-        @savedChanges="addFAQ"
-        @canceledChanges="closeAddFAQ"
+      <AddReview
+        :newReview="newReview"
+        :storeReviews="storeReviews"
+        @savedChanges="addReview"
+        @canceledChanges="closeAddReview"
+        @imageSelected="handleImageUpload"
       />
     </div>
   </section>

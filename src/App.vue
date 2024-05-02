@@ -11,10 +11,12 @@ import resourcesData from "@/data/resourcesData";
 /*-- Import Store --*/
 import { useStoreAuth } from "@/stores/storeAuth";
 import { useStoreFAQs } from "@/stores/storeFAQs";
+import { useStoreReviews } from "@/stores/storeReviews";
 
 // Store handling
 const storeAuth = useStoreAuth();
 const storeFAQs = useStoreFAQs();
+const storeReviews = useStoreReviews();
 
 // Router
 const route = useRoute();
@@ -88,6 +90,7 @@ onMounted(() => {
   storeAuth.init();
   storeFAQs.getFAQs("home");
   storeFAQs.getFAQs("pricing");
+  storeReviews.getReviews();
 });
 </script>
 
