@@ -12,8 +12,25 @@ import { db } from "../firebase/firebase.js";
 const faqHomeCollectionRef = collection(db, "faqHome");
 const faqPricingCollectionRef = collection(db, "faqPricing");
 
+interface FAQHome {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+interface FAQPricing {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+interface State {
+  faqsHome: FAQHome[];
+  faqsPricing: FAQPricing[];
+}
+
 export const useStoreFAQs = defineStore("storeFAQs", {
-  state: () => {
+  state: (): State => {
     return {
       faqsHome: [],
       faqsPricing: [],
