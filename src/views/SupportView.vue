@@ -3,6 +3,11 @@ import { ref, reactive, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 /*-- Import Components --*/
 import SectionType from "@/components/Misc/SectionType.vue";
+/*-- Import store --*/
+import { useStoreBookings } from "@/stores/storeBookings";
+
+// Store handling
+const storeBookings = useStoreBookings();
 
 const router = useRouter();
 
@@ -162,7 +167,7 @@ const setActiveDate = (
   clickedWeekday.value = weekday;
 };
 
-// Booking
+/* Booking */
 const newBooking: any = reactive({
   topic: "",
   day: "",
@@ -216,6 +221,7 @@ const addBooking = () => {
     newBooking.year = clickedYear.value;
     newBooking.startTime = activeStartTime.value;
     newBooking.endTime = activeEndTime.value;
+    storeBookings.addBooking(newBooking);
     bookingModal.value = true;
     valueClear();
     error.value = "";
@@ -269,7 +275,8 @@ onMounted(() => {
         {{ activeTopic === "getStarted" ? getStartedContent : contactContent }}
       </div>
     </section>
-    <section
+    <form
+      @submit.prevent="addBooking"
       class="w-[100%] flex flex-col items-center gap-[2.5rem] md:w-[700px] xxl:w-[816px]"
     >
       <!-- Topic -->
@@ -463,37 +470,37 @@ onMounted(() => {
         {{ error }}
       </div>
       <button
-        @click="addBooking"
+        type="submit"
         class="btn w-fit flex justify-center items-center mr-auto py-[.5rem] px-[1rem] text-TextLight rounded-[10px] leading-tight cursor-pointer xxl:py-[.625rem] xxl:px-[1.25rem] xxl:rounded-[11px]"
       >
         Reserve
       </button>
-      <!-- Successfull booking modal -->
+    </form>
+    <!-- Successfull booking modal -->
+    <div
+      v-if="bookingModal"
+      class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
+    >
       <div
-        v-if="bookingModal"
-        class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
+        class="w-[245px] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-[.5rem] py-[1.5rem] px-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
       >
+        <h2 class="text-center text-[1rem] font-[500]">
+          Successfull reservation!
+        </h2>
+        <!-- BTNs -->
         <div
-          class="w-[245px] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-[.5rem] py-[1.5rem] px-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
+          class="flex justify-center items-center gap-[.75rem] flex-wrap mt-[1rem]"
         >
-          <h2 class="text-center text-[1rem] font-[500]">
-            Successfull reservation!
-          </h2>
-          <!-- BTNs -->
-          <div
-            class="flex justify-center items-center gap-[.75rem] flex-wrap mt-[1rem]"
+          <button
+            type="button"
+            @click="bookingModal = false"
+            class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
           >
-            <button
-              type="button"
-              @click="bookingModal = false"
-              class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
-            >
-              Close
-            </button>
-          </div>
+            Close
+          </button>
         </div>
       </div>
-    </section>
+    </div>
   </main>
 </template>
 
