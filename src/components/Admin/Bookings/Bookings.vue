@@ -7,22 +7,34 @@ import DeleteBooking from "@/components/Admin/Bookings/DeleteBooking.vue";
 // Prop handling
 const { storeBookings } = defineProps(["storeBookings"]);
 
+import { useStoreDays } from "@/stores/storeDays";
+
+const storeDays = useStoreDays();
+
 // Delete Booking section
 const deleteBookingid = ref<string>("");
+const dayID = ref<string>("");
+const timeID = ref<number>(-1);
 
-const openDeleteModal = (index: string) => {
-  /* if (editBookingid.value) {
-    closeEditBooking();
-  } */
+const openDeleteModal = (
+  index: string,
+  dayIndex: string,
+  timeIndex: number
+) => {
   deleteBookingid.value = index;
+  dayID.value = dayIndex;
+  timeID.value = timeIndex;
 };
 
 const closeDeleteModal = () => {
   deleteBookingid.value = "";
+  dayID.value = "";
+  timeID.value = -1;
 };
 
 const confirmDelete = () => {
   storeBookings.deleteBooking(deleteBookingid.value);
+  storeDays.updateDayReservedTime(dayID.value, timeID.value, "delete");
   closeDeleteModal();
 };
 </script>
@@ -99,7 +111,7 @@ const confirmDelete = () => {
       >
         <button
           type="button"
-          @click="openDeleteModal(booking.id)"
+          @click="openDeleteModal(booking.id, booking.dayID, booking.timeID)"
           class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
         >
           Delete
