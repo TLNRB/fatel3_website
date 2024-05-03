@@ -1,6 +1,30 @@
 <script setup lang="ts">
+import { ref } from "vue";
+/*-- Import Components --*/
+/* import EditBooking from "@/components/Admin/Bookings/EditBooking.vue"; */
+import DeleteBooking from "@/components/Admin/Bookings/DeleteBooking.vue";
+
 // Prop handling
-const { bookings } = defineProps(["bookings"]);
+const { storeBookings } = defineProps(["storeBookings"]);
+
+// Delete Booking section
+const deleteBookingid = ref<string>("");
+
+const openDeleteModal = (index: string) => {
+  /* if (editBookingid.value) {
+    closeEditBooking();
+  } */
+  deleteBookingid.value = index;
+};
+
+const closeDeleteModal = () => {
+  deleteBookingid.value = "";
+};
+
+const confirmDelete = () => {
+  storeBookings.deleteBooking(deleteBookingid.value);
+  closeDeleteModal();
+};
 </script>
 
 <template>
@@ -8,7 +32,7 @@ const { bookings } = defineProps(["bookings"]);
     class="w-[100%] flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]"
   >
     <div
-      v-for="(booking, index) in bookings"
+      v-for="(booking, index) in storeBookings.bookings"
       :key="index"
       class="w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
     >
@@ -54,7 +78,7 @@ const { bookings } = defineProps(["bookings"]);
       </div>
       <!-- Message -->
       <div
-        v-if="booking.message"
+        v-if="booking.information"
         class="flex items-center gap-[1rem] xs:gap-[1.5rem]"
       >
         <div
@@ -65,19 +89,31 @@ const { bookings } = defineProps(["bookings"]);
         <div
           class="w-[100%] py-[.5rem] px-[.75rem] text-[13px] font-light border-[1px] border-ltBorder rounded-[7px] leading-tight sm:text-[.875rem]"
         >
-          {{ booking.message }}
+          {{ booking.information }}
         </div>
       </div>
       <!-- BTNs -->
       <div
         class="flex justify-center items-center gap-[.75rem] flex-wrap"
-        :class="booking.message ? 'mt-[.25rem]' : 'mt-auto'"
+        :class="booking.information ? 'mt-[.25rem]' : 'mt-auto'"
       >
         <button
+          type="button"
+          @click="openDeleteModal(booking.id)"
           class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] text-ltTextNegative border-[1px] border-ltTextNegative rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
         >
           Delete
         </button>
+      </div>
+      <!-- Delete FAQ -->
+      <div
+        v-if="deleteBookingid === booking.id"
+        class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
+      >
+        <DeleteBooking
+          @savedChanges="confirmDelete"
+          @canceledChanges="closeDeleteModal"
+        />
       </div>
     </div>
   </section>
