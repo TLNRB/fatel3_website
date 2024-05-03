@@ -154,6 +154,7 @@ onMounted(() => {
   const supportId = router.currentRoute.value.query.id as string;
   if (supportId) {
     setActiveTopic(supportId);
+    console.log(supportId);
   }
 });
 </script>
@@ -214,7 +215,11 @@ onMounted(() => {
         >
           <div
             class="text-[.875rem] font-light leading-tight translate-y-[1px] xxl:text-[15px] xxl:translate-y-[.5px]"
-            :class="activeTopic ? 'text-TextSemiDark' : 'text-TextSemiNormal'"
+            :class="
+              activeTopic && activeTopic !== 'support'
+                ? 'text-TextSemiDark'
+                : 'text-TextSemiNormal'
+            "
           >
             {{
               activeTopic && activeTopic !== "support"
