@@ -12,11 +12,13 @@ import resourcesData from "@/data/resourcesData";
 import { useStoreAuth } from "@/stores/storeAuth";
 import { useStoreFAQs } from "@/stores/storeFAQs";
 import { useStoreReviews } from "@/stores/storeReviews";
+import { useStoreDays } from "@/stores/storeDays";
 
 // Store handling
 const storeAuth = useStoreAuth();
 const storeFAQs = useStoreFAQs();
 const storeReviews = useStoreReviews();
+const storeDays = useStoreDays();
 
 // Router
 const route = useRoute();
@@ -91,6 +93,7 @@ onMounted(() => {
   storeFAQs.getFAQs("home");
   storeFAQs.getFAQs("pricing");
   storeReviews.getReviews();
+  storeDays.getDays();
 });
 </script>
 
@@ -106,4 +109,3 @@ onMounted(() => {
 </template>
 
 <style scoped></style>
-@/stores/storeFAQs

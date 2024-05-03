@@ -19,6 +19,8 @@ interface Booking {
   year: number;
   startTime: string;
   endTime: string;
+  dayID: string;
+  timeID: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -50,6 +52,8 @@ export const useStoreBookings = defineStore("storeBookings", {
             year: doc.data().year,
             startTime: doc.data().startTime,
             endTime: doc.data().endTime,
+            dayID: doc.data().dayID,
+            timeID: doc.data().timeID,
             firstName: doc.data().firstName,
             lastName: doc.data().lastName,
             email: doc.data().email,
@@ -69,21 +73,8 @@ export const useStoreBookings = defineStore("storeBookings", {
         year: bookingContent.year,
         startTime: bookingContent.startTime,
         endTime: bookingContent.endTime,
-        firstName: bookingContent.firstName,
-        lastName: bookingContent.lastName,
-        email: bookingContent.email,
-        information: bookingContent.information,
-      });
-    },
-    // Update Booking
-    async updateBooking(bookingContent: any, id: string) {
-      await updateDoc(doc(bookingsCollectionRef, id), {
-        topic: bookingContent.topic,
-        day: bookingContent.day,
-        month: bookingContent.month,
-        year: bookingContent.year,
-        startTime: bookingContent.startTime,
-        endTime: bookingContent.endTime,
+        dayID: bookingContent.dayID,
+        timeID: bookingContent.timeID,
         firstName: bookingContent.firstName,
         lastName: bookingContent.lastName,
         email: bookingContent.email,

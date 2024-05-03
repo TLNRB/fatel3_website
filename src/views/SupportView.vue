@@ -5,13 +5,16 @@ import { useRouter } from "vue-router";
 import SectionType from "@/components/Misc/SectionType.vue";
 /*-- Import Store --*/
 import { useStoreBookings } from "@/stores/storeBookings";
+import { useStoreDays } from "@/stores/storeDays";
 
 // Store handling
 const storeBookings = useStoreBookings();
+const storeDays = useStoreDays();
 
+// Router
 const router = useRouter();
 
-/* Dynamic data */
+/*----- Dynamic data -----*/
 // Get Started
 const getStartedSection = ref<string>("get started");
 const getStartedTitleFirst = ref<string>("Get Started with");
@@ -30,11 +33,13 @@ const contactContent = ref<string>(
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 );
 
-/* Support */
+/*----- Support -----*/
+// Item dropdowns
 const activeItem = ref<string>("");
 const toggleActiveItem = (id: string) => {
   activeItem.value = activeItem.value === id ? "" : id;
 };
+
 // Topic
 const topics: any = [
   { id: "getStarted", title: "Get Started" },
@@ -45,13 +50,20 @@ const topics: any = [
 ];
 
 const activeTopic = ref<string>("");
-const activeTopicTitle = ref<string>();
+const activeTopicTitle = ref<string>("");
+
 const setActiveTopic = (id: string) => {
   activeTopic.value = id;
   activeTopicTitle.value = topics.find((topic: any) => topic.id === id)?.title;
   toggleActiveItem("");
 };
 
+const clearActiveTopic = () => {
+  activeTopic.value = "";
+  activeTopicTitle.value = "";
+};
+
+// Watch for the query id and set the active topic
 watch(
   () => router.currentRoute.value,
   () => {
@@ -62,21 +74,20 @@ watch(
 );
 
 // Time
-const times: any = ref([
-  { startTime: "12:00", endTime: "13:00", reserved: false },
-  { startTime: "13:00", endTime: "14:00", reserved: false },
-  { startTime: "14:00", endTime: "15:00", reserved: false },
-  { startTime: "15:00", endTime: "16:00", reserved: false },
-  { startTime: "16:00", endTime: "17:00", reserved: false },
-  { startTime: "17:00", endTime: "18:00", reserved: false },
-  { startTime: "18:00", endTime: "19:00", reserved: false },
-]);
-
 const activeStartTime = ref<string>("");
 const activeEndTime = ref<string>("");
-const setActiveTime = (startTime: string, endTime: string) => {
+const activeTimeID = ref<number>(-1);
+
+const setActiveTime = (startTime: string, endTime: string, index: number) => {
   activeStartTime.value = startTime;
   activeEndTime.value = endTime;
+  activeTimeID.value = index;
+};
+
+const clearActiveTime = () => {
+  activeStartTime.value = "";
+  activeEndTime.value = "";
+  activeTimeID.value = -1;
 };
 
 // Date
@@ -107,17 +118,17 @@ const weekdayNames: string[] = [
 
 // Get today's date
 const today = new Date();
-// Get today's day and month and week day
+// Get today's day and month and year and week day
 const currentDay = today.getDate();
 const currentMonth = monthNames[today.getMonth()];
 const currentYear = today.getFullYear();
 const weekday = weekdayNames[today.getDay()];
 
 // Make today's day and month active as default
-const clickedDay = ref<number | null>();
-const clickedMonth = ref<string | null>();
-const clickedYear = ref<number | null>();
-const clickedWeekday = ref<string | null>();
+const clickedDay = ref<number>();
+const clickedMonth = ref<string>();
+const clickedYear = ref<number>();
+const clickedWeekday = ref<string>();
 
 // Define an array of days that will be displayed
 const days: any = ref([
@@ -150,6 +161,15 @@ for (let i = 1; i <= 6; i++) {
   });
 }
 
+// Filter the days based on the clicked day for displaying the correct time slots
+const filteredDays = ref<any>();
+
+const filterDays = (weekday: string) => {
+  return (filteredDays.value = storeDays.days.find(
+    (day: any) => day.day === weekday
+  ));
+};
+
 const setActiveDate = (
   weekday: string,
   date: number,
@@ -165,9 +185,11 @@ const setActiveDate = (
   clickedMonth.value = month;
   clickedYear.value = year;
   clickedWeekday.value = weekday;
+  // Filter the days based on the clicked day
+  filterDays(weekday);
 };
 
-/* Booking */
+/*----- Booking -----*/
 const newBooking: any = reactive({
   topic: "",
   day: "",
@@ -175,11 +197,16 @@ const newBooking: any = reactive({
   year: "",
   startTime: "",
   endTime: "",
+  dayID: "",
+  timeID: -1,
   firstName: "",
   lastName: "",
   email: "",
   information: "",
 });
+
+const bookingModal = ref<boolean>(false);
+const error = ref<string>("");
 
 const valueClear = () => {
   newBooking.topic = "";
@@ -188,17 +215,16 @@ const valueClear = () => {
   newBooking.year = "";
   newBooking.startTime = "";
   newBooking.endTime = "";
+  newBooking.dayID = "";
+  newBooking.timeID = -1;
   newBooking.firstName = "";
   newBooking.lastName = "";
   newBooking.email = "";
   newBooking.information = "";
-  setActiveTopic("");
-  setActiveTime("", "");
-  setActiveDate("", 0, "", 0);
+  clearActiveTopic();
+  clearActiveTime();
+  setActiveDate("", -1, "", -1);
 };
-
-const bookingModal = ref<boolean>(false);
-const error = ref<string>("");
 
 const addBooking = () => {
   if (
@@ -220,8 +246,17 @@ const addBooking = () => {
     newBooking.year = clickedYear.value;
     newBooking.startTime = activeStartTime.value;
     newBooking.endTime = activeEndTime.value;
+    newBooking.dayID = filteredDays.value.id;
+    newBooking.timeID = activeTimeID.value;
+
     storeBookings.addBooking(newBooking);
+    storeDays.updateDayReservedTime(
+      filteredDays.value.id,
+      activeTimeID.value,
+      "reserve"
+    );
     bookingModal.value = true;
+
     valueClear();
     error.value = "";
   }
@@ -386,10 +421,11 @@ onMounted(() => {
           Select Time
         </div>
         <div
+          v-if="filteredDays"
           class="flex items-center gap-[1.125rem] flex-wrap mt-[1rem] xxl:gap-[1.25rem] xxl:mt-[1.25rem]"
         >
           <div
-            v-for="(time, index) in times"
+            v-for="(time, index) in filteredDays.times"
             :key="index"
             class="flex justify-center items-center py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] rounded-[6px] leading-[1.2] duration-[.15s] ease-in-out xxl:text-[15px] xxl:rounded-[7px]"
             :class="[
@@ -402,11 +438,19 @@ onMounted(() => {
                 : 'cursor-pointer',
             ]"
             @click="
-              !time.reserved ? setActiveTime(time.startTime, time.endTime) : ''
+              !time.reserved
+                ? setActiveTime(time.startTime, time.endTime, index)
+                : ''
             "
           >
             {{ time.startTime }} - {{ time.endTime }}
           </div>
+        </div>
+        <div
+          v-else
+          class="mt-[1rem] text-[.875rem] font-light text-TextSemiNormal italic xxl:mt-[1.25rem]"
+        >
+          Select a date to display the times
         </div>
       </div>
       <!-- Name  -->
