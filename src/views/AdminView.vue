@@ -33,11 +33,22 @@ const sections: any = [
   },
 ];
 
+// Set id of active edit for reviews
+let editReviewID: string = "";
+const setEditReviewID = (id: string) => {
+  editReviewID = id;
+};
+
 // Active Section
 const activeSection = ref<string>("Bookings");
 
 const setActiveSection = (section: string) => {
   activeSection.value = section;
+  // Close editing review if active section is not reviews (its becasue of the image upload)
+  if (editReviewID) {
+    storeReviews.closeEditing(editReviewID);
+    editReviewID = "";
+  }
 };
 
 // Bookings
@@ -102,6 +113,7 @@ const bookings: any = [
     <Reviews
       v-else-if="activeSection === 'reviews'"
       :storeReviews="storeReviews"
+      @activeEditReviewID="setEditReviewID"
     />
     <FAQs
       v-else-if="activeSection === 'faqHome'"

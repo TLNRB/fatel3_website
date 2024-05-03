@@ -107,11 +107,11 @@ const cancelChanges = () => {
           :class="error && !newReview.imgName ? ' border-ltTextNegative' : ''"
         >
           <span
-            class="text-[12px] font-light leading-tight sm:text-[14px]"
+            class="font-light leading-tight"
             :class="
               image || newReview.imgName
-                ? 'text-TextSemiDark  text-[13px] sm:text-[14px]'
-                : 'text-ltBorderNormal pl-[.75rem] text-[12px] sm:text-[13px]'
+                ? 'text-TextSemiDark text-[12px] sm:text-[13px]'
+                : 'text-ltBorderNormal pl-[.75rem] text-[13px] sm:text-[14px]'
             "
             >{{
               image
