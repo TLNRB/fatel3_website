@@ -45,7 +45,7 @@ const topics: any = [
 ];
 
 const activeTopic = ref<string>("");
-const activeTopicTitle = ref<string>("");
+const activeTopicTitle = ref<string>();
 const setActiveTopic = (id: string) => {
   activeTopic.value = id;
   activeTopicTitle.value = topics.find((topic: any) => topic.id === id)?.title;
@@ -202,7 +202,7 @@ const error = ref<string>("");
 
 const addBooking = () => {
   if (
-    !activeTopicTitle ||
+    !activeTopicTitle.value ||
     !clickedDay.value ||
     !clickedMonth.value ||
     !clickedYear.value ||
@@ -215,7 +215,6 @@ const addBooking = () => {
     error.value = "Fill in every information";
   } else {
     newBooking.topic = activeTopicTitle;
-    console.log(newBooking.topic);
     newBooking.day = clickedDay.value;
     newBooking.month = monthNames.indexOf(clickedMonth.value) + 1;
     newBooking.year = clickedYear.value;

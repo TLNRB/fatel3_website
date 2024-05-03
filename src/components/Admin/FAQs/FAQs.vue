@@ -113,7 +113,7 @@ const confirmDelete = () => {
         <!-- Display FAQ -->
         <div
           v-if="editFAQid !== faq.id"
-          class="h-[100%] w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltBorderNormal rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
+          class="h-[100%] w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltBorderNormal rounded-[10px] overflow-hidden xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
         >
           <!-- Question -->
           <div class="flex items-center gap-[1rem] xs:gap-[1.5rem]">
