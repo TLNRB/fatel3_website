@@ -14,8 +14,11 @@ const bookingsCollectionRef = collection(db, "bookings");
 interface Booking {
   id: string;
   topic: string;
-  date: number;
-  time: string;
+  day: number;
+  month: number;
+  year: number;
+  startTime: string;
+  endTime: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -34,16 +37,19 @@ export const useStoreBookings = defineStore("storeBookings", {
   },
 
   actions: {
-    // Get FAQs
-    async getFAQs(collectionIndex: string) {
+    // Get Bookings
+    async getBookings() {
       const unsubscribe = onSnapshot(bookingsCollectionRef, (querySnapshot) => {
         let bookings: any = [];
         querySnapshot.forEach((doc) => {
           let booking = {
             id: doc.id,
             topic: doc.data().topic,
-            date: doc.data().date,
-            time: doc.data().time,
+            day: doc.data().day,
+            month: doc.data().month,
+            year: doc.data().year,
+            startTime: doc.data().startTime,
+            endTime: doc.data().endTime,
             firstName: doc.data().firstName,
             lastName: doc.data().lastName,
             email: doc.data().email,
@@ -58,8 +64,11 @@ export const useStoreBookings = defineStore("storeBookings", {
     async addBooking(bookingContent: any) {
       await addDoc(bookingsCollectionRef, {
         topic: bookingContent.topic,
-        date: bookingContent.date,
-        time: bookingContent.time,
+        day: bookingContent.day,
+        month: bookingContent.month,
+        year: bookingContent.year,
+        startTime: bookingContent.startTime,
+        endTime: bookingContent.endTime,
         firstName: bookingContent.firstName,
         lastName: bookingContent.lastName,
         email: bookingContent.email,
@@ -70,8 +79,11 @@ export const useStoreBookings = defineStore("storeBookings", {
     async updateBooking(bookingContent: any, id: string) {
       await updateDoc(doc(bookingsCollectionRef, id), {
         topic: bookingContent.topic,
-        date: bookingContent.date,
-        time: bookingContent.time,
+        day: bookingContent.day,
+        month: bookingContent.month,
+        year: bookingContent.year,
+        startTime: bookingContent.startTime,
+        endTime: bookingContent.endTime,
         firstName: bookingContent.firstName,
         lastName: bookingContent.lastName,
         email: bookingContent.email,
