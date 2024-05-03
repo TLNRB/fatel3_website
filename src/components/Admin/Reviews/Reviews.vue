@@ -59,10 +59,18 @@ const closeAddReview = () => {
 };
 
 // Edit Review section
+// Emit the edit review id to parent for closing the edit modal properly and delete the unused image from storage in case of section change
+const emit = defineEmits(["activeEditReviewID"]);
+
+const editedReviewID = (reviewID: string) => {
+  emit("activeEditReviewID", reviewID);
+};
+
 const editReviewid = ref<string>("");
 
 const editReview = (index: string) => {
   editReviewid.value = index;
+  editedReviewID(index);
   for (let i = 0; i < storeReviews.reviews.length; i++) {
     // Getting the input values by id
     if (storeReviews.reviews[i].id === index) {

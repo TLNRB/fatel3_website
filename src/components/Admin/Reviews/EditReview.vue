@@ -28,7 +28,6 @@ const saveChanges = () => {
   ) {
     error.value = "Fill in every information or wait for image upload (5s)";
   } else {
-    console.log("savedChanges");
     emit("savedChanges");
     error.value = "";
     image.value = "";
@@ -100,18 +99,18 @@ const cancelChanges = () => {
         <img
           :src="image ? storeReviews.img : newReview.img"
           alt="Image of the reviewer or the business"
-          class="h-[50px]"
+          class="h-[50px] text-[12px] font-light text-TextNormal sm:text-[13px]"
         />
         <label
           class="h-[34px] w-[100%] overflow-hidden flex flex-col justify-center cursor-pointer sm:h-[35px]"
           :class="error && !newReview.imgName ? ' border-ltTextNegative' : ''"
         >
           <span
-            class="text-[12px] font-light leading-tight sm:text-[13]"
+            class="font-light leading-tight"
             :class="
               image || newReview.imgName
-                ? 'text-TextSemiDark'
-                : 'text-ltBorderNormal'
+                ? 'text-TextSemiDark text-[12px] sm:text-[13px]'
+                : 'text-ltBorderNormal pl-[.75rem] text-[13px] sm:text-[14px]'
             "
             >{{
               image
