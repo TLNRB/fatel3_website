@@ -1,30 +1,11 @@
 <script setup lang="ts">
 /*-- Import Components --*/
 import SectionType from "@/components/Misc/SectionType.vue";
-/*-- Import assets --*/
-import tempImg from "@/assets/images/temp-review.jpg";
+/*-- Import Store --*/
+import { useStoreReviews } from "@/stores/storeReviews";
 
-// FAQs
-const reviews: any = [
-  {
-    name: "Reviewer Name",
-    businessName: "Business Name",
-    img: tempImg,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    name: "Reviewer Name",
-    businessName: "Business Name",
-    img: tempImg,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    name: "Reviewer Name",
-    businessName: "Business Name",
-    img: tempImg,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
+// Store handling
+const storeReviews = useStoreReviews();
 </script>
 
 <template>
@@ -49,8 +30,8 @@ const reviews: any = [
         class="h-[100%] flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]"
       >
         <div
-          v-for="(review, index) in reviews"
-          :key="index"
+          v-for="review in storeReviews.reviews"
+          :key="review.id"
           class="min-h-[100%] w-[240px] p-[.375rem] border-[2px] border-ltPrimary rounded-[20px] xs:w-[300px] xl:w-[350px]"
         >
           <div
@@ -66,7 +47,7 @@ const reviews: any = [
             <div
               class="my-[1.25rem] text-TextLight font-light leading-snug xl:my-[1.5rem] xxl:text-[1.125rem]"
             >
-              {{ review.text }}
+              {{ review.review }}
             </div>
             <div class="flex items-center gap-[.75rem]">
               <img
@@ -83,7 +64,7 @@ const reviews: any = [
                 <div
                   class="text-[13px] font-light text-TextSemiNormal leading-tight xxl:text-[.875rem]"
                 >
-                  {{ review.businessName }}
+                  {{ review.businessPosition }}
                 </div>
               </div>
             </div>
