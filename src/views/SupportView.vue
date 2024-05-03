@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { ref, reactive, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 /*-- Import Components --*/
 import SectionType from "@/components/Misc/SectionType.vue";
@@ -40,8 +40,10 @@ const topics: any = [
 ];
 
 const activeTopic = ref<string>("");
+const activeTopicTitle = ref<string>("");
 const setActiveTopic = (id: string) => {
   activeTopic.value = id;
+  activeTopicTitle.value = topics.find((topic: any) => topic.id === id)?.title;
   toggleActiveItem("");
 };
 
@@ -55,23 +57,25 @@ watch(
 );
 
 // Time
-const times = ref([
+const times: any = ref([
   { startTime: "12:00", endTime: "13:00", reserved: false },
-  { startTime: "13:00", endTime: "14:00", reserved: true },
+  { startTime: "13:00", endTime: "14:00", reserved: false },
   { startTime: "14:00", endTime: "15:00", reserved: false },
-  { startTime: "15:00", endTime: "16:00", reserved: true },
+  { startTime: "15:00", endTime: "16:00", reserved: false },
   { startTime: "16:00", endTime: "17:00", reserved: false },
   { startTime: "17:00", endTime: "18:00", reserved: false },
   { startTime: "18:00", endTime: "19:00", reserved: false },
 ]);
 
-const activeTime = ref<string>("");
-const setActiveTime = (startTime: string) => {
-  activeTime.value = startTime;
+const activeStartTime = ref<string>("");
+const activeEndTime = ref<string>("");
+const setActiveTime = (startTime: string, endTime: string) => {
+  activeStartTime.value = startTime;
+  activeEndTime.value = endTime;
 };
 
 // Date
-const monthNames = [
+const monthNames: string[] = [
   "January",
   "February",
   "March",
@@ -86,7 +90,15 @@ const monthNames = [
   "December",
 ];
 
-const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const weekdayNames: string[] = [
+  "Sun",
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+];
 
 // Get today's date
 const today = new Date();
@@ -97,13 +109,13 @@ const currentYear = today.getFullYear();
 const weekday = weekdayNames[today.getDay()];
 
 // Make today's day and month active as default
-const clickedDay = ref();
-const clickedMonth = ref();
-const clickedYear = ref();
-const clickedWeekday = ref();
+const clickedDay = ref<number | null>();
+const clickedMonth = ref<string | null>();
+const clickedYear = ref<number | null>();
+const clickedWeekday = ref<string | null>();
 
 // Define an array of days that will be displayed
-const days = ref([
+const days: any = ref([
   {
     date: currentDay,
     month: currentMonth,
@@ -140,7 +152,7 @@ const setActiveDate = (
   year: number
 ) => {
   // Make the clicked day active for styling
-  days.value.forEach((day) =>
+  days.value.forEach((day: any) =>
     day.date === date ? (day.active = true) : (day.active = false)
   );
   // Display and store the clicked day's data
@@ -150,11 +162,70 @@ const setActiveDate = (
   clickedWeekday.value = weekday;
 };
 
+// Booking
+const newBooking: any = reactive({
+  topic: "",
+  day: "",
+  month: "",
+  year: "",
+  startTime: "",
+  endTime: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  information: "",
+});
+
+const valueClear = () => {
+  newBooking.topic = "";
+  newBooking.day = "";
+  newBooking.month = "";
+  newBooking.year = "";
+  newBooking.startTime = "";
+  newBooking.endTime = "";
+  newBooking.firstName = "";
+  newBooking.lastName = "";
+  newBooking.email = "";
+  newBooking.information = "";
+  setActiveTopic("");
+  setActiveTime("", "");
+  setActiveDate("", 0, "", 0);
+};
+
+const bookingModal = ref<boolean>(false);
+const error = ref<string>("");
+
+const addBooking = () => {
+  if (
+    !activeTopicTitle ||
+    !clickedDay.value ||
+    !clickedMonth.value ||
+    !clickedYear.value ||
+    !activeStartTime.value ||
+    !activeEndTime.value ||
+    !newBooking.firstName ||
+    !newBooking.lastName ||
+    !newBooking.email
+  ) {
+    error.value = "Fill in every information";
+  } else {
+    newBooking.topic = activeTopicTitle;
+    console.log(newBooking.topic);
+    newBooking.day = clickedDay.value;
+    newBooking.month = monthNames.indexOf(clickedMonth.value) + 1;
+    newBooking.year = clickedYear.value;
+    newBooking.startTime = activeStartTime.value;
+    newBooking.endTime = activeEndTime.value;
+    bookingModal.value = true;
+    valueClear();
+    error.value = "";
+  }
+};
+
 onMounted(() => {
   const supportId = router.currentRoute.value.query.id as string;
   if (supportId) {
     setActiveTopic(supportId);
-    console.log(supportId);
   }
 });
 </script>
@@ -206,11 +277,12 @@ onMounted(() => {
         <div class="font-[500] leading-none">What can we help you with?</div>
         <div
           class="flex justify-between items-center mt-[1rem] py-[.625rem] pl-[.875rem] pr-[.625rem] border-[1px] border-ltBorderNormal rounded-[6px] cursor-pointer duration-[.15s] ease-in-out xxl:mt-[1.25rem] xxl:py-[.75rem] xxl:pl-[1rem] xxl:rounded-[7px]"
-          :class="
+          :class="[
             activeItem === 'topic'
               ? 'border-ltPrimary'
-              : 'border-ltBorderNormal'
-          "
+              : 'border-ltBorderNormal',
+            error && !activeTopicTitle ? 'border-ltTextNegative' : '',
+          ]"
           @click="toggleActiveItem('topic')"
         >
           <div
@@ -255,7 +327,14 @@ onMounted(() => {
       </div>
       <!-- Date -->
       <div class="w-[100%] flex flex-col">
-        <div class="font-[500] leading-none">
+        <div
+          class="font-[500] leading-none"
+          :class="
+            error && (!clickedDay || !clickedMonth || !clickedYear)
+              ? 'text-ltTextNegative font-[400]'
+              : ''
+          "
+        >
           Select Date
           <span
             v-if="clickedMonth && clickedYear"
@@ -290,7 +369,16 @@ onMounted(() => {
       </div>
       <!-- Time -->
       <div class="w-[100%] relative flex flex-col">
-        <div class="font-[500] leading-none">Select Time</div>
+        <div
+          class="font-[500] leading-none"
+          :class="
+            error && (!activeStartTime || !activeEndTime)
+              ? 'text-ltTextNegative font-[400]'
+              : ''
+          "
+        >
+          Select Time
+        </div>
         <div
           class="flex items-center gap-[1.125rem] flex-wrap mt-[1rem] xxl:gap-[1.25rem] xxl:mt-[1.25rem]"
         >
@@ -299,14 +387,17 @@ onMounted(() => {
             :key="index"
             class="flex justify-center items-center py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] rounded-[6px] leading-[1.2] duration-[.15s] ease-in-out xxl:text-[15px] xxl:rounded-[7px]"
             :class="[
-              activeTime === time.startTime
+              activeStartTime === time.startTime &&
+              activeEndTime === time.endTime
                 ? 'border-ltPrimary text-ltPrimary'
                 : 'border-ltBorderNormal text-TextSemiDark',
               time.reserved
                 ? 'text-ltBorderNormal line-through cursor-not-allowed'
                 : 'cursor-pointer',
             ]"
-            @click="!time.reserved ? setActiveTime(time.startTime) : ''"
+            @click="
+              !time.reserved ? setActiveTime(time.startTime, time.endTime) : ''
+            "
           >
             {{ time.startTime }} - {{ time.endTime }}
           </div>
@@ -322,8 +413,10 @@ onMounted(() => {
           <div class="font-[500] leading-none">First Name</div>
           <input
             type="text"
+            v-model="newBooking.firstName"
             placeholder="Your first name"
             class="input-field py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
+            :class="error && !newBooking.firstName ? 'input-error' : ''"
           />
         </div>
         <div
@@ -332,8 +425,10 @@ onMounted(() => {
           <div class="font-[500] leading-none">Last Name</div>
           <input
             type="text"
+            v-model="newBooking.lastName"
             placeholder="Your last name"
             class="input-field py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
+            :class="error && !newBooking.lastName ? 'input-error' : ''"
           />
         </div>
       </div>
@@ -342,8 +437,10 @@ onMounted(() => {
         <div class="font-[500] leading-none">Email Address</div>
         <input
           type="email"
+          v-model="newBooking.email"
           placeholder="example@email.com"
           class="input-field py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
+          :class="error && !newBooking.email ? 'input-error' : ''"
         />
       </div>
 
@@ -355,14 +452,47 @@ onMounted(() => {
         </div>
         <textarea
           placeholder="I have a problem with..."
+          v-model="newBooking.information"
           class="input-field min-h-[100px] py-[.625rem] px-[.875rem] text-[.875rem] font-light border-[1px] leading-tight rounded-[6px] outline-none xxl:py-[.75rem] xxl:px-[1rem] xxl:text-[15px] xxl:rounded-[7px]"
         ></textarea>
       </div>
+      <div
+        v-if="error"
+        class="mr-auto text-[.875rem] font-light text-ltTextNegative"
+      >
+        {{ error }}
+      </div>
       <button
+        @click="addBooking"
         class="btn w-fit flex justify-center items-center mr-auto py-[.5rem] px-[1rem] text-TextLight rounded-[10px] leading-tight cursor-pointer xxl:py-[.625rem] xxl:px-[1.25rem] xxl:rounded-[11px]"
       >
         Reserve
       </button>
+      <!-- Successfull booking modal -->
+      <div
+        v-if="bookingModal"
+        class="h-[100%] w-[100%] z-[9] fixed top-0 left-0 right-0 overflow-auto bg-BGLight"
+      >
+        <div
+          class="w-[245px] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-[.5rem] py-[1.5rem] px-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
+        >
+          <h2 class="text-center text-[1rem] font-[500]">
+            Successfull reservation!
+          </h2>
+          <!-- BTNs -->
+          <div
+            class="flex justify-center items-center gap-[.75rem] flex-wrap mt-[1rem]"
+          >
+            <button
+              type="button"
+              @click="bookingModal = false"
+              class="py-[.375rem] px-[.875rem] bg-BGLight text-[.875rem] border-[1px] border-ltBorderNormal rounded-[8px] leading-tight cursor-pointer duration-[.15s] ease-in-out"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </template>
@@ -400,6 +530,10 @@ onMounted(() => {
 
 .input-field:focus {
   border-color: var(--ltPrimary);
+}
+
+.input-error {
+  border-color: var(--ltTextNegative);
 }
 
 ::placeholder {
