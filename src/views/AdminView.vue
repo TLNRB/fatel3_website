@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 /*-- Import Components --*/
 import SectionType from "@/components/Misc/SectionType.vue";
 import Bookings from "@/components/Admin/Bookings/Bookings.vue";
@@ -8,10 +8,12 @@ import Reviews from "@/components/Admin/Reviews/Reviews.vue";
 /*-- Import Store --*/
 import { useStoreFAQs } from "@/stores/storeFAQs";
 import { useStoreReviews } from "@/stores/storeReviews";
+import { useStoreBookings } from "@/stores/storeBookings";
 
 // Store handling
 const storeFAQs = useStoreFAQs();
 const storeReviews = useStoreReviews();
+const storeBookings = useStoreBookings();
 
 // Sections
 const sections: any = [
@@ -79,6 +81,10 @@ const bookings: any = [
     message: "",
   },
 ];
+
+onMounted(() => {
+  storeBookings.getBookings();
+});
 </script>
 
 <template>
@@ -109,7 +115,10 @@ const bookings: any = [
       </div>
     </div>
     <!-- Section Content -->
-    <Bookings v-if="activeSection === 'bookings'" :bookings="bookings" />
+    <Bookings
+      v-if="activeSection === 'bookings'"
+      :storeBookings="storeBookings"
+    />
     <Reviews
       v-else-if="activeSection === 'reviews'"
       :storeReviews="storeReviews"

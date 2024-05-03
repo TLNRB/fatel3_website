@@ -3,7 +3,7 @@ import { ref, reactive, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 /*-- Import Components --*/
 import SectionType from "@/components/Misc/SectionType.vue";
-/*-- Import store --*/
+/*-- Import Store --*/
 import { useStoreBookings } from "@/stores/storeBookings";
 
 // Store handling
