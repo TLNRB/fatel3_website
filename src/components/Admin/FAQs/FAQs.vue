@@ -105,6 +105,11 @@ const confirmDelete = () => {
     <!-- FAQs -->
     <div class="flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]">
       <div
+        v-if="
+          collectionID === 'home'
+            ? storeFAQs.faqsHome.length > 0
+            : storeFAQs.faqsPricing.length > 0
+        "
         v-for="faq in collectionID === 'home'
           ? storeFAQs.faqsHome
           : storeFAQs.faqsPricing"
@@ -177,6 +182,7 @@ const confirmDelete = () => {
           />
         </div>
       </div>
+      <div v-else class="text-TextNormal font-light italic">No FAQs yet</div>
     </div>
     <!--  Add FAQ -->
     <button

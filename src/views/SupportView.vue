@@ -125,10 +125,10 @@ const currentYear = today.getFullYear();
 const weekday = weekdayNames[today.getDay()];
 
 // Make today's day and month active as default
-const clickedDay = ref<number>();
-const clickedMonth = ref<string>();
-const clickedYear = ref<number>();
-const clickedWeekday = ref<string>();
+const clickedDay = ref<number>(-1);
+const clickedMonth = ref<string>("");
+const clickedYear = ref<number>(-1);
+const clickedWeekday = ref<string>("");
 
 // Define an array of days that will be displayed
 const days: any = ref([
@@ -239,26 +239,43 @@ const addBooking = () => {
     !newBooking.email
   ) {
     error.value = "Fill in every information";
+    return;
   } else {
-    newBooking.topic = activeTopicTitle;
-    newBooking.day = clickedDay.value;
-    newBooking.month = monthNames.indexOf(clickedMonth.value) + 1;
-    newBooking.year = clickedYear.value;
-    newBooking.startTime = activeStartTime.value;
-    newBooking.endTime = activeEndTime.value;
-    newBooking.dayID = filteredDays.value.id;
-    newBooking.timeID = activeTimeID.value;
+    // Get the newest data of the clicked day
+    filterDays(clickedWeekday.value);
 
-    storeBookings.addBooking(newBooking);
-    storeDays.updateDayReservedTime(
-      filteredDays.value.id,
-      activeTimeID.value,
-      "reserve"
+    // Check if the time slot has been just reserved
+    const isReserved = filteredDays.value.times.find(
+      (time: any) =>
+        time.reserved &&
+        time.startTime === activeStartTime.value &&
+        time.endTime === activeEndTime.value
     );
-    bookingModal.value = true;
 
-    valueClear();
-    error.value = "";
+    if (isReserved) {
+      error.value = "This time slot is already reserved";
+      return;
+    } else {
+      newBooking.topic = activeTopicTitle;
+      newBooking.day = clickedDay.value;
+      newBooking.month = monthNames.indexOf(clickedMonth.value) + 1;
+      newBooking.year = clickedYear.value;
+      newBooking.startTime = activeStartTime.value;
+      newBooking.endTime = activeEndTime.value;
+      newBooking.dayID = filteredDays.value.id;
+      newBooking.timeID = activeTimeID.value;
+
+      storeBookings.addBooking(newBooking);
+      storeDays.updateDayReservedTime(
+        filteredDays.value.id,
+        activeTimeID.value,
+        "reserve"
+      );
+      bookingModal.value = true;
+
+      valueClear();
+      error.value = "";
+    }
   }
 };
 

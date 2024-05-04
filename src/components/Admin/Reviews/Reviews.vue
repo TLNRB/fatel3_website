@@ -121,7 +121,11 @@ const confirmDelete = () => {
   <section class="w-[100%] flex flex-col gap-[3rem]">
     <!-- Reviews -->
     <div class="flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]">
-      <div v-for="review in storeReviews.reviews" :key="review.id">
+      <div
+        v-if="storeReviews.reviews.length > 0"
+        v-for="review in storeReviews.reviews"
+        :key="review.id"
+      >
         <!-- Display Review -->
         <div
           v-if="editReviewid !== review.id"
@@ -217,6 +221,7 @@ const confirmDelete = () => {
           />
         </div>
       </div>
+      <div v-else class="text-TextNormal font-light italic">No reviews yet</div>
     </div>
     <!--  Add Review -->
     <button
