@@ -44,6 +44,7 @@ const confirmDelete = () => {
     class="w-[100%] flex justify-center gap-[1rem] flex-wrap xl:gap-[1.5rem]"
   >
     <div
+      v-if="storeBookings.bookings.length > 0"
       v-for="(booking, index) in storeBookings.bookings"
       :key="index"
       class="w-[100%] flex flex-col gap-[.5rem] p-[.75rem] bg-BGLight border-[1px] border-ltPrimary rounded-[10px] overflow-hidden xs:w-[325px] sm:w-[400px] xxl:w-[425px]"
@@ -128,6 +129,7 @@ const confirmDelete = () => {
         />
       </div>
     </div>
+    <div v-else class="text-TextNormal font-light italic">No bookings yet</div>
   </section>
 </template>
 
