@@ -1,9 +1,14 @@
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+const {setGlobalOptions} = require("firebase-functions/v2/options");
+
+// Set the maximum instances to 10 for all functions
+setGlobalOptions({maxInstances: 1});
+
+// The Cloud Functions for Firebase SDK to set up triggers and logging.
+const {onSchedule} = require("firebase-functions/v2/scheduler");
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../serviceAccountKey.json");
+var serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

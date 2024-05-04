@@ -42,7 +42,7 @@ const setEditReviewID = (id: string) => {
 };
 
 // Active Section
-const activeSection = ref<string>("Bookings");
+const activeSection = ref<string>("bookings");
 
 const setActiveSection = (section: string) => {
   activeSection.value = section;
@@ -52,35 +52,6 @@ const setActiveSection = (section: string) => {
     editReviewID = "";
   }
 };
-
-// Bookings
-const bookings: any = [
-  {
-    day: 10,
-    month: 5,
-    year: 2024,
-    startTime: "14:00",
-    endTime: "15:00",
-    firstName: "John",
-    lastName: "Doe",
-    email: "example@email.com",
-    topic: "Get Started",
-    message:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    day: 10,
-    month: 5,
-    year: 2024,
-    startTime: "14:00",
-    endTime: "15:00",
-    firstName: "John",
-    lastName: "Doe",
-    email: "example@email.com",
-    topic: "Get Started",
-    message: "",
-  },
-];
 
 onMounted(() => {
   storeBookings.getBookings();
