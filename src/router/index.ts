@@ -1,8 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 /*-- Import Views --*/
 import HomeView from "@/views/HomeView.vue";
+import AllFeaturesView from "@/views/AllFeaturesView.vue";
+import UseCaseView from "@/views/UseCaseView.vue";
+import AboutUsView from "@/views/AboutUsView.vue";
+import PricingView from "@/views/PricingView.vue";
+import SupportView from "@/views/SupportView.vue";
+import AdminView from "@/views/AdminView.vue";
 import LoginView from "@/views/LoginView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
+/*-- Import data --*/
+import useCasesData from "@/data/useCasesData";
+/*-- Import store --*/
+import { useStoreAuth } from "@/stores/storeAuth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +21,52 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/features",
+      name: "features",
+      component: AllFeaturesView,
+    },
+    {
+      path: "/use-cases/:route",
+      name: "usecase",
+      component: UseCaseView,
+      beforeEnter(to) {
+        const useCases = useCasesData;
+        const route = to.params.route;
+        const exists = useCases.some(
+          (useCase: any) => useCase.route === route && !useCase.commingSoon
+        );
+
+        if (!exists) {
+          return {
+            name: "notfound",
+            params: { pathMatch: to.path.substring(1).split("/") },
+            query: to.query,
+            hash: to.hash,
+          };
+        }
+      },
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: AboutUsView,
+    },
+    {
+      path: "/pricing",
+      name: "pricing",
+      component: PricingView,
+    },
+    {
+      path: "/support",
+      name: "support",
+      component: SupportView,
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: AdminView,
     },
     {
       path: "/login",
@@ -26,6 +82,23 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return { top: 0 };
   },
+});
+
+router.beforeEach(async (to, from) => {
+  const storeAuth = useStoreAuth();
+  if (!storeAuth.user.id && to.name === "admin") {
+    return { name: "home" };
+  }
+  if (storeAuth.user.id && to.name === "login") {
+    return false;
+  }
+  if (
+    storeAuth.user.id &&
+    to.name === "admin" &&
+    storeAuth.user.email !== "admin@admin.com"
+  ) {
+    return false;
+  }
 });
 
 export default router;

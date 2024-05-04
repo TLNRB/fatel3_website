@@ -68,7 +68,7 @@ const filteredNavItemsResources = computed(() => {
               Log in
             </RouterLink>
             <RouterLink
-              to="/get-started"
+              :to="{ name: 'support', query: { id: 'getStarted' } }"
               class="footer-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap"
             >
               Get Started
@@ -112,7 +112,7 @@ const filteredNavItemsResources = computed(() => {
             <div class="font-[500] leading-tight">Features</div>
             <div class="flex flex-col gap-[.875rem]">
               <RouterLink
-                to="/features"
+                :to="{ name: 'features', query: { feature: subItem.title } }"
                 v-for="(subItem, index) in filteredNavItemsFeatures.subItems"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
@@ -128,7 +128,7 @@ const filteredNavItemsResources = computed(() => {
             <div class="font-[500] leading-tight">Use Cases</div>
             <div class="flex flex-col gap-[.875rem]">
               <RouterLink
-                :to="subItem.route"
+                :to="`/use-cases/${subItem.route}`"
                 v-for="(subItem, index) in filteredNavItemsUseCases"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"
@@ -144,7 +144,11 @@ const filteredNavItemsResources = computed(() => {
             <div class="font-[500] leading-tight">Resources</div>
             <div class="flex flex-col gap-[.875rem]">
               <RouterLink
-                :to="subItem.route"
+                :to="
+                  subItem.route === '/support'
+                    ? { name: 'support', query: { id: 'support' } }
+                    : subItem.route
+                "
                 v-for="(subItem, index) in filteredNavItemsResources"
                 :key="index"
                 class="nav-item w-fit font-light text-[.875rem] text-TextNormal cursor-pointer duration-[.15s] ease-in-out"

@@ -3,6 +3,17 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { RouterLink } from "vue-router";
 /*-- Import Assets --*/
 import logoPrimary from "@/assets/images/logo_primary.svg";
+/*-- Import Store --*/
+import { useStoreAuth } from "@/stores/storeAuth";
+
+// Store handling
+const storeAuth = useStoreAuth();
+
+// Log out
+const logOut = () => {
+  storeAuth.logOutUser();
+  setActiveIndex("none");
+};
 
 // Prop handling
 const { navItems } = defineProps(["navItems"]);
@@ -38,10 +49,19 @@ const activeIndex = ref<string>("none"); // Track active index
 
 // Method to set active index
 const setActiveIndex = (index: string) => {
-  if (activeIndex.value === index) {
-    activeIndex.value = "none";
+  if (index === "features" || index === "useCases" || index === "resources") {
+    if (activeIndex.value === index) {
+      activeIndex.value = "none";
+    } else {
+      activeIndex.value = index;
+    }
   } else {
-    activeIndex.value = index;
+    if (activeIndex.value === index) {
+      activeIndex.value = "none";
+    } else {
+      activeIndex.value = index;
+    }
+    toggleMenu();
   }
 };
 
@@ -117,11 +137,6 @@ const getSubMenuHeight = (navItem: any) => {
                 v-if="!navItem.subItems && navItem.id !== 'showcase'"
                 :to="navItem.route"
                 class="nav-item w-fit relative flex items-center gap-[3px] py-[.5rem] px-[.875rem] rounded-[11px] cursor-pointer duration-[.15s] ease-in-out xl:px-[.75rem] xl:rounded-[10px]"
-                :class="[
-                  {
-                    'text-ltPrimary': navItem.activePage,
-                  },
-                ]"
                 @click="setActiveIndex(navItem.id)"
               >
                 <div
@@ -178,13 +193,13 @@ const getSubMenuHeight = (navItem: any) => {
               class="overflow-hidden duration-[.375s] ease-in-out xl:w-[100%] xl:absolute xl:top-[72px] xl:left-0 xl:bg-BGNavDropdown xl:border-b-[1px] xl:border-ltBorder"
               :style="getSubMenuHeight(navItem)"
             >
-              <!-- Sub menu for features and use cases -->
+              <!-- Sub menu for features -->
               <div
                 v-if="navItem.id === 'features'"
                 class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1396px] xxl:mx-auto xxl:pl-[141px] xxl:pr-[550px] xxxl:pl-[171px] xxxl:pr-[525px]"
               >
                 <RouterLink
-                  :to="navItem.route"
+                  :to="{ name: 'features', query: { feature: subItem.title } }"
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
                   @click="setActiveIndex('none')"
@@ -206,13 +221,15 @@ const getSubMenuHeight = (navItem: any) => {
                   </div>
                 </RouterLink>
               </div>
-              <!-- Sub menu use cases -->
+              <!-- Sub menu for use cases -->
               <div
                 v-else-if="navItem.id === 'useCases'"
                 class="flex flex-col gap-[.5rem] mt-[.75rem] mb-[1.25rem] sm:flex-row sm:flex-wrap sm:pr-[1rem] md:w-[750px] lg:w-[1025px] xl:my-[2rem] xl:pl-[170px] xl:pr-[150px] xxl:w-[1396px] xxl:mx-auto xxl:pl-[141px] xxl:pr-[550px] xxxl:pl-[171px] xxxl:pr-[525px]"
               >
                 <RouterLink
-                  :to="!subItem.commingSoon ? subItem.route : ''"
+                  :to="
+                    !subItem.commingSoon ? `/use-cases/${subItem.route}` : ''
+                  "
                   v-for="(subItem, index) in navItem.subItems"
                   :key="index"
                   @click="setActiveIndex('none')"
@@ -258,7 +275,13 @@ const getSubMenuHeight = (navItem: any) => {
                   <!-- Company and connect -->
                   <div class="flex flex-col gap-[.5rem] mb-[1.25rem]">
                     <RouterLink
-                      :to="!subItem.commingSoon ? subItem.route : ''"
+                      :to="
+                        !subItem.commingSoon
+                          ? subItem.route === '/support'
+                            ? { name: 'support', query: { id: 'support' } }
+                            : subItem.route
+                          : ''
+                      "
                       v-for="(subItem, index) in item.subItems"
                       :key="index"
                       @click="setActiveIndex('none')"
@@ -302,13 +325,33 @@ const getSubMenuHeight = (navItem: any) => {
           class="flex justify-center items-center gap-[1rem] flex-wrap ml-[-1rem] px-[1rem] xl:ml-0 xl:px-0"
         >
           <RouterLink
+            v-if="
+              storeAuth.user.id && storeAuth.user.email === 'admin@admin.com'
+            "
+            to="/admin"
+            @click="setActiveIndex('none')"
+            class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
+          >
+            admin
+          </RouterLink>
+          <button
+            v-if="storeAuth.user.id"
+            @click="logOut"
+            class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
+          >
+            Log out
+          </button>
+          <RouterLink
+            v-else-if="!storeAuth.user.id"
             to="/login"
+            @click="setActiveIndex('none')"
             class="nav-btn-outline w-[124px] flex justify-center items-center py-[.5rem] px-[1rem] bg-BGLight border-[1px] rounded-[10px] leading-tight xl:w-fit xl:whitespace-nowrap xl:text-[.875rem]"
           >
             Log in
           </RouterLink>
           <RouterLink
-            to="/support"
+            :to="{ name: 'support', query: { id: 'getStarted' } }"
+            @click="setActiveIndex('none')"
             class="nav-btn-solid w-fit flex justify-center items-center py-[.5rem] px-[1rem] text-TextLight border-[1px] rounded-[10px] leading-tight xl:whitespace-nowrap xl:text-[.875rem]"
           >
             Get Started

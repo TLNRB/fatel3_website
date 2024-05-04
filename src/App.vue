@@ -1,12 +1,25 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
 /*-- Import Components --*/
 import Navbar from "@/components/Nav/Navbar.vue";
 import FooterSection from "@/components/Footer/FooterSection.vue";
 /*-- Import Data --*/
-import featuresData from "@/data/featuresData.ts";
-import useCasesData from "@/data/useCasesData.ts";
-import resourcesData from "@/data/resourcesData.ts";
+
+import featuresData from "@/data/featuresData";
+import useCasesData from "@/data/useCasesData";
+import resourcesData from "@/data/resourcesData";
+/*-- Import Store --*/
+import { useStoreAuth } from "@/stores/storeAuth";
+import { useStoreFAQs } from "@/stores/storeFAQs";
+import { useStoreReviews } from "@/stores/storeReviews";
+import { useStoreDays } from "@/stores/storeDays";
+
+// Store handling
+const storeAuth = useStoreAuth();
+const storeFAQs = useStoreFAQs();
+const storeReviews = useStoreReviews();
+const storeDays = useStoreDays();
 
 // Router
 const route = useRoute();
@@ -19,7 +32,6 @@ const navItems: any = [
     title: "Home",
     route: "/",
     subItems: null,
-    activePage: true,
     subMenuOpen: false,
     subMenuHeight: 0,
   },
@@ -28,7 +40,6 @@ const navItems: any = [
     title: "Features",
     route: "/features",
     subItems: featuresData,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeightXS: 388,
     subMenuHeightSM: 206,
@@ -41,9 +52,8 @@ const navItems: any = [
     title: "Use Cases",
     route: "/use-cases",
     subItems: useCasesData,
-    activePage: false,
     subMenuOpen: false,
-    subMenuHeightXS: 206,
+    subMenuHeightXS: 115,
     subMenuHeightSM: 115,
     subMenuHeightMD: 115,
     subMenuHeightLG: 115,
@@ -54,7 +64,6 @@ const navItems: any = [
     title: "Resources",
     route: "/resources",
     subItems: resourcesData,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeightXS: 579,
     subMenuHeightSM: 341,
@@ -67,7 +76,6 @@ const navItems: any = [
     title: "Pricing",
     route: "/pricing",
     subItems: null,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeight: 0,
   },
@@ -76,11 +84,18 @@ const navItems: any = [
     title: "Showcase",
     route: "/#showcase",
     subItems: null,
-    activePage: false,
     subMenuOpen: false,
     subMenuHeight: 0,
   },
 ];
+
+onMounted(() => {
+  storeAuth.init();
+  storeFAQs.getFAQs("home");
+  storeFAQs.getFAQs("pricing");
+  storeReviews.getReviews();
+  storeDays.getDays();
+});
 </script>
 
 <template>
@@ -88,7 +103,11 @@ const navItems: any = [
   <RouterView
     :class="route.path !== '/login' ? 'mt-[66px] lg:mt-[72px]' : ''"
   />
-  <FooterSection v-if="route.path !== '/login'" :navItems="navItems" />
+
+  <FooterSection
+    v-if="route.path !== '/login' && route.path !== '/admin'"
+    :navItems="navItems"
+  />
 </template>
 
 <style scoped></style>

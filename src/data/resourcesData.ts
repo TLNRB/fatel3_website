@@ -1,4 +1,4 @@
-const resources = [
+const resources: any = [
   {
     title: "Company",
     subItems: [

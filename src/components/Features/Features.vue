@@ -34,7 +34,7 @@ import featuresData from "@/data/featuresData";
         <RouterLink
           v-for="(feature, index) in featuresData"
           :key="index"
-          to="/features"
+          :to="{ name: 'features', query: { feature: feature.title } }"
           class="feature w-[100px] flex flex-col items-center gap-[.75rem] cursor-pointer"
         >
           <div
@@ -60,7 +60,7 @@ import featuresData from "@/data/featuresData";
           text="Get Started"
           :icon="arrowIcon"
           altText="arrow icon"
-          route="/support"
+          :route="{ name: 'support', query: { id: 'getStarted' } }"
         />
       </div>
     </div>

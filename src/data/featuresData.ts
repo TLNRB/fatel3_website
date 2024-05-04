@@ -1,13 +1,14 @@
-const features = [
+const features: any = [
   {
     title: "Inventory Management",
     icon: "ri-equalizer-3-line",
     shortDesc: "Get real-time inventory information",
     subItems: [
       {
-        title: "Title",
+        title: "Custom folders",
         icon: "ri-stack-line",
-        longDesc: "Long Description",
+        longDesc:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       },
       {
         title: "Title",

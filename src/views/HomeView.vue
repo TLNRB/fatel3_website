@@ -5,8 +5,13 @@ import Features from "@/components/Features/Features.vue";
 import UseCases from "@/components/UseCases/UseCases.vue";
 import Showcase from "@/components/HomePage/Showcase/Showcase.vue";
 import Reviews from "@/components/HomePage/Reviews/Reviews.vue";
-import FAQ from "@/components/HomePage/FAQ/FAQ.vue";
+import FAQ from "@/components/FAQ/FAQ.vue";
 import CTA from "@/components/CTA/CTA.vue";
+/*-- Import Store --*/
+import { useStoreFAQs } from "@/stores/storeFAQs";
+
+// Store handling
+const storeFAQs = useStoreFAQs();
 </script>
 
 <template>
@@ -16,7 +21,12 @@ import CTA from "@/components/CTA/CTA.vue";
     <UseCases />
     <Showcase />
     <Reviews />
-    <FAQ />
+    <FAQ
+      :faqs="storeFAQs"
+      collectionID="home"
+      :descriptionCondition="true"
+      :buttonCondition="true"
+    />
     <CTA
       textFirstPart="Create Your Inventory with"
       textHighlighted="fatel3"
