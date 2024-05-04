@@ -5,6 +5,7 @@ import { RouterView, useRoute } from "vue-router";
 import Navbar from "@/components/Nav/Navbar.vue";
 import FooterSection from "@/components/Footer/FooterSection.vue";
 /*-- Import Data --*/
+
 import featuresData from "@/data/featuresData";
 import useCasesData from "@/data/useCasesData";
 import resourcesData from "@/data/resourcesData";
@@ -102,6 +103,7 @@ onMounted(() => {
   <RouterView
     :class="route.path !== '/login' ? 'mt-[66px] lg:mt-[72px]' : ''"
   />
+
   <FooterSection
     v-if="route.path !== '/login' && route.path !== '/admin'"
     :navItems="navItems"
