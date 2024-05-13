@@ -26,7 +26,7 @@ export const clickOutside = (dropdownWrapperID: string) => {
     }
   };
 
-  const closeOnOutsideClick = (event) => {
+  const closeOnOutsideClick = (event: any) => {
     if (!event.target.closest(`#${dropdownWrapperID}`)) {
       subMenuHeight.value = "0px";
       console.log(subMenuHeight.value);
