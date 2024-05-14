@@ -60,12 +60,12 @@ exports.bookingsCleanup = onSchedule("every day 00:00", async (event) => {
     console.log("No matching document found");
   }
 
-  day.times.forEach((time) => {
+  dayData.times.forEach((time) => {
     time.reserved = false;
   });
 
   // Update the previous day doc
-  await dayDoc.ref.update(day);
+  await dayDoc.ref.update(dayData);
   console.log("dayDoc updated", dayDoc.id);
 
   return null;
