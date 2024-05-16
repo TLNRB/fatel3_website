@@ -51,10 +51,11 @@ exports.bookingsCleanup = onSchedule("every day 00:00", async (event) => {
   // Get a document where the dayIndex is the previous day
   const dayDoc = await daysRef.where("dayIndex", "==", previousDay).get();
 
+  let dayData = {};
   // Check if there is a document returned
   if (!dayDoc.empty) {
     // Get the first document
-    const dayData = dayDoc.docs[0].data();
+    dayData = dayDoc.docs[0].data();
     console.log("day", dayData);
   } else {
     console.log("No matching document found");
