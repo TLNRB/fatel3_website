@@ -46,7 +46,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
       <img
         class="w-[100%] rounded-t-[12px] lg:rounded-t-[24px] xxl:w-[1396px]"
         :src="tempImg"
-        alt=""
+        alt="Image of fatel3 product"
       />
     </div>
   </section>

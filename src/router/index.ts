@@ -13,6 +13,25 @@ import NotFoundView from "@/views/NotFoundView.vue";
 import useCasesData from "@/data/useCasesData";
 /*-- Import store --*/
 import { useStoreAuth } from "@/stores/storeAuth";
+import { doc } from "firebase/firestore";
+
+// Utility function to update meta tags
+const updateMetaTags = (meta: any) => {
+  if (meta.title) {
+    document.title = meta.title;
+  }
+  if (meta.description) {
+    let descriptionTag = document.querySelector('meta[name="description"]');
+    if (descriptionTag) {
+      descriptionTag.setAttribute("content", meta.description);
+    } else {
+      descriptionTag = document.createElement('meta');
+      descriptionTag.setAttribute("name", "description");
+      descriptionTag.setAttribute("content", meta.description);
+      document.head.appendChild(descriptionTag);
+    }
+  }
+};
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,16 +40,28 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+      meta: {
+        title: "fatel3 - Manage Your Inventory Easier",
+        description: "Manage your inventory easier with fatel3",
+      },
     },
     {
       path: "/features",
       name: "features",
       component: AllFeaturesView,
+      meta: {
+        title: "All Features",
+        description: "All features of fatel3",
+      },
     },
     {
       path: "/use-cases/:route",
       name: "usecase",
       component: UseCaseView,
+      meta: {
+        title: "Use Case",
+        description: "Use case of fatel3",
+      },
       beforeEnter(to) {
         const useCases = useCasesData;
         const route = to.params.route;
@@ -52,31 +83,54 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutUsView,
+      meta: {
+        title: "About Us",
+        description: "About fatel3",
+      },
     },
     {
       path: "/pricing",
       name: "pricing",
       component: PricingView,
+      meta: {
+        title: "Pricing",
+        description: "Pricing of fatel3",
+      },
     },
     {
       path: "/support",
       name: "support",
       component: SupportView,
+      meta: {
+        title: "Support",
+        description: "Support of fatel3",
+      },
     },
     {
       path: "/admin",
       name: "admin",
       component: AdminView,
+      meta: {
+        title: "Admin",
+      },
     },
     {
       path: "/login",
       name: "login",
       component: LoginView,
+      meta: {
+        title: "Login",
+        description: "Login to fatel3",
+      },
     },
     {
       path: "/:catchall(.*)*",
       name: "notfound",
       component: NotFoundView,
+      meta: {
+        title: "Not Found",
+        description: "Page not found",
+      },
     },
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -85,6 +139,14 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
+  const defaultTitle = "fatel3 - Manage Your Inventory Easier";
+  const defaultDescription = "fatel3 is an inventory management system";
+
+  updateMetaTags({
+    title: to.name != 'home' ? `${to.meta.title} | fatel3` : defaultTitle,
+    description: to.meta.description || defaultDescription,
+  });
+
   const storeAuth = useStoreAuth();
   if (!storeAuth.user.id && to.name === "admin") {
     return { name: "home" };

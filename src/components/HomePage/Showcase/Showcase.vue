@@ -59,7 +59,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
       <img
         class="w-[100%] rounded-t-[20px] lg:rounded-tr-[0px] xxl:rounded-tl-[24px]"
         :src="tempImg"
-        alt=""
+        alt="Image of the showcase page"
       />
     </div>
   </section>
