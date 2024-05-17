@@ -1,6 +1,6 @@
 const { setGlobalOptions } = require("firebase-functions/v2/options");
 
-// Set the maximum instances to 10 for all functions
+// Set the maximum instances to 1 for all functions
 setGlobalOptions({ maxInstances: 1 });
 
 // The Cloud Functions for Firebase SDK to set up triggers and logging.
@@ -42,14 +42,40 @@ exports.bookingsCleanup = onSchedule("every day 00:00", async (event) => {
   await batch.commit();
   console.log("deleted bookings");
 
-  // Set the reserved number of classes back to 0 on each class
   // Calculate the datetime of the previous day
-  const previousDay = currentDateTime.getDay();
-  console.log("previousDay", previousDay);
+  const previousDayIndex  = currentDateTime.getDay();
+  console.log("previousDayIndex ", previousDayIndex );
   // Reference to your Firestore collection
   const daysRef = admin.firestore().collection("days");
   // Get a document where the dayIndex is the previous day
-  const dayDoc = await daysRef.where("dayIndex", "==", previousDay).get();
+  //-----------------------------------
+  const dayQuerySnapshot = await daysRef.where("dayIndex", "==", previousDayIndex).limit(1).get();
+
+  let dayData = {};
+  let dayDocRef; // Added variable to store document reference
+
+  // Check if there is a document returned
+  if (!dayQuerySnapshot.empty) {
+    // Get the first document
+    const dayDoc = dayQuerySnapshot.docs[0]; // Access the first document
+    dayData = dayDoc.data();
+    dayDocRef = dayDoc.ref; // Get the document reference
+    console.log("day", dayData);
+
+    dayData.times.forEach((time) => {
+      time.reserved = false;
+    });
+
+    // Update the previous day doc
+    await dayDocRef.update(dayData); // Use the document reference to update
+    console.log("dayDoc updated", dayDoc.id);
+  } else {
+    console.log("No matching document found");
+  }
+
+  return null;
+  //-----------------------------------
+  /*const dayDoc = await daysRef.where("dayIndex", "==", previousDayIndex ).get();
 
   let dayData = {};
   // Check if there is a document returned
@@ -69,5 +95,5 @@ exports.bookingsCleanup = onSchedule("every day 00:00", async (event) => {
   await dayDoc.ref.update(dayData);
   console.log("dayDoc updated", dayDoc.id);
 
-  return null;
+  return null; */
 });
