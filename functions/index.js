@@ -48,11 +48,10 @@ exports.bookingsCleanup = onSchedule("every day 00:00", async (event) => {
   // Reference to your Firestore collection
   const daysRef = admin.firestore().collection("days");
   // Get a document where the dayIndex is the previous day
-  //-----------------------------------
   const dayQuerySnapshot = await daysRef.where("dayIndex", "==", previousDayIndex).limit(1).get();
 
   let dayData = {};
-  let dayDocRef; // Added variable to store document reference
+  let dayDocRef; // For the document reference
 
   // Check if there is a document returned
   if (!dayQuerySnapshot.empty) {
@@ -74,26 +73,4 @@ exports.bookingsCleanup = onSchedule("every day 00:00", async (event) => {
   }
 
   return null;
-  //-----------------------------------
-  /*const dayDoc = await daysRef.where("dayIndex", "==", previousDayIndex ).get();
-
-  let dayData = {};
-  // Check if there is a document returned
-  if (!dayDoc.empty) {
-    // Get the first document
-    dayData = dayDoc.docs[0].data();
-    console.log("day", dayData);
-  } else {
-    console.log("No matching document found");
-  }
-
-  dayData.times.forEach((time) => {
-    time.reserved = false;
-  });
-
-  // Update the previous day doc
-  await dayDoc.ref.update(dayData);
-  console.log("dayDoc updated", dayDoc.id);
-
-  return null; */
 });
