@@ -62,8 +62,7 @@ onMounted(() => {
     <div
       class="w-[100%] mt-[1.5rem] text-center text-TextNormal font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[550px] lg:text-[1.125rem] xl:mt-[2rem] xxl:w-[600px] xxl:text-[1.25rem]"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Manage your inventory with easy-to-use tools made to help your processes and boost your efficiency.
     </div>
     <ButtonFilled
       text="Get Started"
@@ -123,7 +122,7 @@ onMounted(() => {
               class="min-w-[44px] min-h-[44px] w-[44px] h-[44px] flex justify-center items-center bg-BGLight rounded-[14px]"
             >
               <i
-                class="ri-stack-line text-[25px] h-[25px] flex justify-center items-center text-ltPrimary translate-y-[.5px]"
+                class="text-[25px] h-[25px] flex justify-center items-center text-ltPrimary translate-y-[.5px]" :class="subItem.icon"
               ></i>
             </div>
           </div>

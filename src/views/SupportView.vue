@@ -21,7 +21,7 @@ const getStartedTitleFirst = ref<string>("Get Started with");
 const getStartedTitleHighlighted = ref<string>("fatel3");
 const getStartedTitleLast = ref<string>("Today");
 const getStartedContent = ref<string>(
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  "Start your journey with us! Reserve a meeting to get help in starting our application."
 );
 
 // Contact us
@@ -30,7 +30,7 @@ const contactTitleFirst = ref<string>("Get in Touch with");
 const contactTitleHighlighted = ref<string>("fatel3");
 const contactTitleLast = ref<string>("to Get Help");
 const contactContent = ref<string>(
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  "Connect with us! Reserve a meeting about your problem by filling out the contact form below. We're here to help!"
 );
 
 /*----- Support -----*/

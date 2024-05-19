@@ -68,8 +68,7 @@ onUnmounted(() => {
       <div
         class="w-[100%] mt-[1.5rem] mx-auto text-center text-TextNormal font-light leading-snug xs:w-[330px] sm:w-[400px] lg:w-[550px] lg:text-[1.125rem] xl:mt-[2rem] xxl:w-[600px] xxl:text-[1.25rem]"
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        Explore our plans to find the right fit for your business needs.
       </div>
     </section>
     <section
@@ -213,8 +212,7 @@ onUnmounted(() => {
         <div
           class="w-[100%] mx-auto text-center text-TextNormal font-light leading-snug xs:w-[330px] sm:w-[475px] lg:w-[550px] lg:text-[1.125rem] xxl:w-[600px] xxl:text-[1.125rem]"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Compare our plans side by side to determine which one aligns best with your goals.
         </div>
       </div>
       <!-- Feature list dropdown btn -->

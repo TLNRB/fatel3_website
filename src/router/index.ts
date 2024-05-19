@@ -42,7 +42,7 @@ const router = createRouter({
       component: HomeView,
       meta: {
         title: "fatel3 - Manage Your Inventory Easier",
-        description: "Manage your inventory easier with fatel3",
+        description: "Manage your inventory easier with fatel3. Increase your productivity and efficiency to grow your business to the next level.",
       },
     },
     {
@@ -51,7 +51,7 @@ const router = createRouter({
       component: AllFeaturesView,
       meta: {
         title: "All Features",
-        description: "All features of fatel3",
+        description: "Explore our features from filtering to reporting, our tools help your businesses to optimize its management.",
       },
     },
     {
@@ -60,7 +60,7 @@ const router = createRouter({
       component: UseCaseView,
       meta: {
         title: "Use Case",
-        description: "Use case of fatel3",
+        description: "Discover how our inventory management solution helps various industries and business needs.",
       },
       beforeEnter(to) {
         const useCases = useCasesData;
@@ -85,7 +85,7 @@ const router = createRouter({
       component: AboutUsView,
       meta: {
         title: "About Us",
-        description: "About fatel3",
+        description: "Learn more about our company story and values. Discover the way we rethink inventory management.",
       },
     },
     {
@@ -94,7 +94,7 @@ const router = createRouter({
       component: PricingView,
       meta: {
         title: "Pricing",
-        description: "Pricing of fatel3",
+        description: "Explore our plans and choose the one that best fits your business requirements.",
       },
     },
     {
@@ -103,7 +103,7 @@ const router = createRouter({
       component: SupportView,
       meta: {
         title: "Support",
-        description: "Support of fatel3",
+        description: "Reserve a meeting with our team to get started or to solve any problems you may encounter. We are here to help you.",
       },
     },
     {
@@ -120,7 +120,7 @@ const router = createRouter({
       component: LoginView,
       meta: {
         title: "Login",
-        description: "Login to fatel3",
+        description: "Access your account and manage your inventory effortlessly with our secure login portal. Sign in to streamline your operations and stay organized.",
       },
     },
     {
@@ -129,7 +129,6 @@ const router = createRouter({
       component: NotFoundView,
       meta: {
         title: "Not Found",
-        description: "Page not found",
       },
     },
   ],

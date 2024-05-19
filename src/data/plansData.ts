@@ -11,10 +11,6 @@ const plans: any = [
         title: "items",
       },
       {
-        data: "1000",
-        title: "items",
-      },
-      {
         data: "2",
         title: "User License",
       },
@@ -30,7 +26,7 @@ const plans: any = [
           { title: "Users", data: "2", icon: "" },
           { title: "Inventory locations", data: "2", icon: "" },
           { title: "Item reads", data: "200 000", icon: "" },
-          { title: "Inventory imports", data: "", icon: "ri-check-line" },
+          { title: "Inventory imports", data: "", icon: "" },
           { title: "Reports", data: "", icon: "ri-check-line" },
           { title: "Images", data: "", icon: "" },
         ],
@@ -41,7 +37,7 @@ const plans: any = [
           { title: "Users", data: "2", icon: "" },
           { title: "Inventory locations", data: "2", icon: "" },
           { title: "Item reads", data: "200 000", icon: "" },
-          { title: "Inventory imports", data: "", icon: "ri-check-line" },
+          { title: "Inventory imports", data: "", icon: "" },
           { title: "Reports", data: "", icon: "ri-check-line" },
           { title: "Images", data: "", icon: "" },
         ],
@@ -55,10 +51,6 @@ const plans: any = [
     yearlyPrice: "59",
     isMostPopular: true,
     shortSubList: [
-      {
-        data: "2000",
-        title: "items",
-      },
       {
         data: "2000",
         title: "items",
@@ -104,10 +96,6 @@ const plans: any = [
     yearlyPrice: "Custom pricing",
     isMostPopular: false,
     shortSubList: [
-      {
-        data: "Unlimited",
-        title: "items",
-      },
       {
         data: "Unlimited",
         title: "items",

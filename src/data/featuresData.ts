@@ -5,20 +5,10 @@ const features: any = [
     shortDesc: "Get real-time inventory information",
     subItems: [
       {
-        title: "Custom folders",
-        icon: "ri-stack-line",
+        title: "Real-Time Tracking",
+        icon: "ri-time-line",
         longDesc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      },
-      {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
-      },
-      {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
+          "Monitor your inventory in real-time to make informed decisions instantly. Stay updated on stock movements and status changes.",
       },
     ],
   },
@@ -28,19 +18,14 @@ const features: any = [
     shortDesc: "Create detailed reports based on your needs",
     subItems: [
       {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
+        title: "Report Generation",
+        icon: "ri-file-chart-line",
+        longDesc: "Generate reports that provide insights into your inventory performance. Make data-driven decisions to improve your business strategies.",
       },
       {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
-      },
-      {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
+        title: "Custom Reports",
+        icon: "ri-pencil-ruler-2-line",
+        longDesc: "Customize your reports to suit your business needs. Choose the fields you want to include and the format you prefer.",
       },
     ],
   },
@@ -50,19 +35,14 @@ const features: any = [
     shortDesc: "Create your own filters for better management",
     subItems: [
       {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
+        title: "Filters",
+        icon: "ri-filter-3-line",
+        longDesc: "Easily locate specific items within your inventory by using advanced filtering options. Save time and enhance efficiency.",
       },
       {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
-      },
-      {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
+        title: "Custom Filters",
+        icon: "ri-settings-3-line",
+        longDesc: "Create and apply custom filters based on your needs. Tailor the search functionality to suit your specific goals.",
       },
     ],
   },
@@ -72,19 +52,14 @@ const features: any = [
     shortDesc: "Customize your inventory to your own needs",
     subItems: [
       {
-        title: "Title",
+        title: "Custom Folders",
         icon: "ri-stack-line",
-        longDesc: "Long Description",
+        longDesc: "Organize your inventory with custom folders to simplify management and improve accessibility. Keep everything in order and easy to find",
       },
       {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
-      },
-      {
-        title: "Title",
-        icon: "ri-stack-line",
-        longDesc: "Long Description",
+        title: "Category Management",
+        icon: "ri-folder-3-line",
+        longDesc: "Group items into categories for better organization. Keep your inventory clear by logical groupings.",
       },
     ],
   },

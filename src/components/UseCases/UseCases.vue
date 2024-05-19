@@ -28,8 +28,7 @@ import useCases from "@/data/useCasesData";
     <div
       class="w-[100%] mt-[1.5rem] text-center text-TextNormal font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[550px] lg:text-[1.125rem] xl:mt-[2rem] xxl:w-[600px] xxl:text-[1.25rem]"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Our platform is made to aid diverse businesses in different industries, making it a valuable asset.
     </div>
     <div
       class="flex justify-center gap-[1rem] flex-wrap my-[3rem] xl:gap-[1.5rem] xl:my-[4rem]"

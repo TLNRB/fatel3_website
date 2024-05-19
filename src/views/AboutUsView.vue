@@ -6,6 +6,8 @@ import ButtonFilled from "@/components/Misc/ButtonFilled.vue";
 /*-- Import assets --*/
 import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
 import aboutUsImage from "@/assets/images/temp-review.jpg";
+import personOneImg from "@/assets/images/best2.jpg";
+import personTwoImg from "@/assets/images/best.jpg";
 
 // Values
 const ourValues = [
@@ -13,19 +15,19 @@ const ourValues = [
     icon: "ri-shield-check-line",
     title: "Trust",
     description:
-      "Ambitious resellers who sell different types of products and seek for a system that helps grow their business.",
+      "We understand the importance of reliability and transparency in every interaction, that is why we guarantee you can always depend on us to support your business growth.",
   },
   {
     icon: "ri-heart-add-line",
     title: "Customer driven",
     description:
-      "Ambitious resellers who sell different types of products and seek for a system that helps grow their business.",
+      "We prioritize your needs and feedback, aiming to deliver solutions that exceed your expectations and drive success for your business.",
   },
   {
     icon: "ri-speed-up-line",
     title: "Speed",
     description:
-      "Ambitious resellers who sell different types of products and seek for a system that helps grow their business.",
+      "We recognize the value of efficiency and speed in today's fast-paced business environment, we aim to provide you with services that keep your operations run smoothly.",
   },
 ];
 
@@ -34,12 +36,12 @@ const ourPeople = [
   {
     personName: "Ádám Lőrincz",
     personTitle: "Co-founder",
-    personImg: aboutUsImage,
+    personImg: personOneImg,
   },
   {
     personName: "Norbert Tolnai",
     personTitle: "Co-founder",
-    personImg: aboutUsImage,
+    personImg: personTwoImg,
   },
 ];
 </script>
@@ -68,8 +70,7 @@ const ourPeople = [
       <div
         class="w-[100%] mt-[1.5rem] mx-auto text-center text-TextNormal font-light leading-snug xs:w-[330px] sm:w-[400px] lg:w-[550px] lg:text-[1.125rem] xl:mt-[2rem] xxl:w-[600px] xxl:text-[1.25rem]"
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        Read about our story, the values we believe in and strive for, and the people behind the scenes.
       </div>
       <div
         class="flex flex-col-reverse gap-[3rem] my-[4rem] md:flex-row md:flex-wrap md:justify-center md:items-center lg:gap-[6rem] lg:my-[6rem] xxl:gap-[7rem] xxl:my-[8rem]"
@@ -92,12 +93,7 @@ const ourPeople = [
             Our Story
           </h2>
           <div class="font-light text-TextNormal leading-snug">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua ut labore
-            et dolore magna aliqua.<br /><br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua ut labore
-            et dolore magna aliqua.
+            We started this journey with a vision to simplify inventory management for businesses of all sizes. Our goal is to provide a platform that is easy to use, reliable, and affordable.<br><br> We believe that every business deserves a chance to grow and succeed, and we are here to help you achieve that.
           </div>
         </div>
       </div>
@@ -124,7 +120,7 @@ const ourPeople = [
             <img
               :src="person.personImg"
               alt="person image"
-              class="h-[100%] object-cover rounded-[38px] xxl:rounded-[46px]"
+              class="w-[100%] h-[100%] object-cover  rounded-[38px] xxl:rounded-[46px]"
             />
           </div>
           <div
@@ -149,7 +145,7 @@ const ourPeople = [
         Our Values
       </h2>
       <div
-        class="flex flex-col justify-center items-center gap-[2rem] lg:flex-row xxl:gap-[4rem]"
+        class="flex flex-col justify-center items-start gap-[2rem] lg:flex-row xxl:gap-[4rem]"
       >
         <div
           v-for="(value, index) in ourValues"

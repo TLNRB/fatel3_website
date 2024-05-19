@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 import SectionType from "@/components/Misc/SectionType.vue";
 /*-- Import assets --*/
 import arrowIcon from "@/assets/icons/arrow-right-up-line-primary.svg";
-import tempImg from "@/assets/images/temp-fatel3.png";
+import showcase from "@/assets/images/showcase.png";
 </script>
 
 <template>
@@ -36,10 +36,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
       <div
         class="w-[100%] text-center text-[15px] text-TextLight font-light leading-snug xs:w-[325px] sm:w-[500px] lg:w-[500px] lg:text-start lg:text-[1rem] xxl:w-[600px] xxl:text-[17px]"
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua.
+      Create a stlylish online presence with our new product showcase. Highlight your offerings and attract more customers with a professional, customizable site.
       </div>
       <RouterLink
         :to="{ name: 'support', query: { id: 'getStarted' } }"
@@ -58,7 +55,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
     >
       <img
         class="w-[100%] rounded-t-[20px] lg:rounded-tr-[0px] xxl:rounded-tl-[24px]"
-        :src="tempImg"
+        :src="showcase"
         alt="Image of the showcase page"
       />
     </div>

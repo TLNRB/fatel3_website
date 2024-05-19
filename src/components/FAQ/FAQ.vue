@@ -38,8 +38,7 @@ const toggleActiveFAQ = (index: number) => {
       v-if="descriptionCondition"
       class="w-[100%] text-center text-TextNormal font-light leading-snug xs:w-[325px] sm:w-[400px] lg:w-[500px] lg:text-[1.125rem] xxl:w-[550px] xxl:text-[1.25rem]"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Have questions? We’ve got answers. Explore the FAQ section to find solutions to common questions.
     </div>
     <div
       class="flex flex-col gap-[1rem] my-[1.5rem] xl:gap-[1.125rem] xl:my-[2rem]"

@@ -28,8 +28,7 @@ import tempImg from "@/assets/images/temp-fatel3.png";
         <div
           class="text-center text-[1rem] font-light text-TextNormal sm:text-[1.125rem] sm:leading-snug lg:text-start xxl:text-[1.25rem]"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Take control of your inventory with ease. Our system simplifies inventory management, ensuring that you can focus on what matters most - growing your business.
         </div>
         <ButtonFilled
           text="Get Started"

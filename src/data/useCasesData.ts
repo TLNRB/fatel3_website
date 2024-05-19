@@ -11,13 +11,13 @@ const useCases: any = [
     commingSoon: false,
     pageTitle: "Meets fatel3 for Managing Inventory",
     pageDesc: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "It is designed for ambitious resellers who aim to streamline their inventory management processes. Whether you're selling various items or your own products, this solution is here to help you efficiently manage your inventory and scale your business.",
+      "With specific features and functionalities, we provide a comprehensive platform to track, monitor, and optimize your inventory operations. By stock tracking, gain full control over your inventory management with ease.",
     ],
     pageReviewText:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "fatel3 is an amazing app for resellers looking to elevate their inventory management game. It has an intuitive interface and a lot of features to make inventory management a breeze. Highly recommended for any reseller who wants to scale their business efficiently.",
     pageReviewAuthor: "John Doe",
-    pageReviewAuthorTitle: "CEO at Company",
+    pageReviewAuthorTitle: "Reseller",
     pageReviewImage: tempImg,
     pageApps: [
       {
